@@ -1,14 +1,12 @@
-function analyze() {
-  console.log('popup: inject-script');
+/* Step 1 - Setup listener for the message from content script */
+chrome.runtime.onMessage.addListener((request, sender) => {
+  console.log(sender.tab ? 'from a content script:' + sender.tab.url : 'from the extension');
+  if (request.command == 'metadata-ready') {
+    document.querySelector('#output').innerText = JSON.stringify(request.data);
+  }
+});
 
-  chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { command: 'analyze-dom' }, function(response) {
-      console.dir(response);
-      document.querySelector('#output').innerText = response.result;
-    });
-  });
-}
-
-document.querySelector('#analyze').addEventListener('click', e => {
-  analyze();
+/* Step 2 - Inject script */
+chrome.tabs.executeScript({
+  file: 'content-script.js',
 });
