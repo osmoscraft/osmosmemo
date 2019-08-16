@@ -1,0 +1,20 @@
+{
+  "name": "Meta",
+  "version": "1.0",
+  "description": "Synthesized information about the current page",
+  "manifest_version": 2,
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "permissions": ["declarativeContent"]
+}
