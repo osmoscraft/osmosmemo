@@ -1,12 +1,13 @@
 export class Model {
   constructor(
     state = {
-      title: '',
+      title: undefined,
       titleOptions: [],
       selectedTitleIndex: undefined,
-      href: '',
+      href: undefined,
       description: '',
       tags: [],
+      tagOptions: [],
     }
   ) {
     this.state = state;

@@ -1,8 +1,9 @@
 {
-  "name": "Meta",
+  "name": "Markdown Page Summary",
   "version": "1.0.0",
-  "description": "Meta information about the current page",
+  "description": "Summarize the current page in a markdown snippet",
   "manifest_version": 2,
+  "options_page": "options.html",
   "background": {
     "scripts": ["background.js"],
     "persistent": false

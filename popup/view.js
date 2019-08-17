@@ -5,9 +5,10 @@ const dotsElement = document.querySelector('.js-dots');
 const linkInputElement = document.querySelector('.js-link');
 const descriptionInputElement = document.querySelector('.js-description');
 const resizeElements = document.querySelectorAll('.js-autosize');
-const outputElement = document.querySelector('.js-output');
+const previewElement = document.querySelector('.js-preview');
 const addedTagsElement = document.querySelector('.added-tags');
 const tagInputElement = document.querySelector('.js-tag-input');
+const tagOptionsElement = document.querySelector('.js-tag-options');
 const addTagButtonElement = document.querySelector('.js-add-tag-button');
 const copyButtonElement = document.querySelector('.js-copy');
 
@@ -48,17 +49,17 @@ export class View {
         this.removeTagAtIndex(removeIndex, onRemoveTagByIndex);
       }
     });
-    outputElement.addEventListener('focus', () => outputElement.select());
-    outputElement.addEventListener('click', () => outputElement.select());
+    previewElement.addEventListener('focus', () => previewElement.select());
+    previewElement.addEventListener('click', () => previewElement.select());
     copyButtonElement.addEventListener('click', () => {
-      outputElement.select();
+      previewElement.select();
       document.execCommand('copy');
       copyButtonElement.innerText = 'Copy - Done';
     });
   }
 
   render({ state, previousState }) {
-    const { title, titleOptions, selectedTitleIndex, href, description, tags } = state;
+    const { title, titleOptions, selectedTitleIndex, href, description, tags, tagOptions } = state;
 
     if (title !== previousState.title) {
       titleInputElement.value = title;
@@ -83,8 +84,12 @@ export class View {
       addedTagsElement.innerHTML = tags.map((tag, index) => `<button class="added-tag" data-index=${index}>#${tag}</button>`).join('');
     }
 
+    if (tagOptions.join('') !== previousState.tagOptions.join('')) {
+      tagOptionsElement.innerHTML = tagOptions.map(option => `<option value=${option}></option>`).join('');
+    }
+
     const output = `[${title}](${href}) ${description} ${tags.map(tag => `#${tag}`).join('')}`;
-    outputElement.innerText = output;
+    previewElement.innerText = output;
 
     if (copyButtonElement.innerText.includes('Done')) {
       copyButtonElement.innerText = 'Copy';

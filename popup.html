@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="popup/style.css" />
-    <script src="popup/vendor/autosize.min.js"></script>
+    <link rel="stylesheet" href="shared/style.css" />
+    <script src="shared/vendor/autosize.min.js"></script>
   </head>
   <body>
     <div class="popup-container">
@@ -28,21 +28,15 @@
         <label class="field__label" for="tags">Tags</label>
         <div class="add-tag field__input">
           <div class="added-tags js-added-tags"></div>
-          <input id="tags" class="js-tag-input as-partial-l" name="tag" list="tag-input-options" />
+          <input id="tags" class="js-tag-input as-partial-l" name="tag" list="tag-options" />
           <button class="as-partial-r js-add-tag-button">Add</button>
-          <datalist id="tag-input-options">
-            <option value="library"> </option>
-            <option value="reference"> </option>
-            <option value="resource"> </option>
-            <option value="tool"> </option>
-            <option value="tutorial"> </option>
-          </datalist>
+          <datalist id="tag-options" class="js-tag-options"></datalist>
         </div>
       </div>
       <hr />
       <div class="field">
         <label for="preview" class="field__label">Preview</label>
-        <textarea id="preview" class="js-output js-autosize field__input" readonly rows="1"></textarea>
+        <textarea id="preview" class="js-preview js-autosize field__input" readonly rows="1"></textarea>
       </div>
       <hr />
       <hr />

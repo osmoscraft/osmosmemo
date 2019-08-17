@@ -1,0 +1,6 @@
+.options-container {
+  margin: auto;
+  width: 30em;
+  display: grid;
+  grid-auto-rows: auto;
+}

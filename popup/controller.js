@@ -26,6 +26,10 @@ export class Controller {
       this.view.render({ state, previousState });
       this.cacheModel();
     });
+
+    chrome.storage.sync.get('tagOptions', async data => {
+      this.model.update({ tagOptions: data.tagOptions });
+    });
   }
 
   onData({ title, headings, href }) {

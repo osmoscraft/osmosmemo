@@ -1,4 +1,3 @@
-console.log('Meta analyzer enabled');
 try {
   const cachedModelString = sessionStorage.getItem('cached-model');
   if (!cachedModelString) throw new Error();
@@ -12,7 +11,7 @@ function getMetadata() {
   const href = location.href;
   const headElement = document.querySelector('head');
   const titleElement = headElement && headElement.querySelector('title');
-  const title = titleElement && titleElement.innerText;
+  const title = (titleElement && titleElement.innerText) || '';
   const headings = [...document.querySelectorAll('h1')].map(heading => heading.innerText);
 
   return {

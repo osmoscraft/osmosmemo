@@ -1,2 +1,3 @@
-# meta
-A chrome extension that synthesizes information about the current page
+# Markdown Page Summary
+
+A chrome extension that summarizes the current page in a markdown snippet
