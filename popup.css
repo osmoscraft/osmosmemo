@@ -85,11 +85,6 @@ input[name='tag'] {
   flex-wrap: wrap;
 }
 
-.actions {
-  margin-top: 8px;
-  display: grid;
-}
-
 .field {
   display: grid;
   grid-template:
