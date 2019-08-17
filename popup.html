@@ -8,24 +8,25 @@
     <div class="popup-container">
       <div class="field">
         <label class="field__label" for="title">Title</label>
-        <textarea id="title" name="title" class="js-title js-autosize textarea field__input" rows="1" autofocus></textarea>
+        <textarea id="title" name="title" class="js-title js-autosize field__input" rows="1" autofocus></textarea>
       </div>
       <hr />
       <div class="field">
         <label class="field__label" for="link">Link</label>
-        <textarea id="link" name="link" class="js-link js-autosize textarea field__input" rows="1"></textarea>
+        <textarea id="link" name="link" class="js-link js-autosize field__input" rows="1"></textarea>
       </div>
       <hr />
       <div class="field">
         <label class="field__label" for="description">Description</label>
-        <textarea id="description" name="description" class="js-description js-autosize textarea field__input" rows="1"></textarea>
+        <textarea id="description" name="description" class="js-description js-autosize field__input" rows="1"></textarea>
       </div>
       <hr />
       <div class="field">
         <label class="field__label" for="tags">Tags</label>
         <div class="add-tag field__input">
           <div class="added-tags js-added-tags"></div>
-          <input id="tags" class="js-tag-input tag-input" name="tag" list="tag-input-options" /><button class="combo-right js-add-tag-button">Add</button>
+          <input id="tags" class="js-tag-input as-partial-l" name="tag" list="tag-input-options" />
+          <button class="as-partial-r js-add-tag-button">Add</button>
           <datalist id="tag-input-options">
             <option value="library"> </option>
             <option value="reference"> </option>
@@ -37,8 +38,8 @@
       </div>
       <hr />
       <div class="field">
-        <div class="label field__label">Preview</div>
-        <textarea class="js-output js-autosize field__input" readonly></textarea>
+        <label for="preview" class="field__label">Preview</label>
+        <textarea id="preview" class="js-output js-autosize field__input" readonly></textarea>
       </div>
       <hr />
       <div class="actions">

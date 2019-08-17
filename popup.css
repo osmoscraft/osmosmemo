@@ -1,9 +1,10 @@
 body {
   --app-bg: #eee;
-  --control-border-c: #aaa;
+  --control-border-c: #ccc;
   --control-bg: #fff;
   --default-text-c: #333;
   --standard-control-height: 30px;
+  --standard-border-radius: 4px;
 
   background-color: var(--app-bg);
   color: var(--default-text-c);
@@ -27,9 +28,7 @@ hr {
   margin: 4px 0;
 }
 
-.label,
 label {
-  margin-bottom: 4px;
   font-weight: 600;
 }
 
@@ -37,7 +36,7 @@ output,
 input,
 textarea {
   border: 1px solid var(--control-border-c);
-  border-radius: 4px;
+  border-radius: var(--standard-border-radius);
   padding: 4px 8px;
   resize: none;
   font-size: 14px;
@@ -46,37 +45,39 @@ textarea {
 textarea[readonly] {
   background-color: transparent;
 }
-
-output {
-  background-color: transparent;
+input {
+  height: var(--standard-control-height);
+}
+input.as-partial-l {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 button {
   height: var(--standard-control-height);
   background-color: var(--control-bg);
   border: 1px solid var(--control-border-c);
+  border-radius: var(--standard-border-radius);
+}
+button.as-partial-r {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-width: 0;
 }
 
 .added-tags {
-  padding-bottom: 4px;
-  margin-bottom: -2px;
   width: 100%;
 }
 
 .added-tag {
-  border-radius: 15px;
-  margin: 0 0 4px 0;
+  border-radius: calc(var(--standard-control-height) / 2);
+  height: calc(var(--standard-control-height) - 4px);
+  margin: 0 2px 4px 0;
   padding: 0 8px;
 }
 
 input[name='tag'] {
-  border-radius: 4px 0 0 4px;
   width: 10rem;
-  height: var(--standard-control-height);
-}
-button.combo-right {
-  border-radius: 0 4px 4px 0;
-  border-left-width: 0;
 }
 
 .add-tag {
@@ -86,7 +87,6 @@ button.combo-right {
 
 .actions {
   margin-top: 8px;
-
   display: grid;
 }
 
@@ -100,6 +100,10 @@ button.combo-right {
 
 .field__label {
   grid-area: label;
+}
+
+.field__action {
+  grid-area: action;
 }
 
 .field__input {
