@@ -8,6 +8,7 @@ export class Model {
     }
   ) {
     this.state = state;
+    this.originalState = { ...state };
     this.emitter = document.createElement('div');
   }
 

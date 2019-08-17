@@ -6,33 +6,42 @@
   </head>
   <body>
     <div class="popup-container">
-      <label for="title">Title</label>
-      <textarea id="title" name="title" class="js-title js-autosize textarea" rows="1" autofocus></textarea>
-      <hr />
-      <label for="link">Link</label>
-      <textarea id="link" name="link" class="js-link js-autosize textarea" rows="1"></textarea>
-      <hr />
-      <label for="description">Description</label>
-      <textarea id="description" name="description" class="js-description js-autosize textarea" rows="1"></textarea>
-      <hr />
-      <label for="tags">Tags</label>
-      <div class="added-tags js-added-tags"></div>
-      <div class="add-tag">
-        <input id="tags" class="js-tag-input tag-input" name="tag" list="tag-input-options" /><button class="combo-right js-add-tag-button">Add a tag</button>
-        <datalist id="tag-input-options">
-          <option value="library"> </option>
-          <option value="reference"> </option>
-          <option value="resource"> </option>
-          <option value="tool"> </option>
-          <option value="tutorial"> </option>
-        </datalist>
+      <div class="field">
+        <label class="field__label" for="title">Title</label>
+        <textarea id="title" name="title" class="js-title js-autosize textarea field__input" rows="1" autofocus></textarea>
       </div>
       <hr />
-      <div class="label">Preview</div>
-      <textarea class="js-output js-autosize" readonly></textarea>
+      <div class="field">
+        <label class="field__label" for="link">Link</label>
+        <textarea id="link" name="link" class="js-link js-autosize textarea field__input" rows="1"></textarea>
+      </div>
+      <hr />
+      <div class="field">
+        <label class="field__label" for="description">Description</label>
+        <textarea id="description" name="description" class="js-description js-autosize textarea field__input" rows="1"></textarea>
+      </div>
+      <hr />
+      <div class="field">
+        <label class="field__label" for="tags">Tags</label>
+        <div class="add-tag field__input">
+          <div class="added-tags js-added-tags"></div>
+          <input id="tags" class="js-tag-input tag-input" name="tag" list="tag-input-options" /><button class="combo-right js-add-tag-button">Add</button>
+          <datalist id="tag-input-options">
+            <option value="library"> </option>
+            <option value="reference"> </option>
+            <option value="resource"> </option>
+            <option value="tool"> </option>
+            <option value="tutorial"> </option>
+          </datalist>
+        </div>
+      </div>
+      <hr />
+      <div class="field">
+        <div class="label field__label">Preview</div>
+        <textarea class="js-output js-autosize field__input" readonly></textarea>
+      </div>
       <hr />
       <div class="actions">
-        <button>Reset</button>
         <button class="js-copy">Copy</button>
       </div>
     </div>

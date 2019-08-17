@@ -1,9 +1,17 @@
 body {
-  background-color: #eee;
+  --app-bg: #eee;
+  --control-border-c: #aaa;
+  --control-bg: #fff;
+  --default-text-c: #333;
+  --standard-control-height: 30px;
+
+  background-color: var(--app-bg);
+  color: var(--default-text-c);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
 * {
+  color: inherit;
   font-family: inherit;
   box-sizing: border-box;
 }
@@ -28,7 +36,7 @@ label {
 output,
 input,
 textarea {
-  border: 1px solid #aaa;
+  border: 1px solid var(--control-border-c);
   border-radius: 4px;
   padding: 4px 8px;
   resize: none;
@@ -44,42 +52,56 @@ output {
 }
 
 button {
-  height: 30px;
-  background-color: white;
-  border: 1px solid #aaa;
+  height: var(--standard-control-height);
+  background-color: var(--control-bg);
+  border: 1px solid var(--control-border-c);
 }
 
 .added-tags {
   padding-bottom: 4px;
   margin-bottom: -2px;
+  width: 100%;
 }
 
 .added-tag {
   border-radius: 15px;
-  margin: 2px;
+  margin: 0 0 4px 0;
   padding: 0 8px;
 }
 
 input[name='tag'] {
   border-radius: 4px 0 0 4px;
   width: 10rem;
-  border-right-width: 0;
+  height: var(--standard-control-height);
 }
 button.combo-right {
   border-radius: 0 4px 4px 0;
+  border-left-width: 0;
 }
 
 .add-tag {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: auto;
-  justify-self: start;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .actions {
   margin-top: 8px;
 
   display: grid;
-  grid-template-columns: 1fr 5fr;
-  gap: 8px;
+}
+
+.field {
+  display: grid;
+  grid-template:
+    'label action' auto
+    'input input' auto / 1fr auto;
+  gap: 4px;
+}
+
+.field__label {
+  grid-area: label;
+}
+
+.field__input {
+  grid-area: input;
 }

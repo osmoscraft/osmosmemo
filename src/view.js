@@ -47,7 +47,7 @@ export class View {
     });
   }
 
-  update({ title, href, description, output, tags }) {
+  render({ title, href, description, output, tags, originalState }) {
     if (titleInputElement.value !== title) {
       titleInputElement.value = title;
     }

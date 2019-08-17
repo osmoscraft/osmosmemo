@@ -18,7 +18,7 @@ export class Controller {
     this.model.emitter.addEventListener('update', e => {
       const { title, href, description, tags } = e.detail;
       const output = `[${title}](${href}) ${description} ${tags.map(tag => `#${tag}`).join('')}`;
-      this.view.update({ title, href, description, output, tags });
+      this.view.render({ title, href, description, output, tags, originalState: this.model.originalState });
     });
   }
 
