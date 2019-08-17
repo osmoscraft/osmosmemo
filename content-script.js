@@ -7,8 +7,8 @@ function getMetadata() {
 
   const headElement = document.querySelector('head');
   const titleElement = headElement && headElement.querySelector('title');
-  const title = titleElement && titleElement.innerText;
-  const headings = [...document.querySelectorAll('h1')].map(heading => heading.innerText);
+  const title = titleElement && titleElement.innerText.trim();
+  const headings = [...document.querySelectorAll('h1')].map(heading => heading.innerText.trim());
 
   return {
     title,

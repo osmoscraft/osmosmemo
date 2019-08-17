@@ -1,7 +1,37 @@
 <html>
-  <head> </head>
+  <head>
+    <link rel="stylesheet" href="popup.css" />
+    <script src="vendor/autosize.min.js"></script>
+  </head>
   <body>
-    <script src="popup.js"></script>
-    <output id="output"></output>
+    <div class="popup-container">
+      <label for="title">Title</label>
+      <textarea id="title" name="title" class="js-title js-autosize textarea" rows="1" autofocus></textarea>
+      <hr />
+      <label for="link">Link</label>
+      <textarea id="link" name="link" class="js-link js-autosize textarea" rows="1"></textarea>
+      <hr />
+      <label for="description">Description</label>
+      <textarea id="description" name="description" class="js-description js-autosize textarea" rows="1"></textarea>
+      <hr />
+      <label for="tags">Tags</label>
+      <div class="added-tags js-added-tags"></div>
+      <div class="add-tag">
+        <input id="tags" class="js-tag-input tag-input" name="tag" list="tag-input-options" /><button class="combo-right js-add-tag-button">Add a tag</button>
+        <datalist id="tag-input-options">
+          <option value="library"> </option>
+          <option value="reference"> </option>
+          <option value="resource"> </option>
+          <option value="tool"> </option>
+          <option value="tutorial"> </option>
+        </datalist>
+      </div>
+      <hr />
+      <div class="label">Preview</div>
+      <output class="js-output output"></output>
+      <hr />
+      <button class="copy">Copy</button>
+    </div>
+    <script type="module" src="src/popup.js"></script>
   </body>
 </html>
