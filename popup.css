@@ -76,6 +76,10 @@ button.combo-right {
   justify-self: start;
 }
 
-.copy {
-  margin-top: 16px;
+.actions {
+  margin-top: 8px;
+
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 8px;
 }
