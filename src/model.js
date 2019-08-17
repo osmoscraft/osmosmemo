@@ -9,12 +9,19 @@ export class Model {
     }
   ) {
     this.state = state;
-    this.originalState = { ...state };
     this.emitter = document.createElement('div');
   }
 
   update(delta) {
+    const previousState = { ...this.state };
     this.state = { ...this.state, ...delta };
-    this.emitter.dispatchEvent(new CustomEvent('update', { detail: this.state }));
+    this.emitter.dispatchEvent(
+      new CustomEvent('update', {
+        detail: {
+          state: this.state,
+          previousState,
+        },
+      })
+    );
   }
 }

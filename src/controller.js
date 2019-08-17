@@ -16,8 +16,8 @@ export class Controller {
     });
 
     this.model.emitter.addEventListener('update', e => {
-      const { title, titleOptions, href, description, tags } = e.detail;
-      this.view.render({ title, titleOptions, href, description, tags, originalState: this.model.originalState });
+      const { state, previousState } = e.detail;
+      this.view.render({ state, previousState });
     });
   }
 

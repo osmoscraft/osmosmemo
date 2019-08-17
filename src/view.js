@@ -53,20 +53,24 @@ export class View {
     });
   }
 
-  render({ title, href, description, tags, originalState }) {
-    if (titleInputElement.value !== title) {
+  render({ state, previousState }) {
+    const { title, href, description, tags } = state;
+
+    if (title !== previousState.title) {
       titleInputElement.value = title;
     }
 
-    if (linkInputElement.value !== href) {
+    if (href !== previousState.href) {
       linkInputElement.value = href;
     }
 
-    if (descriptionInputElement.value !== description) {
+    if (description !== previousState.description) {
       descriptionInputElement.value = description;
     }
 
-    addedTagsElement.innerHTML = tags.map((tag, index) => `<button class="added-tag" data-index=${index}>#${tag}</button>`).join('');
+    if (tags.join('') !== previousState.tags.join('')) {
+      addedTagsElement.innerHTML = tags.map((tag, index) => `<button class="added-tag" data-index=${index}>#${tag}</button>`).join('');
+    }
 
     const output = `[${title}](${href}) ${description} ${tags.map(tag => `#${tag}`).join('')}`;
     outputElement.innerText = output;
