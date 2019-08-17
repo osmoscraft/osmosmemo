@@ -1,5 +1,12 @@
 console.log('Meta analyzer enabled');
-chrome.runtime.sendMessage({ command: 'metadata-ready', data: getMetadata() });
+try {
+  const cachedModelString = sessionStorage.getItem('cached-model');
+  if (!cachedModelString) throw new Error();
+  const cachedModel = JSON.parse(sessionStorage.getItem('cached-model'));
+  chrome.runtime.sendMessage({ command: 'metadata-cache-ready', data: cachedModel });
+} catch (e) {
+  chrome.runtime.sendMessage({ command: 'metadata-ready', data: getMetadata() });
+}
 
 function getMetadata() {
   const href = location.href;
@@ -14,3 +21,9 @@ function getMetadata() {
     href,
   };
 }
+
+chrome.runtime.onMessage.addListener(request => {
+  if (request.command === 'cache-model') {
+    sessionStorage.setItem('cached-model', JSON.stringify(request.data));
+  }
+});

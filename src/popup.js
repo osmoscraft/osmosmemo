@@ -12,6 +12,11 @@ chrome.runtime.onMessage.addListener((request, sender) => {
     const { title, headings, href, hostname } = request.data;
     controller.onData({ title, headings, href, hostname });
   }
+
+  if (request.command == 'metadata-cache-ready') {
+    const cachedModel = request.data;
+    controller.onCache(cachedModel);
+  }
 });
 
 /* Step 2 - Inject script */

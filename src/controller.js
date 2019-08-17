@@ -24,11 +24,22 @@ export class Controller {
     this.model.emitter.addEventListener('update', e => {
       const { state, previousState } = e.detail;
       this.view.render({ state, previousState });
+      this.cacheModel();
     });
   }
 
   onData({ title, headings, href }) {
     const titleOptions = [...new Set([...headings.map(heading => heading.trim()), title.trim()])].filter(option => option.length > 0);
     this.model.update({ title: titleOptions[0], selectedTitleIndex: 0, titleOptions, href });
+  }
+
+  onCache(cachedModel) {
+    this.model.update(cachedModel);
+  }
+
+  cacheModel() {
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+      chrome.tabs.sendMessage(tabs[0].id, { command: 'cache-model', data: this.model.state });
+    });
   }
 }
