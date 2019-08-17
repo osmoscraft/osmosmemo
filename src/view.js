@@ -7,6 +7,7 @@ const outputElement = document.querySelector('.js-output');
 const addedTagsElement = document.querySelector('.added-tags');
 const tagInputElement = document.querySelector('.js-tag-input');
 const addTagButtonElement = document.querySelector('.js-add-tag-button');
+const copyButtonElement = document.querySelector('.js-copy');
 
 export class View {
   constructor() {
@@ -34,8 +35,15 @@ export class View {
       const removeIndex = parseInt(e.target.closest('button').dataset.index);
       onRemoveTagByIndex(removeIndex);
       const remainingTags = addedTagsElement.querySelectorAll('button');
-      const elementToFocus = remainingTags.length ? remainingTags[removeIndex - 1] : tagInputElement;
+      const elementToFocus = remainingTags.length ? remainingTags[Math.max(0, removeIndex - 1)] : tagInputElement;
       elementToFocus.focus();
+    });
+    outputElement.addEventListener('focus', () => outputElement.select());
+    outputElement.addEventListener('click', () => outputElement.select());
+    copyButtonElement.addEventListener('click', () => {
+      outputElement.select();
+      document.execCommand('copy');
+      copyButtonElement.innerText = 'Copy - Done';
     });
   }
 
@@ -53,9 +61,12 @@ export class View {
     }
 
     addedTagsElement.innerHTML = tags.map((tag, index) => `<button class="added-tag" data-index=${index}>#${tag}</button>`).join('');
+    outputElement.innerText = output;
+
+    if (copyButtonElement.innerText.includes('Done')) {
+      copyButtonElement.innerText = 'Copy';
+    }
 
     autosize.update(resizeElements);
-
-    outputElement.innerText = output;
   }
 }

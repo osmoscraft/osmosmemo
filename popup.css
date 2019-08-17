@@ -35,6 +35,9 @@ textarea {
   font-size: 14px;
   line-height: 20px;
 }
+textarea[readonly] {
+  background-color: transparent;
+}
 
 output {
   background-color: transparent;
@@ -71,10 +74,6 @@ button.combo-right {
   grid-auto-flow: column;
   grid-auto-columns: auto;
   justify-self: start;
-}
-
-.output {
-  word-break: break-all;
 }
 
 .copy {
