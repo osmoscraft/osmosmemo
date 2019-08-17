@@ -10,5 +10,5 @@
   "page_action": {
     "default_popup": "popup.html"
   },
-  "permissions": ["tabs", "activeTab", "declarativeContent"]
+  "permissions": ["activeTab", "declarativeContent", "storage"]
 }
