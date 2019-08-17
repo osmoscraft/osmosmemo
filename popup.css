@@ -3,8 +3,11 @@ body {
   --control-border-c: #ccc;
   --control-bg: #fff;
   --default-text-c: #333;
+  --secondary-text-c: #666;
   --standard-control-height: 30px;
   --standard-border-radius: 4px;
+  --label-font-size: 12px;
+  --label-font-weight: 600;
 
   background-color: var(--app-bg);
   color: var(--default-text-c);
@@ -29,7 +32,8 @@ hr {
 }
 
 label {
-  font-weight: 600;
+  font-weight: var(--label-font-weight);
+  font-size: var(--label-font-size);
 }
 
 output,
@@ -64,6 +68,14 @@ button.as-partial-r {
   border-bottom-left-radius: 0;
   border-left-width: 0;
 }
+button.as-label-action {
+  border: none;
+  padding: 0;
+  height: auto;
+  font-weight: var(--label-font-weight);
+  font-size: var(--label-font-size);
+  background-color: transparent;
+}
 
 .added-tags {
   width: 100%;
@@ -83,6 +95,25 @@ input[name='tag'] {
 .add-tag {
   display: flex;
   flex-wrap: wrap;
+}
+
+.dots {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, 8px);
+  grid-auto-flow: column;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.dot.selected {
+  background-color: var(--secondary-text-c);
 }
 
 .field {

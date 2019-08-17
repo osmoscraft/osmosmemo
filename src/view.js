@@ -1,5 +1,7 @@
 /* Input elements */
 const titleInputElement = document.querySelector('.js-title');
+const titleSwapElement = document.querySelector('.js-title-swap');
+const dotsElement = document.querySelector('.js-dots');
 const linkInputElement = document.querySelector('.js-link');
 const descriptionInputElement = document.querySelector('.js-description');
 const resizeElements = document.querySelectorAll('.js-autosize');
@@ -14,8 +16,10 @@ export class View {
     autosize(resizeElements);
   }
 
-  handleOutput({ onTitleChange, onLinkChange, onDescriptionChange, onAddTag, onRemoveTagByIndex }) {
+  handleOutput({ onTitleChange, onTitleSwap, onLinkChange, onDescriptionChange, onAddTag, onRemoveTagByIndex }) {
     titleInputElement.addEventListener('input', e => onTitleChange(e.target.value));
+    titleSwapElement.addEventListener('click', () => onTitleSwap());
+
     linkInputElement.addEventListener('input', e => onLinkChange(e.target.value));
     descriptionInputElement.addEventListener('input', e => onDescriptionChange(e.target.value));
     addTagButtonElement.addEventListener('click', () => {
@@ -54,10 +58,17 @@ export class View {
   }
 
   render({ state, previousState }) {
-    const { title, href, description, tags } = state;
+    const { title, titleOptions, selectedTitleIndex, href, description, tags } = state;
 
     if (title !== previousState.title) {
       titleInputElement.value = title;
+    }
+    titleSwapElement.hidden = titleOptions.length === 1;
+    if (selectedTitleIndex !== previousState.selectedTitleIndex) {
+      dotsElement.innerHTML = titleOptions
+        .map((_, index) => index === selectedTitleIndex)
+        .map(isSelect => `<span class="${isSelect ? 'dot selected' : 'dot'}"></span>`)
+        .join('');
     }
 
     if (href !== previousState.href) {

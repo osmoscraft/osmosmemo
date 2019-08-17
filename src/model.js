@@ -3,6 +3,7 @@ export class Model {
     state = {
       title: '',
       titleOptions: [],
+      selectedTitleIndex: undefined,
       href: '',
       description: '',
       tags: [],
