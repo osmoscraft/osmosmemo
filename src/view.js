@@ -53,7 +53,7 @@ export class View {
     });
   }
 
-  render({ title, href, description, output, tags, originalState }) {
+  render({ title, href, description, tags, originalState }) {
     if (titleInputElement.value !== title) {
       titleInputElement.value = title;
     }
@@ -67,6 +67,8 @@ export class View {
     }
 
     addedTagsElement.innerHTML = tags.map((tag, index) => `<button class="added-tag" data-index=${index}>#${tag}</button>`).join('');
+
+    const output = `[${title}](${href}) ${description} ${tags.map(tag => `#${tag}`).join('')}`;
     outputElement.innerText = output;
 
     if (copyButtonElement.innerText.includes('Done')) {

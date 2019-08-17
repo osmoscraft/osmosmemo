@@ -2,6 +2,7 @@ export class Model {
   constructor(
     state = {
       title: '',
+      titleOptions: [],
       href: '',
       description: '',
       tags: [],

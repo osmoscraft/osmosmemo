@@ -16,13 +16,13 @@ export class Controller {
     });
 
     this.model.emitter.addEventListener('update', e => {
-      const { title, href, description, tags } = e.detail;
-      const output = `[${title}](${href}) ${description} ${tags.map(tag => `#${tag}`).join('')}`;
-      this.view.render({ title, href, description, output, tags, originalState: this.model.originalState });
+      const { title, titleOptions, href, description, tags } = e.detail;
+      this.view.render({ title, titleOptions, href, description, tags, originalState: this.model.originalState });
     });
   }
 
-  onData({ title, headings, href, hostname }) {
-    this.model.update({ title, href });
+  onData({ title, headings, href }) {
+    const titleOptions = [...new Set([title.trim(), ...headings.map(heading => heading.trim())])];
+    this.model.update({ title, titleOptions, href });
   }
 }
