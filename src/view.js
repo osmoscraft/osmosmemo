@@ -30,13 +30,19 @@ export class View {
         onAddTag(tagInputElement.value);
         tagInputElement.value = '';
       }
+      if (tagInputElement.value === '' && e.key === 'Backspace') {
+        this.tryFocusLastTag();
+      }
     });
     addedTagsElement.addEventListener('click', e => {
       const removeIndex = parseInt(e.target.closest('button').dataset.index);
-      onRemoveTagByIndex(removeIndex);
-      const remainingTags = addedTagsElement.querySelectorAll('button');
-      const elementToFocus = remainingTags.length ? remainingTags[Math.max(0, removeIndex - 1)] : tagInputElement;
-      elementToFocus.focus();
+      this.removeTagAtIndex(removeIndex, onRemoveTagByIndex);
+    });
+    addedTagsElement.addEventListener('keydown', e => {
+      if (e.key === 'Backspace' || e.key === 'Delete') {
+        const removeIndex = parseInt(e.target.closest('button').dataset.index);
+        this.removeTagAtIndex(removeIndex, onRemoveTagByIndex);
+      }
     });
     outputElement.addEventListener('focus', () => outputElement.select());
     outputElement.addEventListener('click', () => outputElement.select());
@@ -68,5 +74,19 @@ export class View {
     }
 
     autosize.update(resizeElements);
+  }
+
+  removeTagAtIndex(index, onRemoveTagByIndex) {
+    onRemoveTagByIndex(index);
+    const remainingTags = addedTagsElement.querySelectorAll('button');
+    const elementToFocus = remainingTags.length ? remainingTags[Math.max(0, index - 1)] : tagInputElement;
+    elementToFocus.focus();
+  }
+
+  tryFocusLastTag() {
+    const remainingTags = addedTagsElement.querySelectorAll('button');
+    if (remainingTags.length) {
+      remainingTags[remainingTags.length - 1].focus();
+    }
   }
 }
