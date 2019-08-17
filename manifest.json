@@ -1,6 +1,6 @@
 {
   "name": "Markdown Page Summary",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Summarize the current page in a markdown snippet",
   "manifest_version": 2,
   "options_page": "options.html",
