@@ -9,7 +9,23 @@
     "persistent": false
   },
   "page_action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/Logo16.png",
+      "32": "assets/Logo32.png",
+      "48": "assets/Logo48.png",
+      "64": "assets/Logo64.png",
+      "128": "assets/Logo128.png",
+      "256": "assets/Logo256.png"
+    }
+  },
+  "icons": {
+    "16": "assets/Logo16.png",
+    "32": "assets/Logo32.png",
+    "48": "assets/Logo48.png",
+    "64": "assets/Logo64.png",
+    "128": "assets/Logo128.png",
+    "256": "assets/Logo256.png"
   },
   "permissions": ["activeTab", "declarativeContent", "storage"]
 }

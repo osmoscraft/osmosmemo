@@ -40,6 +40,8 @@ export class View {
       }
     });
     addedTagsElement.addEventListener('click', e => {
+      const selectedButton = e.target.closest('button');
+      if (!selectedButton) return;
       const removeIndex = parseInt(e.target.closest('button').dataset.index);
       this.removeTagAtIndex(removeIndex, onRemoveTagByIndex);
     });
