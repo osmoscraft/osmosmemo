@@ -10,7 +10,6 @@ const controller = new Controller(model, view);
 chrome.runtime.onMessage.addListener((request, sender) => {
   if (request.command === 'metadata-ready') {
     const { title, headings, href, hostname } = request.data;
-    debugger;
     controller.onData({ title, headings, href, hostname });
   }
 
