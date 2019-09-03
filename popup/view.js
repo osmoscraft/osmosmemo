@@ -90,8 +90,10 @@ export class View {
       tagOptionsElement.innerHTML = tagOptions.map(option => `<option value=${option}></option>`).join('');
     }
 
-    const output = `[${title}](${href}) ${description} ${tags.map(tag => `#${tag}`).join('')}`;
-    previewElement.innerText = output;
+    const newOutputPreview = this.getPreviewOutput(title, href, description, tags);
+    if (previewElement.innerText !== newOutputPreview) {
+      previewElement.innerText = newOutputPreview;
+    }
 
     if (copyButtonElement.innerText.includes('Done')) {
       copyButtonElement.innerText = 'Copy';
@@ -112,5 +114,21 @@ export class View {
     if (remainingTags.length) {
       remainingTags[remainingTags.length - 1].focus();
     }
+  }
+
+  getPreviewOutput(title, href, description, tags) {
+    const titleLink = `[${title}](${href})`;
+    const tagList = tags.map(tag => `#${tag}`).join('');
+    const outputArray = [titleLink];
+
+    if (description) {
+      outputArray.push(description);
+    }
+
+    if (tagList.length) {
+      outputArray.push(tagList);
+    }
+
+    return outputArray.join(' ');
   }
 }

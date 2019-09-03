@@ -1,6 +1,6 @@
 .options-container {
   margin: auto;
-  width: 30em;
+  max-width: 64em;
   display: grid;
   grid-auto-rows: auto;
 }
