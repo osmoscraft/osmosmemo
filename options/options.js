@@ -34,6 +34,7 @@ saveButtonElement.addEventListener('click', () => {
 
 updateTagsButtonsElement.addEventListener('click', () => {
   chrome.storage.sync.get(['accessToken'], (/** @type {Options} */ data) => {
+    // TODO get repo, user, and filename from options
     fetch('https://api.github.com/repos/chuanqisun/wiki/contents/README.md')
       .then(res => res.json())
       .then(res => {
