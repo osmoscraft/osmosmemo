@@ -1,9 +1,12 @@
-const defaultTagOptions = ['inspiration', 'opinion', 'reference', 'resource', 'tool', 'tutorial'];
+/// <reference path="./shared/typings/index.d.ts" />
 
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.get('tagOptions', async options => {
+  chrome.storage.sync.get(['accessToken', 'tags'], async (/** @type {Options} */ options) => {
+    if (!options.accessToken) {
+      chrome.storage.sync.set({ accessToken: '' }, () => {});
+    }
     if (!options.tags) {
-      chrome.storage.sync.set({ tagOptions: defaultTagOptions }, () => {});
+      chrome.storage.sync.set({ tags: [] }, () => {});
     }
   });
 

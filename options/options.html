@@ -9,17 +9,22 @@
   <body>
     <div class="options-container">
       <div class="field">
-        <label for="preview" class="field__label">Settings summary (JSON)</label>
-        <textarea id="preview" class="js-preview js-autosize field__input" readonly rows="1"></textarea>
+        <label for="access-token" class="field__label">Personal access token</label>
+        <input id="access-token" class="js-access-token field__input" type="password" />
       </div>
+      <hr />
+      <button class="js-save">Save</button>
       <hr />
       <hr />
       <div class="field">
-        <label for="access-token" class="field__label">Personal access token</label>
-        <input id="access-token" class="js-access-token field__input" />
+        <label for="tags" class="field__label">Tags (JSON)</label>
+        <textarea id="tags" class="js-tags js-autosize field__input" readonly rows="1"></textarea>
       </div>
-      <button class="js-save">Save</button>
+      <hr />
+      <button class="js-update-tags">Update tags</button>
+      <hr />
+      <hr />
     </div>
   </body>
-  <script src="options.js"></script>
+  <script type="module" src="options.js"></script>
 </html>

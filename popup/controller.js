@@ -27,8 +27,8 @@ export class Controller {
       this.cacheModel();
     });
 
-    chrome.storage.sync.get('tagOptions', async data => {
-      this.model.update({ tagOptions: data.tagOptions });
+    chrome.storage.sync.get('tags', async data => {
+      this.model.update({ tagOptions: data.tags });
     });
   }
 
