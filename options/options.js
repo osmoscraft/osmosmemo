@@ -1,7 +1,6 @@
 /// <reference path="../shared/typings/index.d.ts" />
 
-import { b64DecodeUnicode } from '../shared/utils/base64.js';
-import { testConnection, getContent } from '../shared/github/rest-api.js';
+import { testConnection, getContentString } from '../shared/github/rest-api.js';
 
 const optionsForm = document.querySelector('.js-options-form');
 const connectButtonElement = document.querySelector('.js-connect');
@@ -69,7 +68,7 @@ function getTagsFromRemote() {
   chrome.storage.sync.get(['accessToken', 'username', 'repo', 'filename'], async (/** @type {Options} */ data) => {
     const { accessToken, username, repo, filename } = data;
 
-    const markdownString = await getContent({ accessToken, username, repo, filename });
+    const markdownString = await getContentString({ accessToken, username, repo, filename });
 
     // negative look ahead to make rule out any hashtags inside parenthesis
     const hashTags = markdownString.match(/(?!.*(?:\)|]))#([a-z0-9]+)/g);

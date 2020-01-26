@@ -1,4 +1,4 @@
-import { b64EncodeUnicode, b64DecodeUnicode } from '../shared/utils/base64.js';
+import { insertContent } from '../shared/github/rest-api.js';
 
 export class Controller {
   constructor(model, view) {
@@ -38,28 +38,14 @@ export class Controller {
   onSave() {
     this.model.update({ saveStatus: 'saving' });
     chrome.storage.sync.get('accessToken', async (/** @type { Options } */ data) => {
-      const headers = new Headers({
-        Authorization: 'Basic ' + btoa('chuanqisun:' + data.accessToken),
-        'Content-Type': 'application/json',
-      });
       try {
-        const latestContent = await fetch('https://api.github.com/repos/chuanqisun/wiki/contents/test.md').then(res => res.json());
-        const decodedLatestContentString = b64DecodeUnicode(latestContent.content);
-
-        const { title, href, description, tags } = this.model.state;
-        const entryString = this.view.getPreviewOutput(title, href, description, tags);
-        const updatedString = decodedLatestContentString.replace('# Wiki', `# Wiki\n${entryString}`);
-
-        await fetch('https://api.github.com/repos/chuanqisun/wiki/contents/test.md', {
-          method: 'PUT',
-          headers,
-          body: JSON.stringify({
-            message: 'New summary added by Markdown Page Summary',
-            content: b64EncodeUnicode(updatedString),
-            sha: latestContent.sha,
-          }),
-        }).then(res => res.json());
-        this.model.update({ saveStatus: 'saved' });
+        chrome.storage.sync.get(['accessToken', 'username', 'repo', 'filename'], async (/** @type {Options} */ data) => {
+          const { accessToken, username, repo, filename } = data;
+          const { title, href, description, tags } = this.model.state;
+          const newEntryString = this.view.getPreviewOutput(title, href, description, tags);
+          await insertContent({ accessToken, username, repo, filename, content: newEntryString });
+          this.model.update({ saveStatus: 'saved' });
+        });
       } catch {
         this.model.update({ saveStatus: 'error' });
       }
