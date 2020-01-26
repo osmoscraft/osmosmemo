@@ -55,5 +55,7 @@ async function getContents({ accessToken, username, repo, filename }) {
     }),
   });
 
+  if (!response.ok) throw new Error('get-contents-failed');
+
   return response.json();
 }

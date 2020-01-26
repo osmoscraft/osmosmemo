@@ -1,4 +1,5 @@
-import { insertContent, getLibraryUrl, testConnection } from '../shared/github/rest-api.js';
+import { insertContent, getLibraryUrl, getContentString } from '../shared/github/rest-api.js';
+import { getUniqueTagsFromMarkdownString } from '../shared/utils/tags.js';
 
 export class Controller {
   constructor(model, view) {
@@ -30,6 +31,17 @@ export class Controller {
       this.cacheModel();
     });
 
+    chrome.storage.onChanged.addListener((changes, namespace) => {
+      if (namespace === 'sync') {
+        for (let key in changes) {
+          if (key === 'tags') {
+            const storageChange = changes[key];
+            this.model.update({ tagOptions: storageChange.newValue });
+          }
+        }
+      }
+    });
+
     chrome.storage.sync.get('tags', async data => {
       this.model.update({ tagOptions: data.tags });
     });
@@ -37,19 +49,17 @@ export class Controller {
     chrome.storage.sync.get(['accessToken', 'username', 'repo', 'filename'], async (/** @type {Options} */ data) => {
       const { accessToken, username, repo, filename } = data;
       try {
-        const isConnectionValid = await testConnection({ accessToken, username, repo, filename });
-        if (isConnectionValid) {
-          const libraryUrl = getLibraryUrl({ username, repo, filename });
-          this.model.update({ libraryUrl, connectionStatus: 'valid' });
-        } else {
-          throw new Error('invalid connection');
-        }
+        const markdownString = await getContentString({ accessToken, username, repo, filename });
+        const libraryUrl = getLibraryUrl({ username, repo, filename });
+        this.model.update({ libraryUrl, connectionStatus: 'valid' });
+
+        // Get latest tags and write to storage. The change listener will fire and push changes to model
+        const uniqueTags = await getUniqueTagsFromMarkdownString(markdownString);
+        chrome.storage.sync.set({ tags: uniqueTags });
       } catch (e) {
         this.model.update({ connectionStatus: 'error' });
       }
     });
-
-    // TODO update tags on first load
   }
 
   onSave() {
