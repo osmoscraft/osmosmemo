@@ -1,3 +1,5 @@
+/// <reference path="../shared/typings/index.d.ts" />
+
 /* Input elements */
 const titleInputElement = document.querySelector('.js-title');
 const titleSwapElement = document.querySelector('.js-title-swap');
@@ -11,13 +13,21 @@ const tagInputElement = document.querySelector('.js-tag-input');
 const tagOptionsElement = document.querySelector('.js-tag-options');
 const addTagButtonElement = document.querySelector('.js-add-tag-button');
 const copyButtonElement = document.querySelector('.js-copy');
+const saveButtonElement = document.querySelector('.js-save');
+
+const saveStatusDisplayStrings = new Map([
+  ['new', 'Save'],
+  ['saving', 'Save - Saving…'],
+  ['saved', 'Save - Done'],
+  ['error', 'Save - Error'],
+]);
 
 export class View {
   constructor() {
     autosize(resizeElements);
   }
 
-  handleOutput({ onTitleChange, onTitleSwap, onLinkChange, onDescriptionChange, onAddTag, onRemoveTagByIndex }) {
+  handleOutput({ onTitleChange, onTitleSwap, onLinkChange, onDescriptionChange, onAddTag, onRemoveTagByIndex, onSave }) {
     titleInputElement.addEventListener('input', e => onTitleChange(e.target.value));
     titleSwapElement.addEventListener('click', () => onTitleSwap());
 
@@ -58,10 +68,12 @@ export class View {
       document.execCommand('copy');
       copyButtonElement.innerText = 'Copy - Done';
     });
+
+    saveButtonElement.addEventListener('click', onSave);
   }
 
   render({ state, previousState }) {
-    const { title, titleOptions, selectedTitleIndex, href, description, tags, tagOptions } = state;
+    const { title, titleOptions, selectedTitleIndex, href, description, tags, tagOptions, saveStatus } = state;
 
     if (title !== previousState.title) {
       titleInputElement.value = title;
@@ -99,6 +111,9 @@ export class View {
       copyButtonElement.innerText = 'Copy';
     }
 
+    if (saveStatus !== previousState.saveStatus) {
+      saveButtonElement.innerText = saveStatusDisplayStrings.get(saveStatus);
+    }
     autosize.update(resizeElements);
   }
 
@@ -117,7 +132,7 @@ export class View {
   }
 
   getPreviewOutput(title, href, description, tags) {
-    const titleLink = `[${title}](${href})`;
+    const titleLink = `- [${title}](${href})`;
     const tagList = tags.map(tag => `#${tag}`).join('');
     const outputArray = [titleLink];
 

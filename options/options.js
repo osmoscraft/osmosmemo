@@ -1,5 +1,7 @@
 /// <reference path="../shared/typings/index.d.ts" />
 
+import { b64DecodeUnicode } from '../shared/utils/base64.js';
+
 const saveButtonElement = document.querySelector('.js-save');
 const updateTagsButtonsElement = document.querySelector('.js-update-tags');
 const accessTokenElement = document.querySelector('.js-access-token');
@@ -49,15 +51,3 @@ updateTagsButtonsElement.addEventListener('click', () => {
       });
   });
 });
-
-function b64DecodeUnicode(str) {
-  // Going backwards: from bytestream, to percent-encoding, to original string.
-  return decodeURIComponent(
-    atob(str)
-      .split('')
-      .map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      })
-      .join('')
-  );
-}

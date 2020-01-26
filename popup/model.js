@@ -8,6 +8,7 @@ export class Model {
       description: '',
       tags: [],
       tagOptions: [],
+      saveStatus: 'new', // 'new' | 'saving' | 'saved' | 'error'
     }
   ) {
     this.state = state;
