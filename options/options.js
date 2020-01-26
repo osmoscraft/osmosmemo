@@ -1,6 +1,7 @@
 /// <reference path="../shared/typings/index.d.ts" />
 
-import { testConnection, getContentString } from '../shared/github/rest-api.js';
+import { getContentString } from '../shared/github/rest-api.js';
+import { getUniqueTagsFromMarkdownString } from '../shared/utils/tags.js';
 
 const optionsForm = document.querySelector('.js-options-form');
 const connectButtonElement = document.querySelector('.js-connect');
@@ -48,33 +49,12 @@ connectButtonElement.addEventListener('click', async event => {
 
   connectButtonElement.innerText = '🔗 Connecting…';
 
-  const isConnectionValid = await testConnection({
-    accessToken,
-    username,
-    repo,
-    filename,
-  });
-
-  if (isConnectionValid) {
-    chrome.storage.sync.set({ accessToken, username, repo, filename }, () => {});
-    getTagsFromRemote();
+  try {
+    const markdownString = await getContentString({ accessToken, username, repo, filename });
+    const uniqueTags = await getUniqueTagsFromMarkdownString(markdownString);
     connectButtonElement.innerText = '🙌 Connected to GitHub';
-  } else {
+    chrome.storage.sync.set({ accessToken, username, repo, filename, tags: uniqueTags });
+  } catch (e) {
     connectButtonElement.innerText = '❌ Something went wrong. Please try again.';
   }
 });
-
-function getTagsFromRemote() {
-  chrome.storage.sync.get(['accessToken', 'username', 'repo', 'filename'], async (/** @type {Options} */ data) => {
-    const { accessToken, username, repo, filename } = data;
-
-    const markdownString = await getContentString({ accessToken, username, repo, filename });
-
-    // negative look ahead to make rule out any hashtags inside parenthesis
-    const hashTags = markdownString.match(/(?!.*(?:\)|]))#([a-z0-9]+)/g);
-    const textTags = hashTags.map(tag => tag.split('#')[1]);
-    const uniqueTags = [...new Set(textTags)].sort();
-
-    chrome.storage.sync.set({ tags: uniqueTags });
-  });
-}

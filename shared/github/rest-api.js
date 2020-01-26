@@ -36,17 +36,6 @@ async function writeContent({ accessToken, username, repo, filename, previousSha
   });
 }
 
-export async function testConnection({ accessToken, username, repo, filename }) {
-  const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${filename}`, {
-    headers: new Headers({
-      Authorization: 'Basic ' + btoa(`${username}:${accessToken}`),
-      'Content-Type': 'application/json',
-    }),
-  });
-
-  return response.ok;
-}
-
 async function getContents({ accessToken, username, repo, filename }) {
   const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${filename}`, {
     headers: new Headers({
