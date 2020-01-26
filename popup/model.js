@@ -8,7 +8,9 @@ export class Model {
       description: '',
       tags: [],
       tagOptions: [],
-      saveStatus: 'new', // 'new' | 'saving' | 'saved' | 'error'
+      libraryUrl: undefined,
+      saveStatus: 'new', // 'new' | 'saving' | 'saved' | 'error',
+      connectionStatus: 'unknown', // 'unknown' | 'valid' | 'error'
     }
   ) {
     this.state = state;

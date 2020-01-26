@@ -16,6 +16,11 @@ export async function insertContent({ accessToken, username, repo, filename, con
   writeContent({ accessToken, username, repo, filename, previousSha: contents.sha, content: resultContent });
 }
 
+/** currently only work with public repos */
+export function getLibraryUrl({ username, repo, filename }) {
+  return `https://github.com/${username}/${repo}/blob/master/${filename}`;
+}
+
 async function writeContent({ accessToken, username, repo, filename, previousSha, content }) {
   return fetch(`https://api.github.com/repos/${username}/${repo}/contents/${filename}`, {
     method: 'PUT',

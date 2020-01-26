@@ -12,8 +12,10 @@ const addedTagsElement = document.querySelector('.added-tags');
 const tagInputElement = document.querySelector('.js-tag-input');
 const tagOptionsElement = document.querySelector('.js-tag-options');
 const addTagButtonElement = document.querySelector('.js-add-tag-button');
-const optionsButtonElement = document.querySelector('.js-options');
+const actionsElement = document.querySelector('.js-actions');
 const saveButtonElement = document.querySelector('.js-save');
+const openOptionsButtonElement = document.querySelector('.js-open-options');
+const openLibraryLinkElement = document.querySelector('.js-open-library');
 
 const saveStatusDisplayStrings = new Map([
   ['new', '💾 Save'],
@@ -65,11 +67,11 @@ export class View {
     previewElement.addEventListener('click', () => previewElement.select());
 
     saveButtonElement.addEventListener('click', onSave);
-    optionsButtonElement.addEventListener('click', () => chrome.runtime.openOptionsPage());
+    openOptionsButtonElement.addEventListener('click', () => chrome.runtime.openOptionsPage());
   }
 
   render({ state, previousState }) {
-    const { title, titleOptions, selectedTitleIndex, href, description, tags, tagOptions, saveStatus } = state;
+    const { title, titleOptions, selectedTitleIndex, href, description, tags, tagOptions, saveStatus, connectionStatus, libraryUrl } = state;
 
     if (title !== previousState.title) {
       titleInputElement.value = title;
@@ -106,6 +108,25 @@ export class View {
     if (saveStatus !== previousState.saveStatus) {
       saveButtonElement.innerText = saveStatusDisplayStrings.get(saveStatus);
     }
+
+    if (libraryUrl !== previousState.libraryUrl) {
+      if (libraryUrl && libraryUrl.length) {
+        openLibraryLinkElement.href = libraryUrl;
+      } else {
+        openLibraryLinkElement.removeAttribute('href');
+      }
+    }
+
+    if (connectionStatus !== previousState.connectionStatus) {
+      const isError = connectionStatus === 'error';
+      if (isError) {
+        openLibraryLinkElement.hidden = true;
+        saveButtonElement.hidden = true;
+      }
+      actionsElement.classList.toggle('has-error', isError);
+      openOptionsButtonElement.classList.toggle('has-error', isError);
+    }
+
     autosize.update(resizeElements);
   }
 

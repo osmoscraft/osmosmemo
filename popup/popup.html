@@ -41,10 +41,13 @@
       </div>
       <hr />
       <hr />
-      <div class="actions">
+      <div class="js-actions actions">
         <button class="js-save">💾 Save</button>
-        <a class="button js-open-library" title="Open library" href="https://github.com/chuanqisun/wiki/blob/master/test.md" target="_blank">📚</a>
-        <button class="js-options" title="Open settings">⚙</button>
+        <a class="button js-open-library" title="Open library" target="_blank">📚</a>
+        <button class="js-open-options open-options" title="Open settings">
+          <span class="open-options__show-when-valid">⚙</span>
+          <span class="open-options__show-when-error">🔗 Connect to GitHub</span>
+        </button>
       </div>
     </div>
     <script type="module" src="popup.js"></script>

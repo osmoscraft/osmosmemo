@@ -1,4 +1,4 @@
-import { insertContent } from '../shared/github/rest-api.js';
+import { insertContent, getLibraryUrl, testConnection } from '../shared/github/rest-api.js';
 
 export class Controller {
   constructor(model, view) {
@@ -33,19 +33,32 @@ export class Controller {
     chrome.storage.sync.get('tags', async data => {
       this.model.update({ tagOptions: data.tags });
     });
+
+    chrome.storage.sync.get(['accessToken', 'username', 'repo', 'filename'], async (/** @type {Options} */ data) => {
+      const { accessToken, username, repo, filename } = data;
+      try {
+        const isConnectionValid = await testConnection({ accessToken, username, repo, filename });
+        if (isConnectionValid) {
+          const libraryUrl = getLibraryUrl({ username, repo, filename });
+          this.model.update({ libraryUrl, connectionStatus: 'valid' });
+        } else {
+          throw new Error('invalid connection');
+        }
+      } catch (e) {
+        this.model.update({ connectionStatus: 'error' });
+      }
+    });
   }
 
   onSave() {
     this.model.update({ saveStatus: 'saving' });
-    chrome.storage.sync.get('accessToken', async (/** @type { Options } */ data) => {
+    chrome.storage.sync.get(['accessToken', 'username', 'repo', 'filename'], async (/** @type {Options} */ data) => {
       try {
-        chrome.storage.sync.get(['accessToken', 'username', 'repo', 'filename'], async (/** @type {Options} */ data) => {
-          const { accessToken, username, repo, filename } = data;
-          const { title, href, description, tags } = this.model.state;
-          const newEntryString = this.view.getPreviewOutput(title, href, description, tags);
-          await insertContent({ accessToken, username, repo, filename, content: newEntryString });
-          this.model.update({ saveStatus: 'saved' });
-        });
+        const { accessToken, username, repo, filename } = data;
+        const { title, href, description, tags } = this.model.state;
+        const newEntryString = this.view.getPreviewOutput(title, href, description, tags);
+        await insertContent({ accessToken, username, repo, filename, content: newEntryString });
+        this.model.update({ saveStatus: 'saved' });
       } catch {
         this.model.update({ saveStatus: 'error' });
       }

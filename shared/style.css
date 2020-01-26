@@ -75,6 +75,10 @@ button {
 button:hover {
   background-color: var(--control-bg-hover);
 }
+.button[hidden],
+button[hidden] {
+  display: none;
+}
 
 button.as-partial-r {
   border-top-left-radius: 0;
@@ -154,4 +158,15 @@ input[name='tag'] {
   display: grid;
   grid-template-columns: 1fr 40px 40px;
   grid-gap: 4px;
+}
+
+.actions.has-error {
+  grid-template-columns: 1fr;
+}
+
+.open-options:not(.has-error) .open-options__show-when-error {
+  display: none;
+}
+.open-options.has-error .open-options__show-when-valid {
+  display: none;
 }
