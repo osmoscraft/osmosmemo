@@ -7,6 +7,7 @@ const optionsForm = document.querySelector('.js-options-form');
 const connectButtonElement = document.querySelector('.js-connect');
 const accessTokenElement = document.querySelector('.js-access-token');
 const tagsElement = document.querySelector('.js-tags');
+const tagCountElement = document.querySelector('.js-tag-count');
 const usernameElement = document.querySelector('.js-username');
 const repoElement = document.querySelector('.js-repo');
 const filenameElement = document.querySelector('.js-filename');
@@ -24,7 +25,8 @@ function renderAllFields() {
     renderInputField({ element: usernameElement, string: username });
     renderInputField({ element: repoElement, string: repo });
     renderInputField({ element: filenameElement, string: filename });
-    renderInputField({ element: tagsElement, string: JSON.stringify(tags) });
+    renderInputField({ element: tagsElement, string: tags.join(', ') });
+    tagCountElement.innerText = `${tags.length} ${tags.length === 1 ? 'tag' : 'tags'} found`;
     autosize.update(resizeElements);
   });
 }

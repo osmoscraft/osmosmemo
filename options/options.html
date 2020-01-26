@@ -9,9 +9,12 @@
   <body>
     <form class="js-options-form options-container">
       <div class="field">
-        <label for="access-token" class="field__label"
-          >Personal access token (<a href="https://github.com/settings/tokens/new" target="_blank">Create from GitHub</a>)</label
-        >
+        <label for="access-token" class="field__label">GitHub personal access token</label>
+        <span class="field__action">
+          <a href="https://github.com/settings/tokens/new" target="_blank">New token</a>
+          <span>|</span>
+          <a href="https://github.com/settings/tokens" target="_blank">Manage tokens</a>
+        </span>
         <input id="access-token" class="js-access-token field__input" type="password" required />
       </div>
       <hr />
@@ -22,6 +25,11 @@
       <hr />
       <div class="field">
         <label for="repo" class="field__label">GitHub repository</label>
+        <span class="field__action">
+          <a href="https://github.com/new" target="_blank">New repository</a>
+          <span>|</span>
+          <a href="https://github.com/chuanqisun?tab=repositories" target="_blank">Manage repositories</a>
+        </span>
         <input id="repo" class="js-repo field__input" type="text" placeholder="TypeScript" required />
       </div>
       <hr />
@@ -35,7 +43,7 @@
       <hr />
       <hr />
       <div class="field">
-        <label for="tags" class="field__label">Available tags (JSON)</label>
+        <label for="tags" class="field__label">Available tags (<span class="js-tag-count"></span>)</label>
         <textarea id="tags" class="js-tags js-autosize field__input" readonly rows="1"></textarea>
       </div>
     </form>
