@@ -36,20 +36,23 @@ export class View {
     linkInputElement.addEventListener('input', e => onLinkChange(e.target.value));
     descriptionInputElement.addEventListener('input', e => onDescriptionChange(e.target.value));
     addTagButtonElement.addEventListener('click', () => {
-      if (tagInputElement.value !== '') {
-        onAddTag(tagInputElement.value);
-        tagInputElement.value = '';
-        tagInputElement.focus();
-      }
+      this.sanitizeTagInput();
+      onAddTag(tagInputElement.value);
+      tagInputElement.value = '';
+      tagInputElement.focus();
     });
     tagInputElement.addEventListener('keydown', e => {
       if (tagInputElement.value !== '' && e.key === 'Enter') {
+        this.sanitizeTagInput();
         onAddTag(tagInputElement.value);
         tagInputElement.value = '';
       }
       if (tagInputElement.value === '' && e.key === 'Backspace') {
         this.tryFocusLastTag();
       }
+    });
+    tagInputElement.addEventListener('keyup', e => {
+      this.sanitizeTagInput();
     });
     addedTagsElement.addEventListener('click', e => {
       const selectedButton = e.target.closest('button');
@@ -158,5 +161,10 @@ export class View {
     }
 
     return outputArray.join(' ');
+  }
+
+  sanitizeTagInput() {
+    // strictly lowercased a-z and 0-9
+    tagInputElement.value = tagInputElement.value.toLocaleLowerCase().replace(/[^0-9a-z]/g, '');
   }
 }
