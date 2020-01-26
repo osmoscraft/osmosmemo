@@ -48,6 +48,8 @@ export class Controller {
         this.model.update({ connectionStatus: 'error' });
       }
     });
+
+    // TODO update tags on first load
   }
 
   onSave() {
