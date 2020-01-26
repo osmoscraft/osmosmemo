@@ -60,6 +60,7 @@ input.as-partial-l {
 
 button {
   height: var(--standard-control-height);
+  font-weight: 600;
   background-color: var(--control-bg);
   border: 1px solid var(--control-border-c);
   border-radius: var(--standard-border-radius);
@@ -135,4 +136,10 @@ input[name='tag'] {
 
 .field__input {
   grid-area: input;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 40px;
+  grid-gap: 4px;
 }

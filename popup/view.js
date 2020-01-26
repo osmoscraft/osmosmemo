@@ -12,14 +12,14 @@ const addedTagsElement = document.querySelector('.added-tags');
 const tagInputElement = document.querySelector('.js-tag-input');
 const tagOptionsElement = document.querySelector('.js-tag-options');
 const addTagButtonElement = document.querySelector('.js-add-tag-button');
-const copyButtonElement = document.querySelector('.js-copy');
+const optionsButtonElement = document.querySelector('.js-options');
 const saveButtonElement = document.querySelector('.js-save');
 
 const saveStatusDisplayStrings = new Map([
-  ['new', 'Save'],
-  ['saving', 'Save - Saving…'],
-  ['saved', 'Save - Done'],
-  ['error', 'Save - Error'],
+  ['new', '💾 Save'],
+  ['saving', '💾 Saving…'],
+  ['saved', '🙌 Saved'],
+  ['error', '❌ Error'],
 ]);
 
 export class View {
@@ -63,13 +63,9 @@ export class View {
     });
     previewElement.addEventListener('focus', () => previewElement.select());
     previewElement.addEventListener('click', () => previewElement.select());
-    copyButtonElement.addEventListener('click', () => {
-      previewElement.select();
-      document.execCommand('copy');
-      copyButtonElement.innerText = 'Copy - Done';
-    });
 
     saveButtonElement.addEventListener('click', onSave);
+    optionsButtonElement.addEventListener('click', () => chrome.runtime.openOptionsPage());
   }
 
   render({ state, previousState }) {
@@ -105,10 +101,6 @@ export class View {
     const newOutputPreview = this.getPreviewOutput(title, href, description, tags);
     if (previewElement.innerText !== newOutputPreview) {
       previewElement.innerText = newOutputPreview;
-    }
-
-    if (copyButtonElement.innerText.includes('Done')) {
-      copyButtonElement.innerText = 'Copy';
     }
 
     if (saveStatus !== previousState.saveStatus) {
