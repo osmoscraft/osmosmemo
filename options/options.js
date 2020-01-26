@@ -40,13 +40,12 @@ updateTagsButtonsElement.addEventListener('click', () => {
       .then(res => {
         const markdownString = b64DecodeUnicode(res.content);
 
-        const tagsMatch = markdownString.match(/Genre[\r\n]+([^\r\n]+)/)[1];
-        const tags = tagsMatch
-          .split(' ')
-          .filter(tag => tag.length)
-          .map(tag => tag.split('#')[1]);
+        // negative look ahead to make rule out any hashtags inside parenthesis
+        const hashTags = markdownString.match(/(?!.*(?:\)|]))#([a-z0-9]+)/g);
+        const textTags = hashTags.map(tag => tag.split('#')[1]);
+        const uniqueTags = [...new Set(textTags)].sort();
 
-        chrome.storage.sync.set({ tags });
+        chrome.storage.sync.set({ tags: uniqueTags });
       });
   });
 });
