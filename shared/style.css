@@ -2,6 +2,7 @@ body {
   --app-bg: #eee;
   --control-border-c: #ccc;
   --control-bg: #fff;
+  --control-bg-hover: #f7f7f7;
   --default-text-c: #333;
   --secondary-text-c: #666;
   --standard-control-height: 30px;
@@ -58,13 +59,23 @@ input.as-partial-l {
   border-bottom-right-radius: 0;
 }
 
+.button,
 button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   height: var(--standard-control-height);
   font-weight: 600;
   background-color: var(--control-bg);
   border: 1px solid var(--control-border-c);
   border-radius: var(--standard-border-radius);
+  text-decoration: none;
 }
+.button:hover,
+button:hover {
+  background-color: var(--control-bg-hover);
+}
+
 button.as-partial-r {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -139,7 +150,8 @@ input[name='tag'] {
 }
 
 .actions {
+  cursor: default;
   display: grid;
-  grid-template-columns: 1fr 40px;
+  grid-template-columns: 1fr 40px 40px;
   grid-gap: 4px;
 }
