@@ -15,6 +15,18 @@ export class Model {
     this.emitter = document.createElement('div');
   }
 
+  getCacheableState() {
+    const { title, titleOptions, selectedTitleIndex, href, description, tags } = this.state;
+    return {
+      title,
+      titleOptions,
+      selectedTitleIndex,
+      href,
+      description,
+      tags,
+    };
+  }
+
   update(delta) {
     const previousState = { ...this.state };
     this.state = { ...this.state, ...delta };

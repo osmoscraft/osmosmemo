@@ -77,7 +77,7 @@ export class Controller {
 
   cacheModel() {
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-      chrome.tabs.sendMessage(tabs[0].id, { command: 'cache-model', data: { ...this.model.state, saveStatus: 'new' } });
+      chrome.tabs.sendMessage(tabs[0].id, { command: 'cache-model', data: this.model.getCacheableState() });
     });
   }
 }
