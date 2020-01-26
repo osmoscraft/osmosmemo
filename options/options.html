@@ -4,27 +4,41 @@
     <link rel="stylesheet" href="../shared/style.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="../shared/vendor/autosize.min.js"></script>
-    <style></style>
+    <meta charset="UTF-8" />
   </head>
   <body>
-    <div class="options-container">
+    <form class="js-options-form options-container">
       <div class="field">
-        <label for="access-token" class="field__label">Personal access token</label>
-        <input id="access-token" class="js-access-token field__input" type="password" />
+        <label for="access-token" class="field__label"
+          >Personal access token (<a href="https://github.com/settings/tokens/new" target="_blank">Create from GitHub</a>)</label
+        >
+        <input id="access-token" class="js-access-token field__input" type="password" required />
       </div>
       <hr />
-      <button class="js-save">Save</button>
+      <div class="field">
+        <label for="username" class="field__label">GitHub username</label>
+        <input id="username" class="js-username field__input" type="text" placeholder="microsoft" required />
+      </div>
+      <hr />
+      <div class="field">
+        <label for="repo" class="field__label">GitHub repository</label>
+        <input id="repo" class="js-repo field__input" type="text" placeholder="TypeScript" required />
+      </div>
+      <hr />
+      <div class="field">
+        <label for="filename" class="field__label">Markdown filename for data storage</label>
+        <input id="filename" class="js-filename field__input" type="text" placeholder="README.md" required />
+      </div>
+      <hr />
+      <hr />
+      <button class="js-connect">🔗 Connect to GitHub</button>
       <hr />
       <hr />
       <div class="field">
-        <label for="tags" class="field__label">Tags (JSON)</label>
+        <label for="tags" class="field__label">Available tags (JSON)</label>
         <textarea id="tags" class="js-tags js-autosize field__input" readonly rows="1"></textarea>
       </div>
-      <hr />
-      <button class="js-update-tags">Update tags</button>
-      <hr />
-      <hr />
-    </div>
+    </form>
   </body>
   <script type="module" src="options.js"></script>
 </html>
