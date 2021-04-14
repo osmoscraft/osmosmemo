@@ -14,8 +14,8 @@ async function build() {
     entryPoints: [
       "src/content-script.ts",
       "src/background.ts",
-      "src/popup/popup.js",
-      "src/options/options.js",
+      "src/popup/popup.ts",
+      "src/options/options.ts",
     ],
     bundle: true,
     format: "esm",

@@ -1,23 +1,32 @@
-/// <reference path="./typings/options.d.ts" />
 import { browser } from 'webextension-polyfill-ts';
+
+export interface Options {
+  tags?: string[];
+  accessToken?: string;
+  username?: string;
+  repo?: string;
+  filename?: string;
+}
 
 browser.runtime.onInstalled.addListener(async () => {
   const options = (await browser.storage.sync.get(['accessToken', 'tags', 'username', 'repo', 'filename'])) as Options;
 
-  // TODO use parallelism
+  let update: Options = {};
   if (!options.accessToken) {
-    await browser.storage.sync.set({ accessToken: '' });
+    update.accessToken = '';
   }
   if (!options.tags) {
-    await browser.storage.sync.set({ tags: [] });
+    update.tags = [];
   }
   if (!options.username) {
-    await browser.storage.sync.set({ username: '' });
+    update.username = '';
   }
   if (!options.repo) {
-    await browser.storage.sync.set({ repo: '' });
+    update.repo = '';
   }
   if (!options.filename) {
-    await browser.storage.sync.set({ filename: 'README.md' });
+    update.filename = 'README.md';
   }
+
+  await browser.storage.sync.set(update);
 });

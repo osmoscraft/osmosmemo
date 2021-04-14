@@ -1,9 +1,9 @@
-/// <reference path="../typings/options.d.ts" />
 import autosize from 'autosize';
 import { browser } from 'webextension-polyfill-ts';
+import type { Options } from '../background';
 
-import { getContentString } from '../shared/github/rest-api.js';
-import { getUniqueTagsFromMarkdownString } from '../shared/utils/tags.js';
+import { getContentString } from '../shared/github/rest-api';
+import { getUniqueTagsFromMarkdownString } from '../shared/utils/tags';
 
 const optionsForm = document.querySelector('.js-options-form') as HTMLElement;
 const connectButtonElement = document.querySelector('.js-connect') as HTMLElement;

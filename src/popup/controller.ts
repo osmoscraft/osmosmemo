@@ -1,8 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
-import { insertContent, getLibraryUrl, getContentString } from '../shared/github/rest-api.js';
-import { getUniqueTagsFromMarkdownString } from '../shared/utils/tags.js';
-import type { Model } from './model.js';
-import type { View } from './view.js';
+import { insertContent, getLibraryUrl, getContentString } from '../shared/github/rest-api';
+import { getUniqueTagsFromMarkdownString } from '../shared/utils/tags';
+import type { Model } from './model';
+import type { View } from './view';
+import type { Options } from '../background';
 
 export class Controller {
   constructor(private model: Model, private view: View) {

@@ -21,12 +21,6 @@
     "48": "assets/osmosmemo-logo-48.png",
     "96": "assets/osmosmemo-logo-96.png"
   },
-  "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "js": ["content-script.js"]
-    }
-  ],
   "permissions": ["activeTab", "storage"],
   "browser_specific_settings": {
     "gecko": {

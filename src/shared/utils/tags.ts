@@ -1,4 +1,4 @@
-/// <reference path="../typings/options.d.ts" />
+import type { Options } from '../../background';
 
 import { browser } from 'webextension-polyfill-ts';
 

@@ -1,6 +1,6 @@
-import { Model } from './model.js';
-import { View } from './view.js';
-import { Controller } from './controller.js';
+import { Model } from './model';
+import { View } from './view';
+import { Controller } from './controller';
 import { browser } from 'webextension-polyfill-ts';
 
 const model = new Model();
@@ -13,7 +13,6 @@ browser.runtime.onMessage.addListener((request, sender) => {
     const { title, headings, href } = request.data;
     controller.onData({ title, headings, href });
   }
-
   if (request.command === 'metadata-cache-ready') {
     const cachedModel = request.data;
     controller.onCache(cachedModel);
