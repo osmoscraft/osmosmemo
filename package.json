@@ -4,7 +4,7 @@
   "description": "A chrome extension that summarizes the current page into a GitHub markdown file",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node scripts/build.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,13 @@
   "homepage": "https://github.com/osmoscraft/osmosmemo#readme",
   "dependencies": {
     "@types/chrome": "0.0.134"
+  },
+  "devDependencies": {
+    "@types/autosize": "^3.0.7",
+    "@types/fs-extra": "^9.0.11",
+    "autosize": "^4.0.2",
+    "esbuild": "^0.11.10",
+    "fs-extra": "^9.1.0",
+    "webextension-polyfill-ts": "^0.25.0"
   }
 }

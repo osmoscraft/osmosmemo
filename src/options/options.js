@@ -1,4 +1,5 @@
-/// <reference path="../shared/typings/options.d.ts" />
+/// <reference path="../typings/options.d.ts" />
+import autosize from "autosize";
 
 import { getContentString } from '../shared/github/rest-api.js';
 import { getUniqueTagsFromMarkdownString } from '../shared/utils/tags.js';
@@ -16,6 +17,7 @@ const resizeElements = document.querySelectorAll('.js-autosize');
 function renderInputField({ element, string }) {
   element.value = string;
 }
+
 
 function renderAllFields() {
   chrome.storage.sync.get(['accessToken', 'tags', 'username', 'repo', 'filename'], (/** @type {Options} */ data) => {

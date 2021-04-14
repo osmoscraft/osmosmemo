@@ -1,3 +1,5 @@
+import autosize from "autosize";
+
 /* Input elements */
 const titleInputElement = document.querySelector('.js-title');
 const titleSwapElement = document.querySelector('.js-title-swap');

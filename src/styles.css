@@ -170,3 +170,11 @@ input[name='tag'] {
 .open-options.has-error .open-options__show-when-valid {
   display: none;
 }
+
+/** Specific to options page */
+.options-container {
+  margin: auto;
+  max-width: 64em;
+  display: grid;
+  grid-auto-rows: auto;
+}
