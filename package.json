@@ -1,5 +1,5 @@
 {
-  "name": "osmoslist",
+  "name": "osmosmemo",
   "version": "1.0.0",
   "description": "A chrome extension that summarizes the current page into a GitHub markdown file",
   "private": true,
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/osmoscraft/osmoslist.git"
+    "url": "git+https://github.com/osmoscraft/osmosmemo.git"
   },
   "keywords": [],
   "author": "osmoscraft",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/osmoscraft/osmoslist/issues"
+    "url": "https://github.com/osmoscraft/osmosmemo/issues"
   },
-  "homepage": "https://github.com/osmoscraft/osmoslist#readme",
+  "homepage": "https://github.com/osmoscraft/osmosmemo#readme",
   "dependencies": {
     "@types/chrome": "0.0.134"
   }
