@@ -1,31 +1,36 @@
 {
-  "name": "Markdown Page Summary",
-  "version": "2.0.1",
-  "description": "Summarize the current page into a GitHub markdown file",
+  "name": "osmos::feed",
+  "version": "1.0.0",
+  "description": "TBD",
   "manifest_version": 2,
-  "options_page": "options/options.html",
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "scripts": ["background.js"]
   },
-  "page_action": {
+  "browser_action": {
+    "default_title": "Add memo",
     "default_popup": "popup/popup.html",
     "default_icon": {
-      "16": "assets/Logo16.png",
-      "32": "assets/Logo32.png",
-      "48": "assets/Logo48.png",
-      "64": "assets/Logo64.png",
-      "128": "assets/Logo128.png",
-      "256": "assets/Logo256.png"
+      "48": "assets/osmosmemo-logo-48.png",
+      "96": "assets/osmosmemo-logo-96.png"
     }
   },
-  "icons": {
-    "16": "assets/Logo16.png",
-    "32": "assets/Logo32.png",
-    "48": "assets/Logo48.png",
-    "64": "assets/Logo64.png",
-    "128": "assets/Logo128.png",
-    "256": "assets/Logo256.png"
+  "options_ui": {
+    "page": "options/options.html"
   },
-  "permissions": ["activeTab", "declarativeContent", "storage"]
+  "icons": {
+    "48": "assets/osmosmemo-logo-48.png",
+    "96": "assets/osmosmemo-logo-96.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "permissions": ["activeTab", "storage"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "osmosmemo@osmoscraft.org"
+    }
+  }
 }
