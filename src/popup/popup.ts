@@ -1,16 +1,17 @@
 import { Model } from './model.js';
 import { View } from './view.js';
 import { Controller } from './controller.js';
+import { browser } from 'webextension-polyfill-ts';
 
 const model = new Model();
 const view = new View();
 const controller = new Controller(model, view);
 
 /* Step 1 - Setup listener for the message from content script */
-chrome.runtime.onMessage.addListener((request, sender) => {
+browser.runtime.onMessage.addListener((request, sender) => {
   if (request.command === 'metadata-ready') {
-    const { title, headings, href, hostname } = request.data;
-    controller.onData({ title, headings, href, hostname });
+    const { title, headings, href } = request.data;
+    controller.onData({ title, headings, href });
   }
 
   if (request.command === 'metadata-cache-ready') {
@@ -20,7 +21,7 @@ chrome.runtime.onMessage.addListener((request, sender) => {
 });
 
 /* Step 2 - Inject script */
-chrome.tabs.executeScript({
+browser.tabs.executeScript({
   file: 'content-script.js',
 });
 

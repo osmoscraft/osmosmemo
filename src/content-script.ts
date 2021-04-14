@@ -1,10 +1,12 @@
+import { browser } from 'webextension-polyfill-ts';
+
 try {
   const cachedModelString = sessionStorage.getItem('cached-model');
   if (!cachedModelString) throw new Error();
   const cachedModel = JSON.parse(sessionStorage.getItem('cached-model'));
-  chrome.runtime.sendMessage({ command: 'metadata-cache-ready', data: cachedModel });
+  browser.runtime.sendMessage({ command: 'metadata-cache-ready', data: cachedModel });
 } catch (e) {
-  chrome.runtime.sendMessage({ command: 'metadata-ready', data: getMetadata() });
+  browser.runtime.sendMessage({ command: 'metadata-ready', data: getMetadata() });
 }
 
 function getMetadata() {
@@ -21,7 +23,7 @@ function getMetadata() {
   };
 }
 
-chrome.runtime.onMessage.addListener((request) => {
+browser.runtime.onMessage.addListener((request) => {
   if (request.command === 'cache-model') {
     sessionStorage.setItem('cached-model', JSON.stringify(request.data));
   }
