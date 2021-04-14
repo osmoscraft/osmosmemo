@@ -1,5 +1,3 @@
-/// <reference path="./shared/typings/index.d.ts" />
-
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.get(['accessToken', 'tags', 'username', 'repo', 'filename'], async (/** @type {Options} */ options) => {
     if (!options.accessToken) {

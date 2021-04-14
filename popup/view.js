@@ -1,5 +1,3 @@
-/// <reference path="../shared/typings/index.d.ts" />
-
 /* Input elements */
 const titleInputElement = document.querySelector('.js-title');
 const titleSwapElement = document.querySelector('.js-title-swap');

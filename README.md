@@ -1,3 +1,3 @@
-# Markdown Page Summary
+# osmos::list
 
-A chrome extension that summarizes the current page into a GitHub markdown file
+Browser extension that summarizes the current page into a markdown file hosted on GitHub

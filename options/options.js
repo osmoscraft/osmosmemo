@@ -1,4 +1,4 @@
-/// <reference path="../shared/typings/index.d.ts" />
+/// <reference path="../shared/typings/options.d.ts" />
 
 import { getContentString } from '../shared/github/rest-api.js';
 import { getUniqueTagsFromMarkdownString } from '../shared/utils/tags.js';
