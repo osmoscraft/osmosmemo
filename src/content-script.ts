@@ -23,8 +23,16 @@ function getMetadata() {
   };
 }
 
-browser.runtime.onMessage.addListener((request) => {
-  if (request.command === 'cache-model') {
-    sessionStorage.setItem('cached-model', JSON.stringify(request.data));
-  }
-});
+function runOnce() {
+  if ((window as any)._osmosLoaded) return;
+
+  (window as any)._osmosLoaded = true;
+
+  browser.runtime.onMessage.addListener((request) => {
+    if (request.command === 'cache-model') {
+      sessionStorage.setItem('cached-model', JSON.stringify(request.data));
+    }
+  });
+}
+
+runOnce();
