@@ -1,8 +1,8 @@
-import autosize from 'autosize';
 import { browser } from 'webextension-polyfill-ts';
 import type { Options } from '../background';
 
 import { getContentString } from '../shared/github/rest-api';
+import { fitTextareaToContent } from '../shared/utils/fit-textarea-to-content';
 import { getUniqueTagsFromMarkdownString } from '../shared/utils/tags';
 
 const optionsForm = document.querySelector('.js-options-form') as HTMLElement;
@@ -29,10 +29,10 @@ async function renderAllFields() {
   renderInputField({ element: filenameElement, string: filename });
   renderInputField({ element: tagsElement, string: tags.join(', ') });
   tagCountElement.innerText = `${tags.length} ${tags.length === 1 ? 'tag' : 'tags'} found`;
-  autosize.update(resizeElements);
+
+  fitTextareaToContent();
 }
 
-autosize(resizeElements);
 renderAllFields();
 
 browser.storage.onChanged.addListener(function (changes, namespace) {

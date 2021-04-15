@@ -1,4 +1,4 @@
-import autosize from 'autosize';
+import { fitTextareaToContent } from '../shared/utils/fit-textarea-to-content';
 
 /* Input elements */
 const titleInputElement = document.querySelector('.js-title') as HTMLInputElement;
@@ -27,7 +27,7 @@ const saveStatusDisplayStrings = new Map([
 export class View {
   constructor() {
     // fix me: chromium edge seems to be flaky with autosize
-    autosize(resizeElements);
+    fitTextareaToContent();
   }
 
   handleOutput({ onTitleChange, onTitleSwap, onLinkChange, onDescriptionChange, onAddTag, onRemoveTagByIndex, onSave }) {
@@ -131,7 +131,7 @@ export class View {
       openOptionsButtonElement.classList.toggle('has-error', isError);
     }
 
-    autosize.update(resizeElements);
+    fitTextareaToContent();
   }
 
   removeTagAtIndex(index, onRemoveTagByIndex) {
