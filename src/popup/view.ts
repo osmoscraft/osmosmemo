@@ -26,7 +26,7 @@ const saveStatusDisplayStrings = new Map([
 
 export class View {
   constructor() {
-    // fix me: chromium has a race condition that break auto resize
+    // fix me: chromium edge seems to be flaky with autosize
     autosize(resizeElements);
   }
 

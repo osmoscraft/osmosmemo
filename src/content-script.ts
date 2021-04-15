@@ -1,13 +1,23 @@
 import { browser } from 'webextension-polyfill-ts';
 
-try {
-  const cachedModelString = sessionStorage.getItem('cached-model');
-  if (!cachedModelString) throw new Error();
-  const cachedModel = JSON.parse(sessionStorage.getItem('cached-model'));
-  browser.runtime.sendMessage({ command: 'metadata-cache-ready', data: cachedModel });
-} catch (e) {
-  browser.runtime.sendMessage({ command: 'metadata-ready', data: getMetadata() });
-}
+browser.runtime.onMessage.addListener((request) => {
+  if (request.command === 'set-cached-model') {
+    console.log(`[osmos] set cached model`, request.data);
+    sessionStorage.setItem('cached-model', JSON.stringify(request.data));
+  } else if (request.command === 'get-model') {
+    try {
+      const cachedModelString = sessionStorage.getItem('cached-model');
+      if (!cachedModelString) throw new Error();
+      const cachedModel = JSON.parse(cachedModelString);
+      console.log(`[osmos] get cached model`, cachedModel);
+      browser.runtime.sendMessage({ command: 'cached-model-ready', data: cachedModel });
+    } catch (e) {
+      const model = getMetadata();
+      browser.runtime.sendMessage({ command: 'model-ready', data: model });
+      console.log(`[osmos] get model`, model);
+    }
+  }
+});
 
 function getMetadata() {
   const href = location.href;
@@ -22,17 +32,3 @@ function getMetadata() {
     href,
   };
 }
-
-function runOnce() {
-  if ((window as any)._osmosLoaded) return;
-
-  (window as any)._osmosLoaded = true;
-
-  browser.runtime.onMessage.addListener((request) => {
-    if (request.command === 'cache-model') {
-      sessionStorage.setItem('cached-model', JSON.stringify(request.data));
-    }
-  });
-}
-
-runOnce();

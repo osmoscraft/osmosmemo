@@ -7,22 +7,26 @@ const model = new Model();
 const view = new View();
 const controller = new Controller(model, view);
 
-/* Step 1 - Setup listener for the message from content script */
-browser.runtime.onMessage.addListener((request, sender) => {
-  if (request.command === 'metadata-ready') {
-    const { title, headings, href } = request.data;
-    controller.onData({ title, headings, href });
-  }
-  if (request.command === 'metadata-cache-ready') {
-    const cachedModel = request.data;
-    controller.onCache(cachedModel);
-  }
-});
+async function initialize() {
+  /* Step 1 - Setup listener for the message from content script */
+  browser.runtime.onMessage.addListener((request, sender) => {
+    if (request.command === 'model-ready') {
+      const { title, headings, href } = request.data;
 
-/* Step 2 - Inject script */
-browser.tabs.executeScript({
-  file: 'content-script.js',
-});
+      controller.onData({ title, headings, href });
+    }
+    if (request.command === 'cached-model-ready') {
+      const cachedModel = request.data;
+      controller.onCache(cachedModel);
+    }
+  });
+
+  /* Step 2 - Send out request to content script */
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  browser.tabs.sendMessage(tabs[0].id, { command: 'get-model' });
+}
+
+initialize();
 
 // debug
 // window.model = model;

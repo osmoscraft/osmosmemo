@@ -29,7 +29,11 @@ export class Model {
     };
   }
 
-  update(delta) {
+  updateAndCache(delta) {
+    this.update(delta, true);
+  }
+
+  update(delta, shouldCache = false) {
     const previousState = { ...this._state };
     this._state = { ...this._state, ...delta };
     this.emitter.dispatchEvent(
@@ -37,6 +41,7 @@ export class Model {
         detail: {
           state: this._state,
           previousState,
+          shouldCache,
         },
       })
     );

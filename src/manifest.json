@@ -6,6 +6,12 @@
   "background": {
     "scripts": ["background.js"]
   },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content-script.js"]
+    }
+  ],
   "browser_action": {
     "default_title": "Add memo",
     "default_popup": "popup.html",
