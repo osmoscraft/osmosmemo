@@ -1,7 +1,7 @@
 {
   "name": "osmos::feed",
   "version": "1.0.0",
-  "description": "TBD",
+  "description": "An in-browser bookmark manager with easy tagging and fast recall",
   "manifest_version": 2,
   "background": {
     "scripts": ["background.js"]
