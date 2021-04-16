@@ -1,6 +1,6 @@
 {
   "name": "osmos::memo",
-  "version": "1.0.1",
+  "version": "2.1.0",
   "description": "An in-browser bookmark manager with easy tagging and fast recall",
   "manifest_version": 2,
   "background": {
