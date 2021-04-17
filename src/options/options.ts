@@ -62,7 +62,7 @@ connectButtonElement.addEventListener("click", async (event) => {
 
 function updateTagOptionsPreview(tags: string[]) {
   renderInputField({ element: tagsElement, string: tags.join(", ") });
-  tagCountElement.innerText = `${tags.length} ${tags.length === 1 ? "tag" : "tags"} found`;
+  tagCountElement.innerText = `${tags.length} found`;
 
   fitTextareaToContent();
 }

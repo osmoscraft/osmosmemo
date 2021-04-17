@@ -222,3 +222,14 @@ input[name="tag"] {
 [data-show]:not([data-show-active]) {
   display: none;
 }
+
+.trouble-shooting-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.trouble-shooting-list {
+  margin-top: 8px;
+  font-size: 14px;
+  padding-left: 24px;
+}

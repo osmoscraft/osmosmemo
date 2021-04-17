@@ -18,21 +18,18 @@
       <div class="field">
         <label for="repo" class="field__label">Repo</label>
         <span class="field__action">
-          <a href="https://github.com/osmoscraft/osmosmemo-template/generate" target="_blank">Create repo</a>
-          <span>|</span>
-          <a href="https://github.com/settings/repositories" target="_blank">Manage</a>
+          <a href="https://github.com/login?return_to=%2Fosmoscraft%2Fosmosmemo-template%2Fgenerate" target="_blank">Create repo</a>
         </span>
         <input id="repo" class="js-repo field__input" type="text" required />
       </div>
       <hr />
       <div class="field">
-        <label for="access-token" class="field__label">Personal access token</label>
+        <label for="access-token" class="field__label">Personal access token*</label>
         <span class="field__action">
           <a href="https://github.com/settings/tokens/new" target="_blank">Create token</a>
-          <span>|</span>
-          <a href="https://github.com/settings/tokens" target="_blank">Manage</a>
         </span>
         <input id="access-token" class="js-access-token field__input" placeholder="e.g. ghp_ABCDEFGHIKLMNN1234567890abcdefhijklm" type="password" required />
+        <div>* The <i>repo</i> scope is required.</div>
       </div>
       <hr />
       <div class="field">
@@ -45,13 +42,18 @@
       <hr />
       <hr />
       <div class="field" data-show="on-success">
-        <label for="tags" class="field__label">Detected tags (<span class="js-tag-count"></span>)</label>
+        <label for="tags" class="field__label">Tags (<span class="js-tag-count"></span>)</label>
         <div class="field__input js-textarea-fit-container">
           <textarea id="tags" class="js-tags field__input" readonly rows="1"></textarea>
         </div>
       </div>
-      <div class="field" data-show="on-error">
-        <a href="#">Having trouble? Here is the setup guide.</a>
+      <div data-show="on-error">
+        <div class="trouble-shooting-title">Having trouble? Check these:</div>
+        <ul class="trouble-shooting-list">
+          <li>Verify the Repo exists. You should be able to open <samp>https://github.com/USERNAME/REPO</samp></li>
+          <li>Make sure you have selected the <i>repo</i> scope when creating the personal access token.</li>
+          <li>Still having trouble? <a href="https://github.com/osmoscraft/osmosmemo">Find documentation on GitHub</a>.</li>
+        </ul>
       </div>
     </form>
   </body>
