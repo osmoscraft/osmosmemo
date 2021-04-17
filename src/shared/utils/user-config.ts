@@ -11,7 +11,7 @@ export interface UserOptions {
 export async function getUserOptions(): Promise<UserOptions> {
   const options = await browser.storage.sync.get(["accessToken", "tags", "username", "repo", "filename"]);
 
-  const { accessToken = "", username = "", repo = "", filename = "", tags = [] } = options;
+  const { accessToken = "", username = "", repo = "", filename = "MEMO.md", tags = [] } = options;
   const safeOptions: UserOptions = {
     accessToken,
     username,

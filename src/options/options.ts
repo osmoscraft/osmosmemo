@@ -55,7 +55,7 @@ connectButtonElement.addEventListener("click", async (event) => {
     updateTagOptionsPreview(tagOptions);
     showConditionalElements("on-success");
   } catch (e) {
-    connectButtonElement.innerText = "❌ Something went wrong";
+    connectButtonElement.innerText = "❌ Something went wrong. Try again";
     showConditionalElements("on-error");
   }
 });

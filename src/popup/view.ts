@@ -20,7 +20,7 @@ const openLibraryLinkElement = document.querySelector(".js-open-library") as HTM
 const saveStatusDisplayStrings = new Map([
   ["new", "💾 Save"],
   ["saving", "💾 Saving…"],
-  ["saved", "🙌 Saved"],
+  ["saved", "✅ Saved"],
   ["error", "❌ Error"],
 ]);
 
