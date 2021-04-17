@@ -17,8 +17,10 @@ export async function insertContent({ accessToken, username, repo, filename, con
 }
 
 /** currently only work with public repos */
-export function getLibraryUrl({ username, repo, filename }) {
-  return `https://github.com/${username}/${repo}/blob/master/${filename}`;
+export async function getLibraryUrl({ accessToken, username, repo, filename }) {
+  const defaultBranch = await getDefaultBranch({ accessToken, username, repo });
+
+  return `https://github.com/${username}/${repo}/blob/${defaultBranch}/${filename}`;
 }
 
 async function writeContent({ accessToken, username, repo, filename, previousSha, content }) {
@@ -47,4 +49,24 @@ async function getContents({ accessToken, username, repo, filename }) {
   if (!response.ok) throw new Error("get-contents-failed");
 
   return response.json();
+}
+
+async function getDefaultBranch({ accessToken, username, repo }): Promise<string | null> {
+  try {
+    debugger;
+    const response = await fetch(`https://api.github.com/repos/${username}/${repo}/branches`, {
+      headers: new Headers({
+        Authorization: "Basic " + btoa(`${username}:${accessToken}`),
+        "Content-Type": "application/json",
+      }),
+    });
+
+    const branches = (await response.json()) as any[];
+    if (branches?.length) {
+      return branches[0].name as string;
+    }
+    throw new Error("No branch found");
+  } catch (error) {
+    return null;
+  }
 }
