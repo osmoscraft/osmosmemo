@@ -3,6 +3,8 @@ export function fitTextareaToContent() {
 
   fitContainer.forEach((grower) => {
     const textarea = grower.querySelector("textarea");
-    (grower as HTMLDivElement).dataset.replicatedValue = textarea.value;
+    if (textarea) {
+      (grower as HTMLDivElement).dataset.replicatedValue = textarea.value;
+    }
   });
 }

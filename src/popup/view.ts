@@ -4,18 +4,17 @@ import { browser } from "webextension-polyfill-ts";
 /* Input elements */
 const titleInputElement = document.querySelector(".js-title") as HTMLInputElement;
 const titleSwapElement = document.querySelector(".js-title-swap") as HTMLButtonElement;
-const dotsElement = document.querySelector(".js-dots");
+const dotsElement = document.querySelector(".js-dots") as HTMLDivElement;
 const linkInputElement = document.querySelector(".js-link") as HTMLInputElement;
 const descriptionInputElement = document.querySelector(".js-description") as HTMLInputElement;
-const resizeElements = document.querySelectorAll(".js-autosize");
 const previewElement = document.querySelector(".js-preview") as HTMLInputElement;
 const addedTagsElement = document.querySelector(".added-tags") as HTMLElement;
 const tagInputElement = document.querySelector(".js-tag-input") as HTMLInputElement;
-const tagOptionsElement = document.querySelector(".js-tag-options");
-const addTagButtonElement = document.querySelector(".js-add-tag-button");
-const actionsElement = document.querySelector(".js-actions");
+const tagOptionsElement = document.querySelector(".js-tag-options") as HTMLDataListElement;
+const addTagButtonElement = document.querySelector(".js-add-tag-button") as HTMLButtonElement;
+const actionsElement = document.querySelector(".js-actions") as HTMLDivElement;
 const saveButtonElement = document.querySelector(".js-save") as HTMLButtonElement;
-const openOptionsButtonElement = document.querySelector(".js-open-options");
+const openOptionsButtonElement = document.querySelector(".js-open-options") as HTMLButtonElement;
 const openLibraryLinkElement = document.querySelector(".js-open-library") as HTMLAnchorElement;
 
 const saveStatusDisplayStrings = new Map([
@@ -67,12 +66,12 @@ export class View {
     addedTagsElement.addEventListener("click", (e) => {
       const selectedButton = (e.target as HTMLElement).closest("button");
       if (!selectedButton) return;
-      const removeIndex = parseInt((e.target as HTMLElement).closest("button").dataset.index);
+      const removeIndex = parseInt(((e.target as HTMLElement).closest("button")!.dataset as any).index);
       this.removeTagAtIndex(removeIndex, onRemoveTagByIndex);
     });
     addedTagsElement.addEventListener("keydown", (e) => {
       if (e.key === "Backspace" || e.key === "Delete") {
-        const removeIndex = parseInt((e.target as HTMLElement).closest("button").dataset.index);
+        const removeIndex = parseInt(((e.target as HTMLElement).closest("button")!.dataset as any).index);
         this.removeTagAtIndex(removeIndex, onRemoveTagByIndex);
       }
     });
@@ -132,7 +131,7 @@ export class View {
     }
 
     if (saveStatus !== previousState.saveStatus) {
-      saveButtonElement.innerText = saveStatusDisplayStrings.get(saveStatus);
+      saveButtonElement.innerText = saveStatusDisplayStrings.get(saveStatus)!;
     }
 
     if (libraryUrl !== previousState.libraryUrl) {

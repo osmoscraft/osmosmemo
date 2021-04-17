@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "lib": ["DOM", "DOM.Iterable", "esnext"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "module": "esnext",
+    "strict": true,
+    "noImplicitAny": false,
+    "importsNotUsedAsValues": "error",
+    "skipDefaultLibCheck": true,
+    "declaration": true,
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
