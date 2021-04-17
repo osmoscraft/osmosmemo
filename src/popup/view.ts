@@ -3,8 +3,6 @@ import { browser } from "webextension-polyfill-ts";
 
 /* Input elements */
 const titleInputElement = document.querySelector(".js-title") as HTMLInputElement;
-const titleSwapElement = document.querySelector(".js-title-swap") as HTMLButtonElement;
-const dotsElement = document.querySelector(".js-dots") as HTMLDivElement;
 const linkInputElement = document.querySelector(".js-link") as HTMLInputElement;
 const descriptionInputElement = document.querySelector(".js-description") as HTMLInputElement;
 const previewElement = document.querySelector(".js-preview") as HTMLInputElement;
@@ -30,17 +28,8 @@ export class View {
     fitTextareaToContent();
   }
 
-  handleOutput({
-    onTitleChange,
-    onTitleSwap,
-    onLinkChange,
-    onDescriptionChange,
-    onAddTag,
-    onRemoveTagByIndex,
-    onSave,
-  }) {
+  handleOutput({ onTitleChange, onLinkChange, onDescriptionChange, onAddTag, onRemoveTagByIndex, onSave }) {
     titleInputElement.addEventListener("input", (e) => onTitleChange((e.target as HTMLInputElement).value));
-    titleSwapElement.addEventListener("click", () => onTitleSwap());
 
     linkInputElement.addEventListener("input", (e) => onLinkChange((e.target as HTMLInputElement).value));
     descriptionInputElement.addEventListener("input", (e) => onDescriptionChange((e.target as HTMLInputElement).value));
@@ -83,28 +72,10 @@ export class View {
   }
 
   render({ state, previousState }) {
-    const {
-      title,
-      titleOptions,
-      selectedTitleIndex,
-      href,
-      description,
-      tags,
-      tagOptions,
-      saveStatus,
-      connectionStatus,
-      libraryUrl,
-    } = state;
+    const { title, href, description, tags, tagOptions, saveStatus, connectionStatus, libraryUrl } = state;
 
     if (title !== previousState.title) {
       titleInputElement.value = title;
-    }
-    titleSwapElement.hidden = titleOptions.length === 1;
-    if (selectedTitleIndex !== previousState.selectedTitleIndex) {
-      dotsElement.innerHTML = titleOptions
-        .map((_, index) => index === selectedTitleIndex)
-        .map((isSelect) => `<span class="${isSelect ? "dot selected" : "dot"}"></span>`)
-        .join("");
     }
 
     if (href !== previousState.href) {

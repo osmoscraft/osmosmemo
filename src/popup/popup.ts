@@ -10,10 +10,10 @@ const controller = new Controller(model, view);
 async function initialize() {
   /* Step 1 - Setup listener for the message from content script */
   await browser.runtime.onMessage.addListener((request, sender) => {
-    if (request.command === "model-ready") {
-      const { title, headings, href } = request.data;
+    if (request.command === "metadata-ready") {
+      const { title, href } = request.data;
 
-      controller.onData({ title, headings, href });
+      controller.onData({ title, href });
     }
     if (request.command === "cached-model-ready") {
       const cachedModel = request.data;

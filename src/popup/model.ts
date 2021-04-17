@@ -1,6 +1,5 @@
 export interface ModelState {
   title?: string;
-  titleOptions: string[];
   selectedTitleIndex?: number;
   href?: string;
   description: string;
@@ -18,7 +17,6 @@ export class Model {
 
   private _state: ModelState = {
     title: undefined,
-    titleOptions: [],
     selectedTitleIndex: undefined,
     href: undefined,
     description: "",
@@ -31,10 +29,9 @@ export class Model {
   emitter = document.createElement("div");
 
   getCacheableState() {
-    const { title, titleOptions, selectedTitleIndex, href, description, tags } = this._state;
+    const { title, selectedTitleIndex, href, description, tags } = this._state;
     return {
       title,
-      titleOptions,
       selectedTitleIndex,
       href,
       description,

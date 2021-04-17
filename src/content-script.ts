@@ -26,24 +26,52 @@ function injectContentScript() {
         browser.runtime.sendMessage({ command: "cached-model-ready", data: cachedModel });
       } catch (e) {
         const model = getMetadata();
-        browser.runtime.sendMessage({ command: "model-ready", data: model });
-        console.log(`[osmos] get model`, model);
+        browser.runtime.sendMessage({ command: "metadata-ready", data: model });
+        console.log(`[osmos] get metadata`, model);
       }
     }
   });
 
   function getMetadata() {
-    const href = location.href;
-    const headElement = document.querySelector("head");
-    const titleElement = headElement && headElement.querySelector("title");
-    const title = (titleElement && titleElement.innerText) || "";
-    const headings = [...document.querySelectorAll("h1")].map((heading) => heading.innerText);
+    const href = getPageUrl();
+    const title = getPageTitle();
 
     return {
       title,
-      headings,
       href,
     };
+  }
+
+  function getPageUrl() {
+    let url = document.querySelector(`link[rel="canonical"]`).getAttribute("href")?.trim();
+
+    if (!url) {
+      url = location.href;
+    }
+
+    return url.toLowerCase();
+  }
+
+  function getPageTitle() {
+    let title = document.querySelector(`meta[property="og:title"]`).getAttribute("content")?.trim();
+
+    if (!title) {
+      title = document.querySelector(`meta[name="twitter:title"]`).getAttribute("content")?.trim();
+    }
+
+    if (!title) {
+      title = document.querySelector("title").innerText?.trim();
+    }
+
+    if (!title) {
+      title = document.querySelector("h1").innerText?.trim();
+    }
+
+    if (!title) {
+      title = "";
+    }
+
+    return title;
   }
 }
 

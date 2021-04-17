@@ -13,13 +13,6 @@ export class Controller {
   async init() {
     this.view.handleOutput({
       onTitleChange: (title) => this.model.updateAndCache({ title }),
-      onTitleSwap: () => {
-        const newIndex = (this.model.state.selectedTitleIndex! + 1) % this.model.state.titleOptions.length;
-        return this.model.updateAndCache({
-          selectedTitleIndex: newIndex,
-          title: this.model.state.titleOptions[newIndex],
-        });
-      },
       onLinkChange: (href) => this.model.updateAndCache({ href }),
       onDescriptionChange: (description) => this.model.updateAndCache({ description }),
       onAddTag: (tag) => this.model.updateAndCache({ tags: [...this.model.state.tags, tag] }),
@@ -65,11 +58,8 @@ export class Controller {
     }
   }
 
-  onData({ title, headings, href }) {
-    const titleOptions = [...new Set([...headings.map((heading) => heading.trim()), title.trim()])].filter(
-      (option) => option.length > 0
-    );
-    this.model.update({ title: titleOptions[0], selectedTitleIndex: 0, titleOptions, href, saveStatus: "new" });
+  onData({ title, href }) {
+    this.model.update({ title: title, href, saveStatus: "new" });
   }
 
   onCache(cachedModel) {
