@@ -1,8 +1,8 @@
 export function fitTextareaToContent() {
-  const fitContainer = document.querySelectorAll('.js-textarea-fit-container');
+  const fitContainer = document.querySelectorAll(".js-textarea-fit-container");
 
   fitContainer.forEach((grower) => {
-    const textarea = grower.querySelector('textarea');
+    const textarea = grower.querySelector("textarea");
     (grower as HTMLDivElement).dataset.replicatedValue = textarea.value;
   });
 }

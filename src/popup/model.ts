@@ -8,14 +8,14 @@ export class Model {
     titleOptions: [],
     selectedTitleIndex: undefined,
     href: undefined,
-    description: '',
+    description: "",
     tags: [],
     tagOptions: [],
     libraryUrl: undefined,
-    saveStatus: 'new', // 'new' | 'saving' | 'saved' | 'error',
-    connectionStatus: 'unknown', // 'unknown' | 'valid' | 'error'
+    saveStatus: "new", // 'new' | 'saving' | 'saved' | 'error',
+    connectionStatus: "unknown", // 'unknown' | 'valid' | 'error'
   };
-  emitter = document.createElement('div');
+  emitter = document.createElement("div");
 
   getCacheableState() {
     const { title, titleOptions, selectedTitleIndex, href, description, tags } = this._state;
@@ -37,7 +37,7 @@ export class Model {
     const previousState = { ...this._state };
     this._state = { ...this._state, ...delta };
     this.emitter.dispatchEvent(
-      new CustomEvent('update', {
+      new CustomEvent("update", {
         detail: {
           state: this._state,
           previousState,

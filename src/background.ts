@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import { browser } from "webextension-polyfill-ts";
 
 export interface Options {
   tags?: string[];
@@ -9,23 +9,23 @@ export interface Options {
 }
 
 browser.runtime.onInstalled.addListener(async () => {
-  const options = (await browser.storage.sync.get(['accessToken', 'tags', 'username', 'repo', 'filename'])) as Options;
+  const options = (await browser.storage.sync.get(["accessToken", "tags", "username", "repo", "filename"])) as Options;
 
   let update: Options = {};
   if (!options.accessToken) {
-    update.accessToken = '';
+    update.accessToken = "";
   }
   if (!options.tags) {
     update.tags = [];
   }
   if (!options.username) {
-    update.username = '';
+    update.username = "";
   }
   if (!options.repo) {
-    update.repo = '';
+    update.repo = "";
   }
   if (!options.filename) {
-    update.filename = 'README.md';
+    update.filename = "README.md";
   }
 
   await browser.storage.sync.set(update);
