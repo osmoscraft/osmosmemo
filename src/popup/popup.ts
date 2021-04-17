@@ -9,7 +9,7 @@ const controller = new Controller(model, view);
 
 async function initialize() {
   /* Step 1 - Setup listener for the message from content script */
-  browser.runtime.onMessage.addListener((request, sender) => {
+  await browser.runtime.onMessage.addListener((request, sender) => {
     if (request.command === "model-ready") {
       const { title, headings, href } = request.data;
 
@@ -22,7 +22,7 @@ async function initialize() {
   });
 
   /* Step 2 - Inject content script into active tab */
-  browser.tabs.executeScript({
+  await browser.tabs.executeScript({
     file: "content-script.js",
   });
 

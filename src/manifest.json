@@ -8,25 +8,19 @@
   },
   "browser_action": {
     "default_title": "Add memo",
-    "default_popup": "popup/popup.html",
+    "default_popup": "popup.html",
     "default_icon": {
       "48": "assets/osmosmemo-logo-48.png",
       "96": "assets/osmosmemo-logo-96.png"
     }
   },
   "options_ui": {
-    "page": "options/options.html"
+    "page": "options.html"
   },
   "icons": {
     "48": "assets/osmosmemo-logo-48.png",
     "96": "assets/osmosmemo-logo-96.png"
   },
-  "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "js": ["content-script.js"]
-    }
-  ],
   "permissions": ["activeTab", "storage"],
   "browser_specific_settings": {
     "gecko": {

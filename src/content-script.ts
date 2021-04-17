@@ -11,6 +11,8 @@ function injectContentScript() {
   if (window._osmosmemoInjected) return;
   window._osmosmemoInjected = true;
 
+  console.log(`[osmos] content-script activated`);
+
   browser.runtime.onMessage.addListener((request) => {
     if (request.command === "set-cached-model") {
       console.log(`[osmos] set cached model`, request.data);
