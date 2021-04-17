@@ -13,7 +13,6 @@ async function build() {
   .build({
     entryPoints: [
       "src/content-script.ts",
-      "src/background.ts",
       "src/popup/popup.ts",
       "src/options/options.ts",
     ],
