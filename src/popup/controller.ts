@@ -1,7 +1,7 @@
 import { browser } from "webextension-polyfill-ts";
 import { getContentString, getLibraryUrl, insertContent } from "../shared/github/rest-api";
 import { getUniqueTagsFromMarkdownString } from "../shared/utils/tags";
-import { getUserOptions } from "../shared/utils/user-config";
+import { getUserOptions } from "../shared/utils/user-options";
 import type { Model } from "./model";
 import type { View } from "./view";
 
@@ -30,7 +30,7 @@ export class Controller {
     });
 
     const optionsData = await getUserOptions();
-    this.model.update({ tagOptions: optionsData.tags });
+    this.model.update({ tagOptions: optionsData.tagOptions });
 
     const { accessToken, username, repo, filename } = optionsData;
     try {
