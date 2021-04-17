@@ -45,6 +45,10 @@ export class Controller {
   }
 
   async onSave() {
+    if (!this.view.validateForm()) {
+      return;
+    }
+
     this.model.update({ saveStatus: "saving" });
     const optionsData = await getUserOptions();
     try {

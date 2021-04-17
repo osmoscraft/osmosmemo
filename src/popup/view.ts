@@ -2,6 +2,7 @@ import { fitTextareaToContent } from "../shared/utils/fit-textarea-to-content";
 import { browser } from "webextension-polyfill-ts";
 
 /* Input elements */
+const formElement = document.querySelector(".js-creation-form") as HTMLFormElement;
 const titleInputElement = document.querySelector(".js-title") as HTMLInputElement;
 const linkInputElement = document.querySelector(".js-link") as HTMLInputElement;
 const descriptionInputElement = document.querySelector(".js-description") as HTMLInputElement;
@@ -28,18 +29,42 @@ export class View {
     fitTextareaToContent();
   }
 
-  handleOutput({ onTitleChange, onLinkChange, onDescriptionChange, onAddTag, onRemoveTagByIndex, onSave }) {
-    titleInputElement.addEventListener("input", (e) => onTitleChange((e.target as HTMLInputElement).value));
+  validateForm() {
+    return formElement.checkValidity();
+  }
 
+  handleOutput({ onTitleChange, onLinkChange, onDescriptionChange, onAddTag, onRemoveTagByIndex, onSave }) {
+    formElement.addEventListener("submit", (event) => {
+      event.preventDefault(); // don't reload page
+
+      // auto add any tag left in the input
+      if (tagInputElement.value !== "") {
+        this.sanitizeTagInput();
+        onAddTag(tagInputElement.value);
+        tagInputElement.value = "";
+      }
+
+      onSave();
+    });
+
+    titleInputElement.addEventListener("input", (e) => onTitleChange((e.target as HTMLInputElement).value));
     linkInputElement.addEventListener("input", (e) => onLinkChange((e.target as HTMLInputElement).value));
     descriptionInputElement.addEventListener("input", (e) => onDescriptionChange((e.target as HTMLInputElement).value));
     addTagButtonElement.addEventListener("click", () => {
       this.sanitizeTagInput();
-      onAddTag(tagInputElement.value);
+      if (tagInputElement.value !== "") {
+        onAddTag(tagInputElement.value);
+      }
+
       tagInputElement.value = "";
       tagInputElement.focus();
     });
     tagInputElement.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        // prevent form submission
+        e.preventDefault();
+      }
+
       if (tagInputElement.value !== "" && e.key === "Enter") {
         this.sanitizeTagInput();
         onAddTag(tagInputElement.value);
@@ -67,7 +92,6 @@ export class View {
     previewElement.addEventListener("focus", () => previewElement.select());
     previewElement.addEventListener("click", () => previewElement.select());
 
-    saveButtonElement.addEventListener("click", onSave);
     openOptionsButtonElement.addEventListener("click", () => browser.runtime.openOptionsPage());
   }
 
@@ -88,7 +112,7 @@ export class View {
 
     if (tags.join("") !== previousState.tags.join("")) {
       addedTagsElement.innerHTML = tags
-        .map((tag, index) => `<button class="added-tag" data-index=${index}>#${tag}</button>`)
+        .map((tag, index) => `<button class="added-tag" type="button" data-index=${index}>#${tag}</button>`)
         .join("");
     }
 
@@ -158,6 +182,6 @@ export class View {
 
   sanitizeTagInput() {
     // strictly lowercased a-z and 0-9
-    tagInputElement.value = tagInputElement.value.toLocaleLowerCase().replace(/[^0-9a-z]/g, "");
+    tagInputElement.value = tagInputElement.value.toLocaleLowerCase().replace(/[^0-9a-z_-]/g, "");
   }
 }

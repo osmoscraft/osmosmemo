@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <div class="popup-container">
+    <form class="popup-container js-creation-form">
       <div class="field">
         <label class="field__label" for="title">Title</label>
         <div class="field__input js-textarea-fit-container">
-          <textarea id="title" name="title" class="js-title" rows="1" autofocus></textarea>
+          <textarea id="title" name="title" class="js-title" rows="1" autofocus required></textarea>
         </div>
       </div>
       <hr />
       <div class="field">
         <label class="field__label" for="link">Link</label>
         <div class="field__input js-textarea-fit-container">
-          <textarea id="link" name="link" class="js-link field__input" rows="1"></textarea>
+          <textarea id="link" name="link" class="js-link field__input" rows="1" required></textarea>
         </div>
       </div>
       <hr />
@@ -32,8 +32,8 @@
         <label class="field__label" for="tags">Tags</label>
         <div class="add-tag field__input">
           <div class="added-tags js-added-tags"></div>
-          <input id="tags" class="js-tag-input as-partial-l" name="tag" type="text" list="tag-options" />
-          <button class="as-partial-r js-add-tag-button">Add</button>
+          <input id="tags" class="js-tag-input as-partial-l" name="tag" type="text" list="tag-options" title="Alphanumeric characters, hyphen and underscore only. Press ENTER to add."/>
+          <button type="button" class="as-partial-r js-add-tag-button">Add</button>
           <datalist id="tag-options" class="js-tag-options"></datalist>
         </div>
       </div>
@@ -47,14 +47,14 @@
       <hr />
       <hr />
       <div class="js-actions actions">
-        <button class="js-save">💾 Save</button>
+        <button type="submit" class="js-save">💾 Save</button>
         <a class="button js-open-library" target="_blank">🔎 Search</a>
-        <button class="js-open-options open-options" title="Open settings">
+        <button type="button" class="js-open-options open-options" title="Open settings">
           <span class="open-options__show-when-valid">⚙</span>
           <span class="open-options__show-when-error">🔗 Connect to GitHub</span>
         </button>
       </div>
-    </div>
+    </form>
     <script type="module" src="popup/popup.js"></script>
   </body>
 </html>

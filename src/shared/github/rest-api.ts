@@ -62,7 +62,6 @@ async function getContents({ accessToken, username, repo, filename }) {
 
 async function getDefaultBranch({ accessToken, username, repo }): Promise<string | null> {
   try {
-    debugger;
     const response = await fetch(`https://api.github.com/repos/${username}/${repo}/branches`, {
       headers: new Headers({
         Authorization: "Basic " + btoa(`${username}:${accessToken}`),
