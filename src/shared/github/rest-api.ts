@@ -20,7 +20,9 @@ export async function insertContent({ accessToken, username, repo, filename, con
 export async function getLibraryUrl({ accessToken, username, repo, filename }) {
   const defaultBranch = await getDefaultBranch({ accessToken, username, repo });
 
-  return `https://github.com/${username}/${repo}/blob/${defaultBranch}/${filename}`;
+  return `https://github.com/login?return_to=${encodeURIComponent(
+    `https://github.com/${username}/${repo}/blob/${defaultBranch}/${filename}`
+  )}`;
 }
 
 async function writeContent({ accessToken, username, repo, filename, previousSha, content }) {
