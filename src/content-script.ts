@@ -43,7 +43,7 @@ function injectContentScript() {
   }
 
   function getPageUrl() {
-    let url = document.querySelector(`link[rel="canonical"]`).getAttribute("href")?.trim();
+    let url = document.querySelector(`link[rel="canonical"]`)?.getAttribute("href")?.trim();
 
     if (!url) {
       url = location.href;
@@ -53,18 +53,18 @@ function injectContentScript() {
   }
 
   function getPageTitle() {
-    let title = document.querySelector(`meta[property="og:title"]`).getAttribute("content")?.trim();
+    let title = document.querySelector(`meta[property="og:title"]`)?.getAttribute("content")?.trim();
 
     if (!title) {
-      title = document.querySelector(`meta[name="twitter:title"]`).getAttribute("content")?.trim();
+      title = document.querySelector(`meta[name="twitter:title"]`)?.getAttribute("content")?.trim();
     }
 
     if (!title) {
-      title = document.querySelector("title").innerText?.trim();
+      title = document.querySelector("title")?.innerText?.trim();
     }
 
     if (!title) {
-      title = document.querySelector("h1").innerText?.trim();
+      title = document.querySelector("h1")?.innerText?.trim();
     }
 
     if (!title) {
