@@ -44,11 +44,11 @@ connectButtonElement.addEventListener("click", async (event) => {
   const repo = repoElement.value;
   const filename = filenameElement.value;
 
-  connectButtonElement.innerText = "🔗 Checking GitHub connection…";
+  connectButtonElement.innerText = "🔗 Connection…";
 
   try {
     const markdownString = await getContentString({ accessToken, username, repo, filename });
-    connectButtonElement.innerText = "✅ Successfully connected to GitHub";
+    connectButtonElement.innerText = "✅ Connected to GitHub";
     setUserOptions({ accessToken, username, repo, filename });
 
     const tagOptions = await getUniqueTagsFromMarkdownString(markdownString);
