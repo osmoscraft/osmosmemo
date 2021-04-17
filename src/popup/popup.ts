@@ -28,6 +28,10 @@ async function initialize() {
 
   /* Step 3 - Send out request to content script */
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  if (!tabs?.[0]?.id) {
+    console.error(`[popup] cannot get model. Activie tab does not exist.`);
+    return;
+  }
   browser.tabs.sendMessage(tabs[0].id, { command: "get-model" });
 }
 

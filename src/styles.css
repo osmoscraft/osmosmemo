@@ -13,7 +13,8 @@ body {
   background-color: var(--app-bg);
   color: var(--default-text-c);
   margin: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 * {
@@ -105,7 +106,7 @@ button.as-label-action {
   padding: 0 8px;
 }
 
-input[name='tag'] {
+input[name="tag"] {
   width: 10rem;
 }
 
@@ -136,8 +137,8 @@ input[name='tag'] {
 .field {
   display: grid;
   grid-template:
-    'label action' auto
-    'input input' auto / 1fr auto;
+    "label action" auto
+    "input input" auto / 1fr auto;
   gap: 4px;
 }
 
@@ -156,7 +157,7 @@ input[name='tag'] {
 .actions {
   cursor: default;
   display: grid;
-  grid-template-columns: 1fr 40px 40px;
+  grid-template-columns: 1fr 1fr 40px;
   grid-gap: 4px;
 }
 
@@ -188,7 +189,7 @@ input[name='tag'] {
 }
 .js-textarea-fit-container::after {
   /* Note the weird space! Needed to preventy jumpy behavior */
-  content: attr(data-replicated-value) ' ';
+  content: attr(data-replicated-value) " ";
 
   /* This is how textarea text behaves */
   white-space: pre-wrap;
@@ -215,4 +216,9 @@ input[name='tag'] {
 
   /* Place on top of each other */
   grid-area: 1 / 1 / 2 / 2;
+}
+
+/* utils */
+[data-show]:not([data-show-active]) {
+  display: none;
 }

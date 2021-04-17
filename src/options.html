@@ -8,44 +8,50 @@
   <body>
     <form class="js-options-form options-container">
       <div class="field">
-        <label for="access-token" class="field__label">GitHub personal access token</label>
-        <span class="field__action">
-          <a href="https://github.com/settings/tokens/new" target="_blank">New token</a>
-          <span>|</span>
-          <a href="https://github.com/settings/tokens" target="_blank">Manage tokens</a>
-        </span>
-        <input id="access-token" class="js-access-token field__input" type="password" required />
-      </div>
-      <hr />
-      <div class="field">
         <label for="username" class="field__label">GitHub username</label>
-        <input id="username" class="js-username field__input" type="text" placeholder="microsoft" required />
+        <span class="field__action">
+          <a href="https://github.com/join?source=login" target="_blank">Join GitHub</a>
+        </span>
+        <input id="username" class="js-username field__input" type="text" placeholder="Username or organization" required />
       </div>
       <hr />
       <div class="field">
-        <label for="repo" class="field__label">GitHub repository</label>
+        <label for="repo" class="field__label">Repo</label>
         <span class="field__action">
-          <a href="https://github.com/new" target="_blank">New repository</a>
+          <a href="https://github.com/new" target="_blank">Create repo</a>
           <span>|</span>
-          <a href="https://github.com/chuanqisun?tab=repositories" target="_blank">Manage repositories</a>
+          <a href="https://github.com/chuanqisun?tab=repositories" target="_blank">Show existing</a>
         </span>
-        <input id="repo" class="js-repo field__input" type="text" placeholder="TypeScript" required />
+        <input id="repo" class="js-repo field__input" type="text" required />
+      </div>
+      <hr />
+      <div class="field">
+        <label for="access-token" class="field__label">Personal access token</label>
+        <span class="field__action">
+          <a href="https://github.com/settings/tokens/new" target="_blank">Create token</a>
+          <span>|</span>
+          <a href="https://github.com/settings/tokens" target="_blank">Show existing</a>
+        </span>
+        <input id="access-token" class="js-access-token field__input" placeholder="e.g. ghp_ABCDEFGHIKLMNN1234567890abcdefhijklm" type="password" required />
       </div>
       <hr />
       <div class="field">
         <label for="filename" class="field__label">Markdown filename for data storage</label>
-        <input id="filename" class="js-filename field__input" type="text" placeholder="README.md" required />
+        <input id="filename" class="js-filename field__input" type="text" placeholder="e.g. README.md" required />
       </div>
       <hr />
       <hr />
-      <button class="js-connect">🔗 Connect to GitHub</button>
+      <button class="js-connect">🔗 Check GitHub connection</button>
       <hr />
       <hr />
-      <div class="field">
-        <label for="tags" class="field__label">Available tags (<span class="js-tag-count"></span>)</label>
+      <div class="field" data-show="on-success">
+        <label for="tags" class="field__label">Detected tags (<span class="js-tag-count"></span>)</label>
         <div class="field__input js-textarea-fit-container">
           <textarea id="tags" class="js-tags field__input" readonly rows="1"></textarea>
         </div>
+      </div>
+      <div class="field" data-show="on-error">
+        <a href="#">Having trouble? Here is the setup guide.</a>
       </div>
     </form>
   </body>

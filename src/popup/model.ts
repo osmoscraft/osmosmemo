@@ -1,9 +1,22 @@
+export interface ModelState {
+  title?: string;
+  titleOptions: string[];
+  selectedTitleIndex?: number;
+  href?: string;
+  description: string;
+  tags: string[];
+  tagOptions: string[];
+  libraryUrl?: string;
+  saveStatus: "new" | "saving" | "saved" | "error";
+  connectionStatus: "unknown" | "valid" | "error";
+}
+
 export class Model {
-  get state() {
+  get state(): ModelState {
     return this._state;
   }
 
-  private _state = {
+  private _state: ModelState = {
     title: undefined,
     titleOptions: [],
     selectedTitleIndex: undefined,

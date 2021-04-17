@@ -1,9 +1,9 @@
 import { browser } from "webextension-polyfill-ts";
-import type { Options } from "../background";
 
 import { getContentString } from "../shared/github/rest-api";
 import { fitTextareaToContent } from "../shared/utils/fit-textarea-to-content";
 import { getUniqueTagsFromMarkdownString } from "../shared/utils/tags";
+import { getUserOptions, setUserOptions } from "../shared/utils/user-config";
 
 const optionsForm = document.querySelector(".js-options-form") as HTMLElement;
 const connectButtonElement = document.querySelector(".js-connect") as HTMLElement;
@@ -13,24 +13,18 @@ const tagCountElement = document.querySelector(".js-tag-count") as HTMLElement;
 const usernameElement = document.querySelector(".js-username") as HTMLInputElement;
 const repoElement = document.querySelector(".js-repo") as HTMLInputElement;
 const filenameElement = document.querySelector(".js-filename") as HTMLInputElement;
-const resizeElements = document.querySelectorAll(".js-autosize");
 
 function renderInputField({ element, string }) {
   element.value = string;
 }
 
 async function renderAllFields() {
-  const data: Options = await browser.storage.sync.get(["accessToken", "tags", "username", "repo", "filename"]);
-  const { accessToken, username, repo, filename, tags } = data;
+  const { accessToken, username, repo, filename } = await getUserOptions();
 
   renderInputField({ element: accessTokenElement, string: accessToken });
   renderInputField({ element: usernameElement, string: username });
   renderInputField({ element: repoElement, string: repo });
   renderInputField({ element: filenameElement, string: filename });
-  renderInputField({ element: tagsElement, string: tags.join(", ") });
-  tagCountElement.innerText = `${tags.length} ${tags.length === 1 ? "tag" : "tags"} found`;
-
-  fitTextareaToContent();
 }
 
 renderAllFields();
@@ -50,14 +44,35 @@ connectButtonElement.addEventListener("click", async (event) => {
   const repo = repoElement.value;
   const filename = filenameElement.value;
 
-  connectButtonElement.innerText = "🔗 Connecting…";
+  connectButtonElement.innerText = "🔗 Checking GitHub connection…";
 
   try {
     const markdownString = await getContentString({ accessToken, username, repo, filename });
-    const uniqueTags = await getUniqueTagsFromMarkdownString(markdownString);
-    connectButtonElement.innerText = "🙌 Connected to GitHub";
-    browser.storage.sync.set({ accessToken, username, repo, filename, tags: uniqueTags });
+    connectButtonElement.innerText = "✅ Successfully connected to GitHub";
+    setUserOptions({ accessToken, username, repo, filename });
+
+    const tagOptions = await getUniqueTagsFromMarkdownString(markdownString);
+    updateTagOptionsPreview(tagOptions);
+    showConditionalElements("on-success");
   } catch (e) {
-    connectButtonElement.innerText = "❌ Something went wrong. Please try again.";
+    connectButtonElement.innerText = "❌ Something went wrong";
+    showConditionalElements("on-error");
   }
 });
+
+function updateTagOptionsPreview(tags: string[]) {
+  renderInputField({ element: tagsElement, string: tags.join(", ") });
+  tagCountElement.innerText = `${tags.length} ${tags.length === 1 ? "tag" : "tags"} found`;
+
+  fitTextareaToContent();
+}
+
+function showConditionalElements(condition: "on-success" | "on-error") {
+  (document.querySelectorAll(`[data-show]`) as NodeListOf<HTMLElement>).forEach((element) => {
+    if (element.dataset.show === condition) {
+      element.dataset.showActive = "";
+    } else {
+      delete element.dataset.showActive;
+    }
+  });
+}

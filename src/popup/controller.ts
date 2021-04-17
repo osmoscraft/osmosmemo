@@ -1,9 +1,9 @@
 import { browser } from "webextension-polyfill-ts";
-import { insertContent, getLibraryUrl, getContentString } from "../shared/github/rest-api";
+import { getContentString, getLibraryUrl, insertContent } from "../shared/github/rest-api";
 import { getUniqueTagsFromMarkdownString } from "../shared/utils/tags";
+import { getUserOptions } from "../shared/utils/user-config";
 import type { Model } from "./model";
 import type { View } from "./view";
-import type { Options } from "../background";
 
 export class Controller {
   constructor(private model: Model, private view: View) {
@@ -14,7 +14,7 @@ export class Controller {
     this.view.handleOutput({
       onTitleChange: (title) => this.model.updateAndCache({ title }),
       onTitleSwap: () => {
-        const newIndex = (this.model.state.selectedTitleIndex + 1) % this.model.state.titleOptions.length;
+        const newIndex = (this.model.state.selectedTitleIndex! + 1) % this.model.state.titleOptions.length;
         return this.model.updateAndCache({
           selectedTitleIndex: newIndex,
           title: this.model.state.titleOptions[newIndex],
@@ -36,30 +36,16 @@ export class Controller {
       }
     });
 
-    browser.storage.onChanged.addListener((changes, namespace) => {
-      if (namespace === "sync") {
-        for (let key in changes) {
-          if (key === "tags") {
-            const storageChange = changes[key];
-            this.model.update({ tagOptions: storageChange.newValue });
-          }
-        }
-      }
-    });
+    const optionsData = await getUserOptions();
+    this.model.update({ tagOptions: optionsData.tags });
 
-    const tagsData = await browser.storage.sync.get("tags");
-    this.model.update({ tagOptions: tagsData.tags });
-
-    const optionsData: Options = await browser.storage.sync.get(["accessToken", "username", "repo", "filename"]);
     const { accessToken, username, repo, filename } = optionsData;
     try {
       const markdownString = await getContentString({ accessToken, username, repo, filename });
-      const libraryUrl = getLibraryUrl({ username, repo, filename });
-      this.model.update({ libraryUrl, connectionStatus: "valid" });
-
-      // Get latest tags and write to storage. The change listener will fire and push changes to model
-      const uniqueTags = await getUniqueTagsFromMarkdownString(markdownString);
-      browser.storage.sync.set({ tags: uniqueTags });
+      const libraryUrl = await getLibraryUrl({ accessToken, username, repo, filename });
+      const tagOptions = await getUniqueTagsFromMarkdownString(markdownString);
+      this.model.update({ tagOptions, libraryUrl, connectionStatus: "valid" });
+      console.log(`[controller] tags available`, tagOptions.length);
     } catch (e) {
       this.model.update({ connectionStatus: "error" });
     }
@@ -67,7 +53,7 @@ export class Controller {
 
   async onSave() {
     this.model.update({ saveStatus: "saving" });
-    const optionsData = await browser.storage.sync.get(["accessToken", "username", "repo", "filename"]);
+    const optionsData = await getUserOptions();
     try {
       const { accessToken, username, repo, filename } = optionsData;
       const { title, href, description, tags } = this.model.state;
@@ -92,6 +78,11 @@ export class Controller {
 
   async cacheModel() {
     const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+    if (!tabs?.[0]?.id) {
+      console.error(`[controller] cannot cache model. Activie tab does not exist.`);
+      return;
+    }
+
     browser.tabs.sendMessage(tabs[0].id, { command: "set-cached-model", data: this.model.getCacheableState() });
   }
 }
