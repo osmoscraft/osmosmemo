@@ -43,8 +43,8 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
 
 My current focus is to bring the entire [osmos::craft](https://osmoscraft.org) project online. Until then, I have no bandwidth for new feature requests or PRs. However, issues and bug reports are always welcome. I'll keep track of issues and address them once I have more time! Thank your for being patient.
 
-# Other tools
+## Ecosystem
 
-osmos::memo is part of the [osmos::craft](https://osmoscraft.org) project. If you enjoy this tool, you might also like:
+osmos::memo is part of the [osmos::craft](https://osmoscraft.org) ecosystem. If you enjoy this tool, you might also like:
 
 - [osmos::feed](https://github.com/osmoscraft/osmosfeed): A web-based RSS reader running entirely from your GitHub repo.
