@@ -42,5 +42,5 @@ My current focus is to bring the entire [osmos::craft](https://osmoscraft.org) p
 
 # Other tools
 
-osmos::memo is part of the osmos::craft project. You might find these helpful:
+osmos::memo is part of the [osmos::craft](https://osmoscraft.org) project. If you enjoy this tool, you might also like:
 - [osmos::feed](https://github.com/osmoscraft/osmosfeed): A web-based RSS reader running entirely from your GitHub repo.
