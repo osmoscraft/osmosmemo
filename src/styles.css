@@ -188,6 +188,8 @@ input[name="tag"] {
   font-size: 14px;
   line-height: 20px;
 
+  overflow-wrap: anywhere; /* Not supported in safari but the extension is not available in safari. */
+
   /* Place on top of each other */
   grid-area: 1 / 1 / 2 / 2;
 }
