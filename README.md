@@ -13,6 +13,11 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
 
 ![image](https://user-images.githubusercontent.com/1895289/115136045-ebeb9c00-9fd1-11eb-9d8d-11a7f7736ae9.png)
 
+[My person memo since 2018](https://github.com/chuanqisun/memo)
+[![image](https://user-images.githubusercontent.com/1895289/115136700-5b638a80-9fd6-11eb-9c12-e53b1e98a1e1.png)](https://github.com/chuanqisun/memo)
+
+
+
 
 ## Get started
 
