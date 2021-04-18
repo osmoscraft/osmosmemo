@@ -36,3 +36,11 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
   ![image](https://user-images.githubusercontent.com/1895289/115136197-243faa00-9fd3-11eb-829b-da1c3e6536e6.png)
 - Now navigate to any page and re-open the extension. You will be able to save new content.
   ![image](https://user-images.githubusercontent.com/1895289/115136348-10487800-9fd4-11eb-9a40-81382fe5c0fb.png)
+  
+## Contributions
+My current focus is to bring the entire [osmos::craft](https://osmoscraft.org) project online. Until then, I have no bandwidth for new feature requests or PRs. However, issues and bug reports are always welcome. I'll keep track of issues and address them once I have more time! Thank your for being patient.
+
+# Other tools
+
+osmos::memo is part of the osmos::craft project. You might find these helpful:
+- [osmos::feed](https://github.com/osmoscraft/osmosfeed): A web-based RSS reader running entirely from your GitHub repo.
