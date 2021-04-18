@@ -33,4 +33,4 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
 - Click Connect and make sure you get a success message.  
   ![image](https://user-images.githubusercontent.com/1895289/115136197-243faa00-9fd3-11eb-829b-da1c3e6536e6.png)
 - Now navigate to any page and re-open the extension. You will be able to save new content.
-  ![image](https://user-images.githubusercontent.com/1895289/115136338-fc047b00-9fd3-11eb-8523-e04b1bebd00b.png)
+  ![image](https://user-images.githubusercontent.com/1895289/115136348-10487800-9fd4-11eb-9a40-81382fe5c0fb.png)
