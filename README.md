@@ -27,7 +27,9 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
 - When you active the extension from browser toolbar for the 1st time, click the button to connect to GitHub.  
   ![image](https://user-images.githubusercontent.com/1895289/115136286-acbe4a80-9fd3-11eb-9c5f-7e14a1e8c38d.png)
 - Provide your GitHub username and repo.
-- Create a new personal access token for the extension can add content on behalf of you. Make sure you select the `repo` scope.
+  - If you don't have a repo yet, it's easiest to [create from the template](https://github.com/login?return_to=%2Fosmoscraft%2Fosmosmemo-template%2Fgenerate).
+  - You can set the visibility of your repo to either Public or Private. The extension works in both cases.
+- [Create a new personal access token](https://github.com/settings/tokens/new) for the extension to  add content on behalf of you. Make sure you select the `repo` scope.
   ![image](https://user-images.githubusercontent.com/1895289/115136132-877d0c80-9fd2-11eb-9ec2-3b531e4445ea.png)
 - Use `README.md` as the storage filename. Other filenames work too but GitHub will not automatically render it as the home page for your repo.  
 - Click Connect and make sure you get a success message.  
