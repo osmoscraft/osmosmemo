@@ -11,6 +11,9 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
 
 ## Screenshot
 
+![image](https://user-images.githubusercontent.com/1895289/115136045-ebeb9c00-9fd1-11eb-9d8d-11a7f7736ae9.png)
+
+
 ## Get started
 
 ### Install
@@ -21,9 +24,13 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
 
 ### Connect to GitHub
 
-- When you active the extension the 1st time, the extension will alllow you to connect to GitHub.
+- When you active the extension from browser toolbar for the 1st time, click the button to connect to GitHub.  
+  ![image](https://user-images.githubusercontent.com/1895289/115136286-acbe4a80-9fd3-11eb-9c5f-7e14a1e8c38d.png)
 - Provide your GitHub username and repo.
 - Create a new personal access token for the extension can add content on behalf of you. Make sure you select the `repo` scope.
-- Use `README.md` as the storage filename. Other filenames work too but GitHub will not automatically render it as the home page for your repo.
-- Click Connect.
-- Now navigate to any page. Clicking the extension button will now allow you to save new content.
+  ![image](https://user-images.githubusercontent.com/1895289/115136132-877d0c80-9fd2-11eb-9ec2-3b531e4445ea.png)
+- Use `README.md` as the storage filename. Other filenames work too but GitHub will not automatically render it as the home page for your repo.  
+- Click Connect and make sure you get a success message.  
+  ![image](https://user-images.githubusercontent.com/1895289/115136197-243faa00-9fd3-11eb-829b-da1c3e6536e6.png)
+- Now navigate to any page and re-open the extension. You will be able to save new content.
+  ![image](https://user-images.githubusercontent.com/1895289/115136338-fc047b00-9fd3-11eb-8523-e04b1bebd00b.png)
