@@ -1,4 +1,4 @@
-[![image](https://user-images.githubusercontent.com/1895289/115134725-885c7100-9fc7-11eb-82c5-c3df07602cef.png)](https://osmoscraft.org)
+![image](https://user-images.githubusercontent.com/1895289/115334164-b8cf1700-a14f-11eb-8f9d-5d3da52acb9e.png)
 
 # osmos::memo
 
