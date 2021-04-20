@@ -11,7 +11,7 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
 
 ## Screenshot
 
-![image](https://user-images.githubusercontent.com/1895289/115136045-ebeb9c00-9fd1-11eb-9d8d-11a7f7736ae9.png)
+![image](https://user-images.githubusercontent.com/1895289/115334609-8ffb5180-a150-11eb-97f2-20865fde4ff9.png)
 
 [My memo since 2018](https://github.com/chuanqisun/memo)
 [![image](https://user-images.githubusercontent.com/1895289/115136700-5b638a80-9fd6-11eb-9c12-e53b1e98a1e1.png)](https://github.com/chuanqisun/memo)
@@ -35,7 +35,7 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
   ![image](https://user-images.githubusercontent.com/1895289/115136132-877d0c80-9fd2-11eb-9ec2-3b531e4445ea.png)
 - Use `README.md` as the storage filename. Other filenames work too but GitHub will not automatically render it as the home page for your repo.
 - Click Connect and make sure you get a success message.  
-  ![image](https://user-images.githubusercontent.com/1895289/115136197-243faa00-9fd3-11eb-829b-da1c3e6536e6.png)
+  ![image](https://user-images.githubusercontent.com/1895289/115334656-a1445e00-a150-11eb-893a-403b130fdc1d.png)
 - Now navigate to any page and re-open the extension. You will be able to save new content.
   ![image](https://user-images.githubusercontent.com/1895289/115136348-10487800-9fd4-11eb-9a40-81382fe5c0fb.png)
 
