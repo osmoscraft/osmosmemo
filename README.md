@@ -41,7 +41,7 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
 
 ## Contributions
 
-My current focus is to bring the entire [osmos::craft](https://osmoscraft.org) project online. Until then, I have no bandwidth for new feature requests or PRs. However, issues and bug reports are always welcome. I'll keep track of issues and address them once I have more time! Thank your for being patient.
+My current focus is to bring the entire [osmos::craft](https://osmoscraft.org) project online. Until then, I have no bandwidth for new feature requests or PRs. However, issues and bug reports are always welcome. I'll keep track of issues and address them once I have more time. Thank your for being patient.
 
 ## Ecosystem
 
