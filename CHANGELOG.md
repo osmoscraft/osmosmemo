@@ -1,8 +1,8 @@
 # Release status
 
-- Firefox: v2.1.2 under review, v2.1.1 published
-- Chrome: v2.1.1 under review
-- Edge: v2.1.1 under review
+- Firefox: v2.1.2 published
+- Chrome: v2.1.2 under review, v2.1.1 published
+- Edge: v2.1.2 under review
 
 # vNext
 
