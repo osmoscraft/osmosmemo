@@ -35,7 +35,7 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
   ![image](https://user-images.githubusercontent.com/1895289/115136132-877d0c80-9fd2-11eb-9ec2-3b531e4445ea.png)
 - Use `README.md` as the storage filename. Other filenames work too but GitHub will not automatically render it as the home page for your repo.
 - Click Connect and make sure you get a success message.  
-  ![image](https://user-images.githubusercontent.com/1895289/115334656-a1445e00-a150-11eb-893a-403b130fdc1d.png)
+  ![image](https://user-images.githubusercontent.com/1895289/115334759-cc2eb200-a150-11eb-9a71-1b0372532cfb.png)
 - Now navigate to any page and re-open the extension. You will be able to save new content.
   ![image](https://user-images.githubusercontent.com/1895289/115136348-10487800-9fd4-11eb-9a40-81382fe5c0fb.png)
 
