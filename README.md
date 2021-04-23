@@ -31,12 +31,12 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
 - Provide your GitHub username and repo.
   - If you don't have a repo yet, it's easiest to [create from the template](https://github.com/login?return_to=%2Fosmoscraft%2Fosmosmemo-template%2Fgenerate).
   - You can set the visibility of your repo to either Public or Private. The extension works in both cases.
-- [Create a new personal access token](https://github.com/settings/tokens/new) for the extension to add content on behalf of you. Make sure you select the `repo` scope.
+- [Create a new personal access token](https://github.com/settings/tokens/new) for the extension to add content on behalf of you. Make sure you select the `repo` scope.  
   ![image](https://user-images.githubusercontent.com/1895289/115136132-877d0c80-9fd2-11eb-9ec2-3b531e4445ea.png)
 - Use `README.md` as the storage filename. Other filenames work too but GitHub will not automatically render it as the home page for your repo.
 - Click Connect and make sure you get a success message.  
   ![image](https://user-images.githubusercontent.com/1895289/115334759-cc2eb200-a150-11eb-9a71-1b0372532cfb.png)
-- Now navigate to any page and re-open the extension. You will be able to save new content.
+- Now navigate to any page and re-open the extension. You will be able to save new content.  
   ![image](https://user-images.githubusercontent.com/1895289/115136348-10487800-9fd4-11eb-9a40-81382fe5c0fb.png)
 
 ## Contributions
