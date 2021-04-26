@@ -20,9 +20,9 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
 
 ### Install
 
-- Chrome extension
-- Edge extension
-- Firefox add-on
+- [Chrome](https://chrome.google.com/webstore/detail/osmosmemo/chgfencjlhmjhmnnpnlnchglkkdcipii)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/osmos-memo)
+- [Edge](https://microsoftedge.microsoft.com/addons/detail/osmosmemo/hhhiajhglkelhgipohelpagkdcgadacj)
 
 ### Connect to GitHub
 
