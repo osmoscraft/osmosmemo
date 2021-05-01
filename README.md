@@ -2,7 +2,7 @@
 
 # osmos::memo
 
-An in-browser bookmark manager optimized for tagging and retrieval speed.
+A browser bookmark manager optimized for capture and retrieval speed.
 
 - Extract page title and url into a short markdown snippet.
 - One-click to insert the snippet to file hosted on GitHub.
