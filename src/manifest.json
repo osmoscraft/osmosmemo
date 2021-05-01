@@ -1,6 +1,6 @@
 {
   "name": "osmos::memo",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "An in-browser bookmark manager with easy tagging and fast recall",
   "manifest_version": 2,
   "browser_action": {
@@ -24,6 +24,14 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "osmosmemo@osmoscraft.org"
+    }
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "Capture current page"
     }
   }
 }

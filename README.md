@@ -43,6 +43,16 @@ An in-browser bookmark manager optimized for tagging and retrieval speed.
 
 My current focus is to bring the entire [osmos::craft](https://osmoscraft.org) project online. Until then, I have no bandwidth for new feature requests or PRs. However, issues and bug reports are always welcome. I'll keep track of issues and address them once I have more time. Thank your for being patient.
 
+## FAQ
+
+### How to open the extension with keyboard shortcut?
+
+> By the default, <kbd>Alt</kbd>+<kbd>Shift</kdb>+<kbd>D</kbd> opens the extension. You can customize it with browser extensions settings.
+>
+> - Chrome: visit `chrome://extensions/shortcuts`
+> - Edge: visit `edge://extensions/shortcuts`
+> - Firefox: visit `about:addons` as shown in [this video](https://bug1303384.bmoattachments.org/attachment.cgi?id=9051647).
+
 ## Ecosystem
 
 osmos::memo is part of the [osmos::craft](https://osmoscraft.org) ecosystem. If you enjoy this tool, you might also like:

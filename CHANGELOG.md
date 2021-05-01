@@ -1,10 +1,7 @@
-# Release status
+# v2.2.0
 
-- Firefox: v2.1.2 published
-- Chrome: v2.1.2 under review, v2.1.1 published
-- Edge: v2.1.2 under review
-
-# vNext
+- Added: `Alt+Shift+D` to capture the current page.
+- Fixed: a typo on settings UI.
 
 # v2.1.2
 
