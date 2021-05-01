@@ -9,7 +9,10 @@ const execAsync = promisify(exec);
 async function pack() {
   const manifest = require(path.resolve(UNPACKED_OUT_DIR, "manifest.json"));
   const version = manifest.version;
-  await execAsync(`zip -r ../osmosmemo-${version}.zip .`, {cwd: UNPACKED_OUT_DIR})
+  const outFilename = `osmosmemo-${version}.zip`;
+  await execAsync(`zip -r ../${outFilename} .`, {cwd: UNPACKED_OUT_DIR})
+
+  console.log(`[pack] packed: ${outFilename}`);
 }
 
 pack();
