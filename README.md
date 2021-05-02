@@ -47,7 +47,7 @@ My current focus is to bring the entire [osmos::craft](https://osmoscraft.org) p
 
 ### How to open the extension with keyboard shortcut?
 
-> By the default, <kbd>Alt</kbd>+<kbd>Shift</kdb>+<kbd>D</kbd> opens the extension. You can customize it with browser extensions settings.
+> By the default, <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> opens the extension. You can customize it with browser extensions settings.
 >
 > - Chrome: visit `chrome://extensions/shortcuts`
 > - Edge: visit `edge://extensions/shortcuts`
