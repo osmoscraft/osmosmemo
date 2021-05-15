@@ -5,7 +5,7 @@
 A browser bookmark manager optimized for capture and retrieval speed.
 
 - Extract page title and url into a short markdown snippet.
-- One-click to insert the snippet to file hosted on GitHub.
+- One-click to insert the snippet to `README.md` hosted on GitHub.
 - Add new tags or reuse the ones from previous snippets.
 - Instant search from snippets with the "find on page" utility built into browsers.
 
