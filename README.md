@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/1895289/115334164-b8cf1700-a14f-11eb-8f9d-5d3da52acb9e.png)
+[![image](./docs/media/osmosmemo-square-badge.svg)](#get-started)
 
 # osmos::memo
 
