@@ -1,3 +1,7 @@
+# v2.2.1
+
+- Fixed: Case sensitive URLs were transformed to lowercase.
+
 # v2.2.0
 
 - Added: `Alt+Shift+D` to capture the current page.

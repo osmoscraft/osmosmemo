@@ -49,7 +49,7 @@ function injectContentScript() {
       url = location.href;
     }
 
-    return url.toLowerCase();
+    return url;
   }
 
   function getPageTitle() {
