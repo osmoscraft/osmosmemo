@@ -1,6 +1,7 @@
 # v2.2.1
 
 - Fixed: Case sensitive URLs were transformed to lowercase.
+- Thank you @dinh.
 
 # v2.2.0
 
