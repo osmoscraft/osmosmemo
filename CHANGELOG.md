@@ -1,3 +1,10 @@
+# unreleased
+
+- Planned: YouTube url issue.
+- Planned: IME support.
+- Fixed: typo in "connecting..." status label.
+- Thank you @jerrylususu, @dinh
+
 # v2.2.1
 
 - Fixed: Case sensitive URLs were transformed to lowercase.
