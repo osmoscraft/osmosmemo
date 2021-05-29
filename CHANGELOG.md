@@ -1,7 +1,7 @@
-# unreleased
+# v2.3.0
 
-- Planned: YouTube url issue.
-- Planned: IME support.
+- Added: Support unicode characters in all input fields. e.g., you can use Chinese or even emoji in tags now.
+- Fixed: YouTube url missing video IDs.
 - Fixed: typo in "connecting..." status label.
 - Thank you @jerrylususu, @dinh
 
