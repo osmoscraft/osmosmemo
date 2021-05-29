@@ -44,7 +44,7 @@ connectButtonElement.addEventListener("click", async (event) => {
   const repo = repoElement.value;
   const filename = filenameElement.value;
 
-  connectButtonElement.innerText = "🔗 Connection…";
+  connectButtonElement.innerText = "🔗 Connecting…";
 
   try {
     const markdownString = await getContentString({ accessToken, username, repo, filename });
