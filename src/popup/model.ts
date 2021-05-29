@@ -1,7 +1,4 @@
-export interface ModelState {
-  title?: string;
-  selectedTitleIndex?: number;
-  href?: string;
+export interface FullModel extends CacheableModel {
   description: string;
   tags: string[];
   tagOptions: string[];
@@ -10,15 +7,23 @@ export interface ModelState {
   connectionStatus: "unknown" | "valid" | "error";
 }
 
+export interface CacheableModel {
+  title?: string;
+  href?: string;
+  cacheKey?: string;
+  description?: string;
+  tags?: string[];
+}
+
 export class Model {
-  get state(): ModelState {
+  get state(): FullModel {
     return this._state;
   }
 
-  private _state: ModelState = {
+  private _state: FullModel = {
     title: undefined,
-    selectedTitleIndex: undefined,
     href: undefined,
+    cacheKey: undefined,
     description: "",
     tags: [],
     tagOptions: [],
@@ -28,22 +33,22 @@ export class Model {
   };
   emitter = document.createElement("div");
 
-  getCacheableState() {
-    const { title, selectedTitleIndex, href, description, tags } = this._state;
+  getCacheableState(): CacheableModel {
+    const { title, href, cacheKey, description, tags } = this._state;
     return {
       title,
-      selectedTitleIndex,
       href,
+      cacheKey,
       description,
       tags,
     };
   }
 
-  updateAndCache(delta) {
+  updateAndCache(delta: Partial<FullModel>) {
     this.update(delta, true);
   }
 
-  update(delta, shouldCache = false) {
+  update(delta: Partial<FullModel>, shouldCache = false) {
     const previousState = { ...this._state };
     this._state = { ...this._state, ...delta };
     this.emitter.dispatchEvent(

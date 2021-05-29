@@ -1,4 +1,4 @@
-import { Model } from "./model";
+import { CacheableModel, Model } from "./model";
 import { View } from "./view";
 import { Controller } from "./controller";
 import { browser } from "webextension-polyfill-ts";
@@ -11,12 +11,10 @@ async function initialize() {
   /* Step 1 - Setup listener for the message from content script */
   await browser.runtime.onMessage.addListener((request, sender) => {
     if (request.command === "metadata-ready") {
-      const { title, href } = request.data;
-
-      controller.onData({ title, href });
+      controller.onData(request.data as CacheableModel);
     }
     if (request.command === "cached-model-ready") {
-      const cachedModel = request.data;
+      const cachedModel = request.data as CacheableModel;
       controller.onCache(cachedModel);
     }
   });

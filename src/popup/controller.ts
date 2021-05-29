@@ -2,7 +2,7 @@ import { browser } from "webextension-polyfill-ts";
 import { getContentString, getLibraryUrl, insertContent } from "../shared/github/rest-api";
 import { getUniqueTagsFromMarkdownString } from "../shared/utils/tags";
 import { getUserOptions } from "../shared/utils/user-options";
-import type { Model } from "./model";
+import type { CacheableModel, Model, FullModel } from "./model";
 import type { View } from "./view";
 
 export class Controller {
@@ -62,11 +62,11 @@ export class Controller {
     }
   }
 
-  onData({ title, href }) {
-    this.model.update({ title: title, href, saveStatus: "new" });
+  onData({ title, href, cacheKey }: Partial<FullModel>) {
+    this.model.update({ title: title, href, cacheKey, saveStatus: "new" });
   }
 
-  onCache(cachedModel) {
+  onCache(cachedModel: CacheableModel) {
     this.model.update(cachedModel);
   }
 

@@ -1,3 +1,10 @@
+# v2.3.0
+
+- Added: Support unicode characters in all input fields. e.g., you can use Chinese or even emoji in tags now.
+- Fixed: YouTube url missing video IDs.
+- Fixed: typo in "connecting..." status label.
+- Thank you @jerrylususu, @dinh
+
 # v2.2.1
 
 - Fixed: Case sensitive URLs were transformed to lowercase.
