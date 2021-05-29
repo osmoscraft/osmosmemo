@@ -37,12 +37,8 @@ export class View {
     formElement.addEventListener("submit", (event) => {
       event.preventDefault(); // don't reload page
 
-      // auto add any tag left in the input
-      if (tagInputElement.value !== "") {
-        this.sanitizeTagInput();
-        onAddTag(tagInputElement.value);
-        tagInputElement.value = "";
-      }
+      // commit any tag left in the input
+      this.commitTag({ onAddTag });
 
       onSave();
     });
@@ -50,33 +46,26 @@ export class View {
     titleInputElement.addEventListener("input", (e) => onTitleChange((e.target as HTMLInputElement).value));
     linkInputElement.addEventListener("input", (e) => onLinkChange((e.target as HTMLInputElement).value));
     descriptionInputElement.addEventListener("input", (e) => onDescriptionChange((e.target as HTMLInputElement).value));
-    addTagButtonElement.addEventListener("click", () => {
-      this.sanitizeTagInput();
-      if (tagInputElement.value !== "") {
-        onAddTag(tagInputElement.value);
+    addTagButtonElement.addEventListener("click", () => this.commitTag({ onAddTag, refocus: true }));
+    tagInputElement.addEventListener("keydown", (e) => {
+      if (e.isComposing) {
+        // passthrough IME events
+        return;
       }
 
-      tagInputElement.value = "";
-      tagInputElement.focus();
-    });
-    tagInputElement.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         // prevent form submission
         e.preventDefault();
       }
 
       if (tagInputElement.value !== "" && e.key === "Enter") {
-        this.sanitizeTagInput();
-        onAddTag(tagInputElement.value);
-        tagInputElement.value = "";
+        this.commitTag({ onAddTag });
       }
       if (tagInputElement.value === "" && e.key === "Backspace") {
         this.tryFocusLastTag();
       }
     });
-    tagInputElement.addEventListener("keyup", (e) => {
-      this.sanitizeTagInput();
-    });
+
     addedTagsElement.addEventListener("click", (e) => {
       const selectedButton = (e.target as HTMLElement).closest("button");
       if (!selectedButton) return;
@@ -180,8 +169,25 @@ export class View {
     return outputArray.join(" ");
   }
 
-  sanitizeTagInput() {
-    // strictly lowercased a-z and 0-9
-    tagInputElement.value = tagInputElement.value.toLocaleLowerCase().replace(/[^0-9a-z_-]/g, "");
+  commitTag(input: { onAddTag: (value: string) => any; refocus?: boolean }) {
+    const { onAddTag, refocus } = input;
+    const sanitizedValue = this.getSanitizedTagInput();
+    if (sanitizedValue !== "") {
+      onAddTag(sanitizedValue);
+    }
+
+    tagInputElement.value = "";
+
+    if (refocus) {
+      tagInputElement.focus();
+    }
+  }
+
+  getSanitizedTagInput() {
+    return tagInputElement.value
+      .toLocaleLowerCase()
+      .trim()
+      .replace(/[\s-_]+/g, "-") /* Standardize joiner to - */
+      .replace(/#/g, ""); /* Prevent duplicated tag symbol */
   }
 }
