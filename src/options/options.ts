@@ -1,9 +1,9 @@
 import { browser } from "webextension-polyfill-ts";
 
-import { getContentString } from "../shared/github/rest-api";
-import { fitTextareaToContent } from "../shared/utils/fit-textarea-to-content";
-import { getUniqueTagsFromMarkdownString } from "../shared/utils/tags";
-import { getUserOptions, setUserOptions } from "../shared/utils/user-options";
+import { getContentString } from "../lib/github/rest-api";
+import { fitTextareaToContent } from "../lib/utils/fit-textarea-to-content";
+import { getUniqueTagsFromMarkdownString } from "../lib/utils/tags";
+import { getUserOptions, setUserOptions } from "../lib/utils/user-options";
 
 const optionsForm = document.querySelector(".js-options-form") as HTMLElement;
 const connectButtonElement = document.querySelector(".js-connect") as HTMLElement;
