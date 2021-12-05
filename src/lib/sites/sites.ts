@@ -19,7 +19,7 @@ export interface SiteConfig {
 }
 
 const defaultSiteConfig: SiteConfig = {
-  siteMatcher: () => true, // call all
+  siteMatcher: () => true, // catch all
   urlExtractors: [canonicalUrl, locationHref],
   cacheKeyExtractors: [locationHrefCacheKey],
   titleExtractors: [ogTitle, twitterTitle, docTitle, h1Title],
