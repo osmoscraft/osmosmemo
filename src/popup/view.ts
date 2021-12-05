@@ -1,5 +1,5 @@
 import { fitTextareaToContent } from "../lib/utils/fit-textarea-to-content";
-import { browser } from "webextension-polyfill-ts";
+import browser from "webextension-polyfill";
 
 /* Input elements */
 const formElement = document.querySelector(".js-creation-form") as HTMLFormElement;

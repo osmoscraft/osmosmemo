@@ -1,4 +1,4 @@
-import { browser } from "webextension-polyfill-ts";
+import browser from "webextension-polyfill";
 import { siteConfigs } from "./lib/sites/sites";
 import { lazyApply } from "./lib/utils/lazy-apply";
 import type { CacheableModel } from "./popup/model";

@@ -1,7 +1,7 @@
 import { CacheableModel, Model } from "./model";
 import { View } from "./view";
 import { Controller } from "./controller";
-import { browser } from "webextension-polyfill-ts";
+import browser from "webextension-polyfill";
 
 const model = new Model();
 const view = new View();

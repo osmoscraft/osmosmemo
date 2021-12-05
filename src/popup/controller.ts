@@ -1,4 +1,4 @@
-import { browser } from "webextension-polyfill-ts";
+import browser from "webextension-polyfill";
 import { getContentString, getLibraryUrl, insertContent } from "../lib/github/rest-api";
 import { getUniqueTagsFromMarkdownString } from "../lib/utils/tags";
 import { getUserOptions } from "../lib/utils/user-options";

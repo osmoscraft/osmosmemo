@@ -1,3 +1,7 @@
+# v2.3.2
+
+- Chore: Migrated deprecated web extension polyfill
+
 # v2.3.1
 
 - Fixed: Wrong title displayed for YouTube after client-side navigation between videos

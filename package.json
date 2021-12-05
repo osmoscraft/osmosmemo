@@ -24,8 +24,9 @@
   "devDependencies": {
     "@osmoscraft/typescript-testing-library": "^0.0.5",
     "@types/fs-extra": "^9.0.13",
+    "@types/webextension-polyfill": "^0.8.2",
     "esbuild": "^0.14.2",
     "fs-extra": "^10.0.0",
-    "webextension-polyfill-ts": "^0.26.0"
+    "webextension-polyfill": "^0.8.0"
   }
 }

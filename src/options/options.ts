@@ -1,4 +1,4 @@
-import { browser } from "webextension-polyfill-ts";
+import browser from "webextension-polyfill";
 
 import { getContentString } from "../lib/github/rest-api";
 import { fitTextareaToContent } from "../lib/utils/fit-textarea-to-content";
