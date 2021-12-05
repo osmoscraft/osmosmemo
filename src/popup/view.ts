@@ -1,4 +1,4 @@
-import { fitTextareaToContent } from "../shared/utils/fit-textarea-to-content";
+import { fitTextareaToContent } from "../lib/utils/fit-textarea-to-content";
 import { browser } from "webextension-polyfill-ts";
 
 /* Input elements */
@@ -101,12 +101,12 @@ export class View {
 
     if (tags.join("") !== previousState.tags.join("")) {
       addedTagsElement.innerHTML = tags
-        .map((tag, index) => `<button class="added-tag" type="button" data-index=${index}>#${tag}</button>`)
+        .map((tag, index) => `<button class="added-tag" type="button" data-index="${index}">#${tag}</button>`)
         .join("");
     }
 
     if (tagOptions.join("") !== previousState.tagOptions.join("")) {
-      tagOptionsElement.innerHTML = tagOptions.map((option) => `<option value=${option}></option>`).join("");
+      tagOptionsElement.innerHTML = tagOptions.map((option) => `<option value="${option}">`).join("");
     }
 
     const newOutputPreview = this.getPreviewOutput(title, href, description, tags);

@@ -1,4 +1,6 @@
 import { browser } from "webextension-polyfill-ts";
+import { siteConfigs } from "./lib/sites/sites";
+import { lazyApply } from "./lib/utils/lazy-apply";
 import type { CacheableModel } from "./popup/model";
 
 declare global {
@@ -41,55 +43,19 @@ function injectContentScript() {
   });
 
   function getMetadata(): CacheableModel {
-    const href = getPageUrl();
-    const title = getPageTitle();
-    const cacheKey = getPageCacheKey();
+    const bestConfig = siteConfigs.find((config) => config.siteMatcher(document))!;
 
     return {
-      title,
-      href,
-      cacheKey,
+      title: lazyApply(bestConfig.titleExtractors, [document]),
+      href: lazyApply(bestConfig.urlExtractors, [document]),
+      cacheKey: lazyApply(bestConfig.cacheKeyExtractors, [document]),
     };
   }
 
-  function getPageUrl() {
-    let url = document.querySelector(`link[rel="canonical"]`)?.getAttribute("href")?.trim();
-
-    /**
-     * Some websites incorrectly used canonical url. Fallback to location.href
-     */
-    const canonicalHostname = new URL(url ?? location.href).hostname;
-    if (!url || SKIP_CANONICAL_HOSTNAMES.includes(canonicalHostname)) {
-      url = location.href;
-    }
-
-    return url;
-  }
-
   function getPageCacheKey() {
-    return location.href;
-  }
+    const bestConfig = siteConfigs.find((config) => config.siteMatcher(document))!;
 
-  function getPageTitle() {
-    let title = document.querySelector(`meta[property="og:title"]`)?.getAttribute("content")?.trim();
-
-    if (!title) {
-      title = document.querySelector(`meta[name="twitter:title"]`)?.getAttribute("content")?.trim();
-    }
-
-    if (!title) {
-      title = document.querySelector("title")?.innerText?.trim();
-    }
-
-    if (!title) {
-      title = document.querySelector("h1")?.innerText?.trim();
-    }
-
-    if (!title) {
-      title = "";
-    }
-
-    return title;
+    return lazyApply(bestConfig.cacheKeyExtractors, [document])!;
   }
 }
 

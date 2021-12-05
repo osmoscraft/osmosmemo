@@ -1,7 +1,7 @@
 import { browser } from "webextension-polyfill-ts";
-import { getContentString, getLibraryUrl, insertContent } from "../shared/github/rest-api";
-import { getUniqueTagsFromMarkdownString } from "../shared/utils/tags";
-import { getUserOptions } from "../shared/utils/user-options";
+import { getContentString, getLibraryUrl, insertContent } from "../lib/github/rest-api";
+import { getUniqueTagsFromMarkdownString } from "../lib/utils/tags";
+import { getUserOptions } from "../lib/utils/user-options";
 import type { CacheableModel, Model, FullModel } from "./model";
 import type { View } from "./view";
 

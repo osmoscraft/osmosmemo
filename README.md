@@ -53,6 +53,12 @@ My current focus is to bring the entire [osmos::craft](https://osmoscraft.org) p
 > - Edge: visit `edge://extensions/shortcuts`
 > - Firefox: visit `about:addons` as shown in [this video](https://bug1303384.bmoattachments.org/attachment.cgi?id=9051647).
 
+### How long does it take for a new release to reach my browser?
+
+- Firefox: from a couple hours to a day
+- Chrome: 1-3 days
+- Edge: 5-10 days
+
 ## Ecosystem
 
 osmos::memo is part of the [osmos::craft](https://osmoscraft.org) ecosystem. If you enjoy this tool, you might also like:
