@@ -9,11 +9,18 @@ export async function getContentString({ accessToken, username, repo, filename }
 
 /** insert content at the first line of the file. An EOL character will be automatically added. */
 export async function insertContent({ accessToken, username, repo, filename, content }) {
-  const contents = await getContents({ accessToken, username, repo, filename });
-  const previousContent = b64DecodeUnicode(contents.content ?? "");
-  const resultContent = `${content}\n${previousContent}`;
+  return new Promise(async (resolve, reject) => {
+    try {
+      const contents = await getContents({ accessToken, username, repo, filename });
+      const previousContent = b64DecodeUnicode(contents.content ?? "");
+      const resultContent = `${content}\n${previousContent}`;
 
-  writeContent({ accessToken, username, repo, filename, previousSha: contents.sha, content: resultContent });
+      writeContent({ accessToken, username, repo, filename, previousSha: contents.sha, content: resultContent });
+      resolve({});
+    } catch (e) {
+      reject(e);
+    }
+  });
 }
 
 /** currently only work with public repos */
