@@ -7,7 +7,7 @@ export type Callable<T extends any[], K> = (...args: T) => K;
  * @returns the first truthy return value from the function(s) called.
  */
 export function lazyApply<ArgsType extends any[], ReturnType>(
-  fnCalls: Callable<ArgsType, ReturnType>[],
+  fnCalls: Callable<ArgsType, any>[],
   args: ArgsType
 ): ReturnType | undefined {
   for (let fnCall of fnCalls) {

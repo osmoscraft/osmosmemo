@@ -7,8 +7,8 @@
     "start": "node scripts/build.js",
     "build": "npm run test && npm start && npm run pack",
     "pack": "node scripts/pack.js",
-    "test": "ts-node-dev --project tsconfig.test.json --quiet --transpile-only run-test.ts",
-    "test:watch": "ts-node-dev --project tsconfig.test.json --respawn --watch --transpile-only run-test.ts"
+    "test": "vitest run",
+    "test:watch": "vitest watch"
   },
   "repository": {
     "type": "git",
@@ -22,11 +22,11 @@
   },
   "homepage": "https://github.com/osmoscraft/osmosmemo#readme",
   "devDependencies": {
-    "@osmoscraft/typescript-testing-library": "^0.0.5",
     "@types/fs-extra": "^9.0.13",
-    "@types/webextension-polyfill": "^0.8.2",
-    "esbuild": "^0.14.2",
-    "fs-extra": "^10.0.0",
-    "webextension-polyfill": "^0.8.0"
+    "@types/webextension-polyfill": "^0.9.1",
+    "esbuild": "^0.15.10",
+    "fs-extra": "^10.1.0",
+    "vitest": "^0.24.0",
+    "webextension-polyfill": "^0.10.0"
   }
 }
