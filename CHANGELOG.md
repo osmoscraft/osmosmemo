@@ -1,6 +1,7 @@
 # v2.3.3
 
 - Fixed: "Saved" status is displayed before the API request is completed
+- Chore: Update testing library to vitest
 
 # v2.3.2
 
