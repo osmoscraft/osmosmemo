@@ -13,7 +13,7 @@ export async function insertContent({ accessToken, username, repo, filename, con
   const previousContent = b64DecodeUnicode(contents.content ?? "");
   const resultContent = `${content}\n${previousContent}`;
 
-  writeContent({ accessToken, username, repo, filename, previousSha: contents.sha, content: resultContent });
+  await writeContent({ accessToken, username, repo, filename, previousSha: contents.sha, content: resultContent });
 }
 
 /** currently only work with public repos */

@@ -1,3 +1,7 @@
+# v2.3.3
+
+- Fixed: "Saved" status is displayed before the API request is completed
+
 # v2.3.2
 
 - Chore: Migrated deprecated web extension polyfill
