@@ -1,8 +1,7 @@
-import browser from "webextension-polyfill";
 import { getContentString, getLibraryUrl, insertContent } from "../lib/github/rest-api";
 import { getUniqueTagsFromMarkdownString } from "../lib/utils/tags";
 import { getUserOptions } from "../lib/utils/user-options";
-import type { CacheableModel, Model, FullModel } from "./model";
+import type { CacheableModel, FullModel, Model } from "./model";
 import type { View } from "./view";
 
 export class Controller {
@@ -71,12 +70,12 @@ export class Controller {
   }
 
   async cacheModel() {
-    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tabs?.[0]?.id) {
       console.error(`[controller] cannot cache model. Activie tab does not exist.`);
       return;
     }
 
-    browser.tabs.sendMessage(tabs[0].id, { command: "set-cached-model", data: this.model.getCacheableState() });
+    chrome.tabs.sendMessage(tabs[0].id, { command: "set-cached-model", data: this.model.getCacheableState() });
   }
 }

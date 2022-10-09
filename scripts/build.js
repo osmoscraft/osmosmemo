@@ -15,6 +15,7 @@ async function build() {
       entryPoints: ["src/content-script.ts", "src/popup/popup.ts", "src/options/options.ts"],
       bundle: true,
       format: "esm",
+      sourcemap: true,
       outdir: UNPACKED_OUT_DIR,
     })
     .catch(() => process.exit(1));

@@ -1,5 +1,3 @@
-import browser from "webextension-polyfill";
-
 import { getContentString } from "../lib/github/rest-api";
 import { fitTextareaToContent } from "../lib/utils/fit-textarea-to-content";
 import { getUniqueTagsFromMarkdownString } from "../lib/utils/tags";
@@ -29,7 +27,7 @@ async function renderAllFields() {
 
 renderAllFields();
 
-browser.storage.onChanged.addListener(function (changes, namespace) {
+chrome.storage.onChanged.addListener(function (changes, namespace) {
   if (namespace === "sync") {
     renderAllFields();
   }

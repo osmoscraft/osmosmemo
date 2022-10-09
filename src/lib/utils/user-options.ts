@@ -1,5 +1,3 @@
-import browser from "webextension-polyfill";
-
 export interface UserOptions {
   tagOptions: string[];
   accessToken: string;
@@ -9,7 +7,7 @@ export interface UserOptions {
 }
 
 export async function getUserOptions(): Promise<UserOptions> {
-  const options = await browser.storage.sync.get(["accessToken", "tagOptions", "username", "repo", "filename"]);
+  const options = await chrome.storage.sync.get(["accessToken", "tagOptions", "username", "repo", "filename"]);
 
   const { accessToken = "", username = "", repo = "", filename = "README.md", tagOptions = [] } = options;
   const safeOptions: UserOptions = {
@@ -24,5 +22,5 @@ export async function getUserOptions(): Promise<UserOptions> {
 }
 
 export async function setUserOptions(update: Partial<UserOptions>) {
-  return browser.storage.sync.set(update);
+  return chrome.storage.sync.set(update);
 }

@@ -1,9 +1,9 @@
 {
   "name": "osmos::memo",
-  "version": "2.3.3",
-  "description": "An in-browser bookmark manager with easy tagging and fast recall",
-  "manifest_version": 2,
-  "browser_action": {
+  "version": "3.0.0",
+  "description": "An in-browser bookmark manager with GitHub backend",
+  "manifest_version": 3,
+  "action": {
     "default_title": "osmos::memo",
     "default_popup": "popup.html",
     "default_icon": {
@@ -20,12 +20,8 @@
     "96": "assets/osmosmemo-icon-96.png",
     "128": "assets/osmosmemo-icon-128.png"
   },
-  "permissions": ["activeTab", "storage"],
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "osmosmemo@osmoscraft.org"
-    }
-  },
+  "permissions": ["activeTab", "storage", "scripting"],
+  "host_permissions": ["*://*/*"],
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {

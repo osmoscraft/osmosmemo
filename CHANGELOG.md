@@ -1,3 +1,7 @@
+# v3.0.0
+
+- New: Migrated to Web Manifest v3 for compatibility with Chrome
+
 # v2.3.3
 
 - Fixed: "Saved" status is displayed before the API request is completed

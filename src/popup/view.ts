@@ -1,5 +1,4 @@
 import { fitTextareaToContent } from "../lib/utils/fit-textarea-to-content";
-import browser from "webextension-polyfill";
 
 /* Input elements */
 const formElement = document.querySelector(".js-creation-form") as HTMLFormElement;
@@ -81,7 +80,7 @@ export class View {
     previewElement.addEventListener("focus", () => previewElement.select());
     previewElement.addEventListener("click", () => previewElement.select());
 
-    openOptionsButtonElement.addEventListener("click", () => browser.runtime.openOptionsPage());
+    openOptionsButtonElement.addEventListener("click", () => chrome.runtime.openOptionsPage());
   }
 
   render({ state, previousState }) {
