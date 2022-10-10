@@ -1,7 +1,6 @@
-import { escapeRegExp } from "./regexp";
+import { getEntryPatternByHref } from "./markdown";
 
 export function mergeContent(newEntryHref: string, newEntry: string, existinContent: string): string {
-  const existingItemPattern = String.raw`^- \[.+\]\(${escapeRegExp(newEntryHref)}\).*$`;
-  const replaceResult = existinContent.replace(new RegExp(existingItemPattern, "m"), newEntry);
+  const replaceResult = existinContent.replace(getEntryPatternByHref(newEntryHref), newEntry);
   return replaceResult === existinContent ? `${newEntry}\n${existinContent}` : replaceResult;
 }

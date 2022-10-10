@@ -1,5 +1,5 @@
 import { fitTextareaToContent } from "../lib/utils/fit-textarea-to-content";
-import { escapeRegExp } from "../lib/utils/regexp";
+import { getEntryPatternByHref } from "../lib/utils/markdown";
 import type { FullModel } from "./model";
 
 const $ = document.querySelector.bind(document);
@@ -101,8 +101,7 @@ export class View {
     }
 
     if (href !== previousState.href || markdownString !== previousState.markdownString) {
-      const existingItemPattern = String.raw`^- \[.+\]\(${escapeRegExp(href)}\).*$`;
-      const isExistingUrl = markdownString?.match(new RegExp(existingItemPattern, "m"));
+      const isExistingUrl = markdownString?.match(getEntryPatternByHref(href!));
       existingLinkMarker.hidden = !isExistingUrl;
     }
 
