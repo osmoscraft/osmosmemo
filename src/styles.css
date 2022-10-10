@@ -122,6 +122,7 @@ input[name="tag"] {
 
 .field__action {
   grid-area: action;
+  font-size: var(--label-font-size);
 }
 
 .field__input {
