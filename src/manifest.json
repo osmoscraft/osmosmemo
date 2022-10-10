@@ -21,7 +21,6 @@
     "128": "assets/osmosmemo-icon-128.png"
   },
   "permissions": ["activeTab", "storage", "scripting"],
-  "host_permissions": ["*://*/*"],
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
