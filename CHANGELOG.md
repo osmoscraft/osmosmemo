@@ -1,3 +1,7 @@
+# v3.0.1
+
+- Fixed: Capture status was stale when link input changes
+
 # v3.0.0
 
 - New: Migrated to Web Manifest v3 for compatibility with Chrome
