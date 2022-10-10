@@ -4,8 +4,8 @@
   "description": "A chrome extension that summarizes the current page into a GitHub markdown file",
   "private": true,
   "scripts": {
-    "start": "node scripts/build.js",
-    "build": "npm run test && npm start && npm run pack",
+    "dev": "npm run test && node scripts/build.js --dev",
+    "build": "npm run test && node scripts/build.js && npm run pack",
     "pack": "node scripts/pack.js",
     "test": "vitest run",
     "test:watch": "vitest watch"

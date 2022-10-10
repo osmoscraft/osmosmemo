@@ -4,6 +4,8 @@ const fs = require("fs-extra");
 const OUT_DIR = `dist`;
 const UNPACKED_OUT_DIR = `dist/unpacked`;
 
+const isDevMode = process.argv.includes("--dev");
+
 async function build() {
   console.log("[build] start building extension...");
 
@@ -17,6 +19,17 @@ async function build() {
       format: "esm",
       sourcemap: true,
       outdir: UNPACKED_OUT_DIR,
+      watch: isDevMode
+        ? {
+            onRebuild: (error) => {
+              if (error) {
+                console.error(`[watch] rebuild error`, error);
+              } else {
+                console.log(`[watch] rebuild success`);
+              }
+            },
+          }
+        : false,
     })
     .catch(() => process.exit(1));
 
