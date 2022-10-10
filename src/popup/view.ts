@@ -1,3 +1,4 @@
+import browser from "webextension-polyfill";
 import { fitTextareaToContent } from "../lib/utils/fit-textarea-to-content";
 import type { FullModel } from "./model";
 
@@ -84,7 +85,7 @@ export class View {
     previewElement.addEventListener("focus", () => previewElement.select());
     previewElement.addEventListener("click", () => previewElement.select());
 
-    openOptionsButtonElement.addEventListener("click", () => chrome.runtime.openOptionsPage());
+    openOptionsButtonElement.addEventListener("click", () => browser.runtime.openOptionsPage());
   }
 
   render({ state, previousState }: { state: FullModel; previousState: FullModel }) {

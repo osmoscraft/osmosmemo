@@ -1,6 +1,5 @@
-# v3.0.0
+# v2.4.0
 
-- New: Migrated to Web Manifest v3 for compatibility with Chrome
 - New: Detect existing URLs for which "Save" becomes "Update"
 - Changed: Link input is moved above Title input
 

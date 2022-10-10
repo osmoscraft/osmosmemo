@@ -1,3 +1,4 @@
+import browser from "webextension-polyfill";
 import { siteConfigs } from "./lib/sites/sites";
 import { lazyApply } from "./lib/utils/lazy-apply";
 import type { CacheableModel } from "./popup/model";
@@ -15,7 +16,7 @@ function injectContentScript() {
 
   console.log(`[osmos] content-script activated`);
 
-  chrome.runtime.onMessage.addListener((request) => {
+  browser.runtime.onMessage.addListener((request) => {
     if (request.command === "set-cached-model") {
       console.log(`[osmos] set cached model`, request.data);
       sessionStorage.setItem("cached-model", JSON.stringify(request.data));
@@ -30,10 +31,10 @@ function injectContentScript() {
         }
 
         console.log(`[osmos] get cached model`, cachedModel);
-        chrome.runtime.sendMessage({ command: "cached-model-ready", data: cachedModel });
+        browser.runtime.sendMessage({ command: "cached-model-ready", data: cachedModel });
       } catch (e) {
         const model = getMetadata();
-        chrome.runtime.sendMessage({ command: "metadata-ready", data: model });
+        browser.runtime.sendMessage({ command: "metadata-ready", data: model });
         console.log(`[osmos] get metadata`, model);
       }
     }

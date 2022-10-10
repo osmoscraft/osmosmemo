@@ -23,9 +23,10 @@
   "homepage": "https://github.com/osmoscraft/osmosmemo#readme",
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
+    "@types/webextension-polyfill": "^0.9.1",
     "esbuild": "^0.15.10",
     "fs-extra": "^10.1.0",
     "vitest": "^0.24.0",
-    "@types/chrome": "^0.0.197"
+    "webextension-polyfill": "^0.10.0"
   }
 }

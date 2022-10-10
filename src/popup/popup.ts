@@ -1,6 +1,7 @@
-import { Controller } from "./controller";
 import { CacheableModel, Model } from "./model";
 import { View } from "./view";
+import { Controller } from "./controller";
+import browser from "webextension-polyfill";
 
 const model = new Model();
 const view = new View();
@@ -8,7 +9,7 @@ const controller = new Controller(model, view);
 
 async function initialize() {
   /* Step 1 - Setup listener for the message from content script */
-  await chrome.runtime.onMessage.addListener((request, sender) => {
+  await browser.runtime.onMessage.addListener((request, sender) => {
     if (request.command === "metadata-ready") {
       controller.onData(request.data as CacheableModel);
     }
@@ -19,20 +20,17 @@ async function initialize() {
   });
 
   /* Step 2 - Inject content script into active tab */
-  const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-  const currentTabId = tabs?.[0]?.id;
-  if (!currentTabId) {
-    console.error(`[popup] cannot get model. Activie tab does not exist.`);
-    return;
-  }
-
-  await chrome.scripting.executeScript({
-    target: { tabId: currentTabId },
-    files: ["content-script.js"],
+  await browser.tabs.executeScript({
+    file: "content-script.js",
   });
 
   /* Step 3 - Send out request to content script */
-  chrome.tabs.sendMessage(currentTabId, { command: "get-model" });
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  if (!tabs?.[0]?.id) {
+    console.error(`[popup] cannot get model. Activie tab does not exist.`);
+    return;
+  }
+  browser.tabs.sendMessage(tabs[0].id, { command: "get-model" });
 }
 
 initialize();
