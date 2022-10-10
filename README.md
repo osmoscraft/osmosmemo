@@ -22,7 +22,6 @@ A browser bookmark manager optimized for capture and retrieval speed.
 
 - [Chrome](https://chrome.google.com/webstore/detail/osmosmemo/chgfencjlhmjhmnnpnlnchglkkdcipii)
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/osmos-memo)
-- [Edge](https://microsoftedge.microsoft.com/addons/detail/osmosmemo/hhhiajhglkelhgipohelpagkdcgadacj)
 
 ### Connect to GitHub
 
