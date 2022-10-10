@@ -15,7 +15,12 @@ export class Controller {
   async init() {
     this.view.handleOutput({
       onTitleChange: (title) => this.model.updateAndCache({ title }),
-      onLinkChange: (href) => this.model.updateAndCache({ href }),
+      onLinkChange: (href) => {
+        // when link changes, Saved status must be recalculated
+        const savedModel = this.findSavedModel(href, this.model.state.markdownString) ?? undefined;
+        this.model.update({...savedModel, isSaved: !!savedModel });
+        this.model.updateAndCache({ href });
+      },
       onDescriptionChange: (description) => this.model.updateAndCache({ description }),
       onAddTag: (tag) => this.model.updateAndCache({ tags: [...this.model.state.tags, tag] }),
       onRemoveTagByIndex: (index) =>

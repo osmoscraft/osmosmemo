@@ -1,3 +1,7 @@
+# v2.4.1
+
+- Fixed: Capture status was stale when link input changes
+
 # v2.4.0
 
 - New: Detect existing URLs for which "Save" becomes "Update"
