@@ -1,5 +1,4 @@
 import { fitTextareaToContent } from "../lib/utils/fit-textarea-to-content";
-import { getEntryPatternByHref } from "../lib/utils/markdown";
 import type { FullModel } from "./model";
 
 const $ = document.querySelector.bind(document);
@@ -89,8 +88,9 @@ export class View {
   }
 
   render({ state, previousState }: { state: FullModel; previousState: FullModel }) {
-    const { title, href, description, markdownString, tags, tagOptions, saveStatus, connectionStatus, libraryUrl } =
-      state;
+    const { title, href, description, isSaved, tags, tagOptions, saveStatus, connectionStatus, libraryUrl } = state;
+
+    existingLinkMarker.hidden = !isSaved;
 
     if (title !== previousState.title) {
       titleInputElement.value = title!;
@@ -98,11 +98,6 @@ export class View {
 
     if (href !== previousState.href) {
       linkInputElement.value = href!;
-    }
-
-    if (href !== previousState.href || markdownString !== previousState.markdownString) {
-      const isExistingUrl = markdownString?.match(getEntryPatternByHref(href!));
-      existingLinkMarker.hidden = !isExistingUrl;
     }
 
     if (description !== previousState.description) {

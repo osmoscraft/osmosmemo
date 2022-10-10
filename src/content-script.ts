@@ -8,8 +8,6 @@ declare global {
   }
 }
 
-const SKIP_CANONICAL_HOSTNAMES = ["www.youtube.com"];
-
 function injectContentScript() {
   // make sure the content script is injected only on first run
   if (window._osmosmemoInjected) return;

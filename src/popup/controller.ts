@@ -1,4 +1,5 @@
 import { getContentString, getLibraryUrl, updateContent } from "../lib/github/rest-api";
+import { getEntryPatternByHref, parseEntry } from "../lib/utils/markdown";
 import { mergeContent } from "../lib/utils/merge-content";
 import { getUniqueTagsFromMarkdownString } from "../lib/utils/tags";
 import { getUserOptions } from "../lib/utils/user-options";
@@ -37,8 +38,16 @@ export class Controller {
       const markdownString = await getContentString({ accessToken, username, repo, filename });
       const libraryUrl = await getLibraryUrl({ accessToken, username, repo, filename });
       const tagOptions = await getUniqueTagsFromMarkdownString(markdownString);
-      this.model.update({ tagOptions, libraryUrl, connectionStatus: "valid", markdownString });
-      console.log(`[controller] tags available`, tagOptions.length);
+      const savedModel = this.findSavedModel(this.model.state.href, markdownString) ?? undefined;
+      this.model.update({
+        tagOptions,
+        libraryUrl,
+        connectionStatus: "valid",
+        markdownString,
+        isSaved: !!savedModel,
+        ...(this.model.state.isCacheLoaded ? undefined : savedModel), // Cache takes precedence over saved model
+      });
+      console.log(`[controller] Model updated from GitHub`);
     } catch (e) {
       this.model.update({ connectionStatus: "error" });
     }
@@ -57,18 +66,33 @@ export class Controller {
       const newEntryString = this.view.getPreviewOutput(title, href, description, tags);
       const mergeWithExisting = mergeContent.bind(null, href!, newEntryString);
       const updatedContent = await updateContent({ accessToken, username, repo, filename }, mergeWithExisting);
-      this.model.update({ saveStatus: "saved", markdownString: updatedContent });
+      this.model.update({ saveStatus: "saved", markdownString: updatedContent, isSaved: true });
     } catch {
       this.model.update({ saveStatus: "error" });
     }
   }
 
   onData({ title, href, cacheKey }: Partial<FullModel>) {
-    this.model.update({ title: title, href, cacheKey, saveStatus: "new" });
+    const savedModel = this.findSavedModel(href, this.model.state.markdownString) ?? undefined;
+    this.model.update({ title: title, href, cacheKey, saveStatus: "new", ...savedModel, isSaved: !!savedModel });
+    console.log(`[controller] Model updated from new page parser`);
   }
 
   onCache(cachedModel: CacheableModel) {
-    this.model.update(cachedModel);
+    const savedModel = this.findSavedModel(cachedModel.href!, this.model.state.markdownString) ?? undefined;
+    // Let cache override any existing state
+    this.model.update({ ...cachedModel, isCacheLoaded: true, isSaved: !!savedModel });
+    console.log(`[controller] Model updated from session cache`);
+  }
+
+  private findSavedModel(href?: string, remoteMarkdown?: string) {
+    if (!remoteMarkdown) return null;
+    if (!href) return null;
+
+    const match = remoteMarkdown?.match(getEntryPatternByHref(href));
+    if (!match) return null;
+
+    return match ? parseEntry(match[0]) : null;
   }
 
   async cacheModel() {

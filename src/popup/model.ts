@@ -4,6 +4,8 @@ export interface FullModel extends CacheableModel {
   tagOptions: string[];
   /** Markdown string of the entire storage file */
   markdownString?: string;
+  isSaved?: boolean;
+  isCacheLoaded?: boolean;
   /** URL to the GitHub storage file */
   libraryUrl?: string;
   saveStatus: "new" | "saving" | "saved" | "error";
@@ -16,6 +18,13 @@ export interface CacheableModel {
   cacheKey?: string;
   description?: string;
   tags?: string[];
+}
+
+export interface SavedModel {
+  title: string;
+  href: string;
+  description: string;
+  tags: string[];
 }
 
 export class Model {
