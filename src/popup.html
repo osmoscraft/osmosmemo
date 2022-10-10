@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="styles.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
     <form class="popup-container js-creation-form">
+      <div class="field">
+        <label class="field__label" for="link">Link</label>
+        <span class="field__action js-existing-link-marker">✅ Saved</span>
+        <div class="field__input js-textarea-fit-container">
+          <textarea id="link" name="link" class="js-link field__input" rows="1" spellcheck="false" required></textarea>
+        </div>
+      </div>
+      <hr />
       <div class="field">
         <label class="field__label" for="title">Title</label>
         <div class="field__input js-textarea-fit-container">
@@ -15,16 +23,15 @@
       </div>
       <hr />
       <div class="field">
-        <label class="field__label" for="link">Link</label>
-        <div class="field__input js-textarea-fit-container">
-          <textarea id="link" name="link" class="js-link field__input" rows="1" spellcheck="false" required></textarea>
-        </div>
-      </div>
-      <hr />
-      <div class="field">
         <label class="field__label" for="description">Description</label>
         <div class="field__input js-textarea-fit-container">
-          <textarea id="description" name="description" class="js-description field__input" placeholder="Something useful for your future self" rows="1"></textarea>
+          <textarea
+            id="description"
+            name="description"
+            class="js-description field__input"
+            placeholder="Something useful for your future self"
+            rows="1"
+          ></textarea>
         </div>
       </div>
       <hr />
@@ -32,7 +39,14 @@
         <label class="field__label" for="tags">Tags</label>
         <div class="add-tag field__input">
           <div class="added-tags js-added-tags"></div>
-          <input id="tags" class="js-tag-input as-partial-l" name="tag" type="text" list="tag-options" title="Alphanumeric characters, hyphen and underscore only. Press ENTER to add."/>
+          <input
+            id="tags"
+            class="js-tag-input as-partial-l"
+            name="tag"
+            type="text"
+            list="tag-options"
+            title="Alphanumeric characters, hyphen and underscore only. Press ENTER to add."
+          />
           <button type="button" class="as-partial-r js-add-tag-button">Add</button>
           <datalist id="tag-options" class="js-tag-options"></datalist>
         </div>

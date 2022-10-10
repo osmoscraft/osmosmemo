@@ -7,13 +7,22 @@ export async function getContentString({ accessToken, username, repo, filename }
   return stringResult;
 }
 
-/** insert content at the first line of the file. An EOL character will be automatically added. */
-export async function insertContent({ accessToken, username, repo, filename, content }) {
+/**
+ * Insert content at the first line of the file. An EOL character will be automatically added.
+ * @return Updated full markdown string
+ */
+export async function updateContent(
+  { accessToken, username, repo, filename },
+  updateFunction: (previousContent: string) => string
+) {
+  // To reduce chance of conflict, the update function runs on fresh data from API
   const contents = await getContents({ accessToken, username, repo, filename });
   const previousContent = b64DecodeUnicode(contents.content ?? "");
-  const resultContent = `${content}\n${previousContent}`;
+  const resultContent = updateFunction(previousContent);
 
   await writeContent({ accessToken, username, repo, filename, previousSha: contents.sha, content: resultContent });
+
+  return resultContent;
 }
 
 /** currently only work with public repos */

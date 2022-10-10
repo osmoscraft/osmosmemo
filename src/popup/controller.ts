@@ -1,4 +1,5 @@
-import { getContentString, getLibraryUrl, insertContent } from "../lib/github/rest-api";
+import { getContentString, getLibraryUrl, updateContent } from "../lib/github/rest-api";
+import { mergeContent } from "../lib/utils/merge-content";
 import { getUniqueTagsFromMarkdownString } from "../lib/utils/tags";
 import { getUserOptions } from "../lib/utils/user-options";
 import type { CacheableModel, FullModel, Model } from "./model";
@@ -36,7 +37,7 @@ export class Controller {
       const markdownString = await getContentString({ accessToken, username, repo, filename });
       const libraryUrl = await getLibraryUrl({ accessToken, username, repo, filename });
       const tagOptions = await getUniqueTagsFromMarkdownString(markdownString);
-      this.model.update({ tagOptions, libraryUrl, connectionStatus: "valid" });
+      this.model.update({ tagOptions, libraryUrl, connectionStatus: "valid", markdownString });
       console.log(`[controller] tags available`, tagOptions.length);
     } catch (e) {
       this.model.update({ connectionStatus: "error" });
@@ -54,8 +55,9 @@ export class Controller {
       const { accessToken, username, repo, filename } = optionsData;
       const { title, href, description, tags } = this.model.state;
       const newEntryString = this.view.getPreviewOutput(title, href, description, tags);
-      await insertContent({ accessToken, username, repo, filename, content: newEntryString });
-      this.model.update({ saveStatus: "saved" });
+      const mergeWithExisting = mergeContent.bind(null, href!, newEntryString);
+      const updatedContent = await updateContent({ accessToken, username, repo, filename }, mergeWithExisting);
+      this.model.update({ saveStatus: "saved", markdownString: updatedContent });
     } catch {
       this.model.update({ saveStatus: "error" });
     }

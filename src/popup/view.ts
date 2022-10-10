@@ -1,19 +1,24 @@
 import { fitTextareaToContent } from "../lib/utils/fit-textarea-to-content";
+import { escapeRegExp } from "../lib/utils/regexp";
+import type { FullModel } from "./model";
+
+const $ = document.querySelector.bind(document);
 
 /* Input elements */
-const formElement = document.querySelector(".js-creation-form") as HTMLFormElement;
-const titleInputElement = document.querySelector(".js-title") as HTMLInputElement;
-const linkInputElement = document.querySelector(".js-link") as HTMLInputElement;
-const descriptionInputElement = document.querySelector(".js-description") as HTMLInputElement;
-const previewElement = document.querySelector(".js-preview") as HTMLInputElement;
-const addedTagsElement = document.querySelector(".added-tags") as HTMLElement;
-const tagInputElement = document.querySelector(".js-tag-input") as HTMLInputElement;
-const tagOptionsElement = document.querySelector(".js-tag-options") as HTMLDataListElement;
-const addTagButtonElement = document.querySelector(".js-add-tag-button") as HTMLButtonElement;
-const actionsElement = document.querySelector(".js-actions") as HTMLDivElement;
-const saveButtonElement = document.querySelector(".js-save") as HTMLButtonElement;
-const openOptionsButtonElement = document.querySelector(".js-open-options") as HTMLButtonElement;
-const openLibraryLinkElement = document.querySelector(".js-open-library") as HTMLAnchorElement;
+const formElement = $(".js-creation-form") as HTMLFormElement;
+const titleInputElement = $(".js-title") as HTMLInputElement;
+const linkInputElement = $(".js-link") as HTMLInputElement;
+const existingLinkMarker = $(".js-existing-link-marker") as HTMLSpanElement;
+const descriptionInputElement = $(".js-description") as HTMLInputElement;
+const previewElement = $(".js-preview") as HTMLInputElement;
+const addedTagsElement = $(".added-tags") as HTMLElement;
+const tagInputElement = $(".js-tag-input") as HTMLInputElement;
+const tagOptionsElement = $(".js-tag-options") as HTMLDataListElement;
+const addTagButtonElement = $(".js-add-tag-button") as HTMLButtonElement;
+const actionsElement = $(".js-actions") as HTMLDivElement;
+const saveButtonElement = $(".js-save") as HTMLButtonElement;
+const openOptionsButtonElement = $(".js-open-options") as HTMLButtonElement;
+const openLibraryLinkElement = $(".js-open-library") as HTMLAnchorElement;
 
 const saveStatusDisplayStrings = new Map([
   ["new", "💾 Save"],
@@ -83,15 +88,22 @@ export class View {
     openOptionsButtonElement.addEventListener("click", () => chrome.runtime.openOptionsPage());
   }
 
-  render({ state, previousState }) {
-    const { title, href, description, tags, tagOptions, saveStatus, connectionStatus, libraryUrl } = state;
+  render({ state, previousState }: { state: FullModel; previousState: FullModel }) {
+    const { title, href, description, markdownString, tags, tagOptions, saveStatus, connectionStatus, libraryUrl } =
+      state;
 
     if (title !== previousState.title) {
-      titleInputElement.value = title;
+      titleInputElement.value = title!;
     }
 
     if (href !== previousState.href) {
-      linkInputElement.value = href;
+      linkInputElement.value = href!;
+    }
+
+    if (href !== previousState.href || markdownString !== previousState.markdownString) {
+      const existingItemPattern = String.raw`^- \[.+\]\(${escapeRegExp(href)}\).*$`;
+      const isExistingUrl = markdownString?.match(new RegExp(existingItemPattern, "m"));
+      existingLinkMarker.hidden = !isExistingUrl;
     }
 
     if (description !== previousState.description) {
