@@ -48,15 +48,13 @@ My current focus is to bring the entire [osmos::craft](https://osmoscraft.org) p
 
 > By the default, <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> opens the extension. You can customize it with browser extensions settings.
 >
-> - Chrome: visit `chrome://extensions/shortcuts`
-> - Edge: visit `edge://extensions/shortcuts`
+> - Chrome and Edge: visit `chrome://extensions/shortcuts`
 > - Firefox: visit `about:addons` as shown in [this video](https://bug1303384.bmoattachments.org/attachment.cgi?id=9051647).
 
 ### How long does it take for a new release to reach my browser?
 
 - Firefox: from a couple hours to a day
 - Chrome: 1-3 days
-- Edge: 5-10 days
 
 ## Ecosystem
 
