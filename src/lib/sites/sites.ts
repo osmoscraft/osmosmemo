@@ -1,15 +1,6 @@
-import {
-  canonicalUrl,
-  locationHref,
-  locationHrefCacheKey,
-  ogTitle,
-  twitterTitle,
-  docTitle,
-  h1Title,
-  StringExtractor,
-  youtubeH1TitleExtractor,
-} from "./field-extractors";
-import type { SiteMatcher } from "./site-matcher";
+import { defaultSiteConfig } from "./domains/default";
+import { githubSiteConfig } from "./domains/github";
+import { youtubeSiteConfig } from "./domains/youtube";
 
 export interface SiteConfig {
   siteMatcher: SiteMatcher;
@@ -17,20 +8,11 @@ export interface SiteConfig {
   urlExtractors: StringExtractor[];
   cacheKeyExtractors: StringExtractor[];
 }
+export type SiteMatcher = (document: Document) => boolean;
 
-const defaultSiteConfig: SiteConfig = {
-  siteMatcher: () => true, // catch all
-  urlExtractors: [canonicalUrl, locationHref],
-  cacheKeyExtractors: [locationHrefCacheKey],
-  titleExtractors: [ogTitle, twitterTitle, docTitle, h1Title],
-};
+export type Extractor<T> = (document: Document) => T | undefined;
 
-// YouTube does not refresh most of the fields in the document html when user navigates to a different video
-const youtubeSiteConfig: SiteConfig = {
-  siteMatcher: (document) => document.location.hostname.includes("youtube.com"),
-  urlExtractors: [locationHref],
-  cacheKeyExtractors: defaultSiteConfig.cacheKeyExtractors,
-  titleExtractors: [youtubeH1TitleExtractor, docTitle],
-};
+// Interfaces
+export type StringExtractor = Extractor<string>;
 
-export const siteConfigs = [youtubeSiteConfig, defaultSiteConfig];
+export const siteConfigs = [youtubeSiteConfig, githubSiteConfig, defaultSiteConfig];

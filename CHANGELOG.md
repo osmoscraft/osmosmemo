@@ -1,6 +1,7 @@
-# Unreleased
+# v3.1.0
 
-- Fixed: keyboard shortcut suggestion per Manifest v3 spec
+- New: Parse repo name and tagline from GitHub repo URL
+- Fixed: Keyboard shortcut suggestion per Manifest v3 spec
 - Chore: Dependency reduction and updates
 - Chore: Modern build scripts with Node.js 20 API
 
