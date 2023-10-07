@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "description": "A chrome extension that summarizes the current page into a GitHub markdown file",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "npm run test && node scripts/build.js --dev",
-    "build": "npm run test && node scripts/build.js && npm run pack",
-    "pack": "node scripts/pack.js",
-    "test": "vitest run",
-    "test:watch": "vitest watch"
+    "dev": "rm -rf dist && concurrently --raw npm:dev:*",
+    "build": "rm -rf dist && concurrently --raw npm:build:* && npm run pack",
+    "dev:pages": "npm run build:pages -- --watch",
+    "dev:assets": "npm run build:assets -- --watch",
+    "build:pages": "esbuild src/content-script.ts src/options.ts src/popup.ts --format=esm --sourcemap --bundle --outdir=dist/unpacked",
+    "build:assets": "node scripts/copy-assets.js --src public --target dist/unpacked",
+    "pack": "node scripts/pack.js --dir dist/unpacked",
+    "test": "tsx src/index.tests.ts",
+    "test:watch": "tsx --watch src/index.tests.ts"
   },
   "repository": {
     "type": "git",
@@ -22,10 +27,10 @@
   },
   "homepage": "https://github.com/osmoscraft/osmosmemo#readme",
   "devDependencies": {
-    "@types/fs-extra": "^9.0.13",
-    "esbuild": "^0.15.10",
-    "fs-extra": "^10.1.0",
-    "vitest": "^0.24.0",
-    "@types/chrome": "^0.0.197"
+    "@types/chrome": "^0.0.246",
+    "@types/node": "^20.8.3",
+    "concurrently": "^8.2.1",
+    "esbuild": "^0.19.4",
+    "tsx": "^3.13.0"
   }
 }

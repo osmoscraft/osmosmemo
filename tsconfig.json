@@ -7,7 +7,7 @@
     "module": "esnext",
     "strict": true,
     "noImplicitAny": false,
-    "importsNotUsedAsValues": "error",
+    "verbatimModuleSyntax": true,
     "skipDefaultLibCheck": true,
     "declaration": true,
     "outDir": "dist"

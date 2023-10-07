@@ -1,7 +1,7 @@
-import { getContentString } from "../lib/github/rest-api";
-import { fitTextareaToContent } from "../lib/utils/fit-textarea-to-content";
-import { getUniqueTagsFromMarkdownString } from "../lib/utils/tags";
-import { getUserOptions, setUserOptions } from "../lib/utils/user-options";
+import { getContentString } from "./lib/github/rest-api";
+import { fitTextareaToContent } from "./lib/utils/fit-textarea-to-content";
+import { getUniqueTagsFromMarkdownString } from "./lib/utils/tags";
+import { getUserOptions, setUserOptions } from "./lib/utils/user-options";
 
 const optionsForm = document.querySelector(".js-options-form") as HTMLElement;
 const connectButtonElement = document.querySelector(".js-connect") as HTMLElement;

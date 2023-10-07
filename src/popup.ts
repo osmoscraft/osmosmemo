@@ -1,6 +1,6 @@
-import { Controller } from "./controller";
-import { CacheableModel, Model } from "./model";
-import { View } from "./view";
+import { Controller } from "./popup/controller";
+import { Model, type CacheableModel } from "./popup/model";
+import { View } from "./popup/view";
 
 const model = new Model();
 const view = new View();

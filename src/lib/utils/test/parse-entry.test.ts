@@ -1,13 +1,14 @@
-import { describe, expect, it } from "vitest";
+import { deepStrictEqual, strictEqual } from "node:assert";
+import { describe, it } from "node:test";
 import { parseEntry } from "../markdown";
 
 describe("parseEntry", () => {
   it("Empty entry", () => {
-    expect(parseEntry("")).toBe(null);
+    strictEqual(parseEntry(""), null);
   });
 
   it("Simple link", () => {
-    expect(parseEntry("- [title](http://example.com)")).toEqual({
+    deepStrictEqual(parseEntry("- [title](http://example.com)"), {
       title: "title",
       href: "http://example.com",
       description: "",
@@ -16,7 +17,7 @@ describe("parseEntry", () => {
   });
 
   it("Link with description", () => {
-    expect(parseEntry("- [title](http://example.com) details")).toEqual({
+    deepStrictEqual(parseEntry("- [title](http://example.com) details"), {
       title: "title",
       href: "http://example.com",
       description: "details",
@@ -25,7 +26,7 @@ describe("parseEntry", () => {
   });
 
   it("Link with longer description", () => {
-    expect(parseEntry("- [title](http://example.com) details and more details")).toEqual({
+    deepStrictEqual(parseEntry("- [title](http://example.com) details and more details"), {
       title: "title",
       href: "http://example.com",
       description: "details and more details",
@@ -34,7 +35,7 @@ describe("parseEntry", () => {
   });
 
   it("Link with tags", () => {
-    expect(parseEntry("- [title](http://example.com) #tag")).toEqual({
+    deepStrictEqual(parseEntry("- [title](http://example.com) #tag"), {
       title: "title",
       href: "http://example.com",
       description: "",
@@ -43,7 +44,7 @@ describe("parseEntry", () => {
   });
 
   it("Link with multiple tags", () => {
-    expect(parseEntry("- [title](http://example.com) #tag1#tag2")).toEqual({
+    deepStrictEqual(parseEntry("- [title](http://example.com) #tag1#tag2"), {
       title: "title",
       href: "http://example.com",
       description: "",
@@ -52,7 +53,7 @@ describe("parseEntry", () => {
   });
 
   it("Link with everything", () => {
-    expect(parseEntry("- [title](http://example.com) details #tag1#tag2")).toEqual({
+    deepStrictEqual(parseEntry("- [title](http://example.com) details #tag1#tag2"), {
       title: "title",
       href: "http://example.com",
       description: "details",
@@ -61,7 +62,7 @@ describe("parseEntry", () => {
   });
 
   it("Link with everything and additional whitespace", () => {
-    expect(parseEntry("- [title](http://example.com)      details  #tag1#tag2  ")).toEqual({
+    deepStrictEqual(parseEntry("- [title](http://example.com)      details  #tag1#tag2  "), {
       title: "title",
       href: "http://example.com",
       description: "details",
@@ -70,7 +71,7 @@ describe("parseEntry", () => {
   });
 
   it("Link with everything and lack of whitespace", () => {
-    expect(parseEntry("- [title](http://example.com)details#tag1#tag2")).toEqual({
+    deepStrictEqual(parseEntry("- [title](http://example.com)details#tag1#tag2"), {
       title: "title",
       href: "http://example.com",
       description: "details",

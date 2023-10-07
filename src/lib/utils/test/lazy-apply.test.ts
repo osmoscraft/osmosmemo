@@ -1,25 +1,26 @@
-import { describe, expect, it } from "vitest";
+import { deepStrictEqual, strictEqual } from "node:assert";
+import { describe, it } from "node:test";
 import { lazyApply } from "../lazy-apply";
 
 describe("lazyApply", () => {
   it("return undefined for empty input", async () => {
-    await expect(lazyApply([], [])).toEqual(undefined);
+    await strictEqual(lazyApply([], []), undefined);
   });
 
   it("return undefined if function return undefined", async () => {
-    await expect(lazyApply([() => undefined], [])).toEqual(undefined);
+    await strictEqual(lazyApply([() => undefined], []), undefined);
   });
 
   it("return undefined if multiple functions return falsy value", async () => {
-    await expect(lazyApply([() => undefined, () => false, () => "", () => null, () => 0], [])).toEqual(undefined);
+    await strictEqual(lazyApply([() => undefined, () => false, () => "", () => null, () => 0], []), undefined);
   });
 
   it("return calls function with args", async () => {
-    await expect(lazyApply([(...args) => args], ["hello", "world"])).toEqual(["hello", "world"]);
+    await deepStrictEqual(lazyApply([(...args) => args], ["hello", "world"]), ["hello", "world"]);
   });
 
   it("returns first defined value", async () => {
-    await expect(lazyApply([() => undefined, () => "hello", () => "world"], [])).toEqual("hello");
+    await strictEqual(lazyApply([() => undefined, () => "hello", () => "world"], []), "hello");
   });
 
   it("does not call subsequent function after defined value is returned", async () => {
@@ -39,7 +40,7 @@ describe("lazyApply", () => {
       []
     );
 
-    await expect(isTargetFnCalled).toEqual(true);
-    await expect(isSubsequentFnCalled).toEqual(false);
+    await strictEqual(isTargetFnCalled, true);
+    await strictEqual(isSubsequentFnCalled, false);
   });
 });

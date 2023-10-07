@@ -1,18 +1,26 @@
-const { promisify } = require("util");
-const path = require("path");
-const { exec } = require("child_process");
-
-const UNPACKED_OUT_DIR = `dist/unpacked`;
+import assert from "assert/strict";
+import { exec } from "child_process";
+import path from "path";
+import { promisify } from "util";
+import { readJson } from "./fs.js";
 
 const execAsync = promisify(exec);
 
-async function pack() {
-  const manifest = require(path.resolve(UNPACKED_OUT_DIR, "manifest.json"));
+assert(process.argv.includes("--dir"), "Specify dir to be packed: --dir <DIR>");
+const dir = process.argv[process.argv.indexOf("--dir") + 1];
+
+/**
+ * @param {string} dir
+ */
+async function pack(dir) {
+  console.log("[pack] extension dir", path.resolve(dir));
+  const manifest = await readJson(path.resolve(dir, "manifest.json"));
   const version = manifest.version;
-  const outFilename = `osmosmemo-${version}.zip`;
-  await execAsync(`zip -r ../${outFilename} .`, {cwd: UNPACKED_OUT_DIR})
+  const outFilename = `fjord-${version}.chrome.zip`;
+
+  await execAsync(`zip -r ../${outFilename} .`, { cwd: dir });
 
   console.log(`[pack] packed: ${outFilename}`);
 }
 
-pack();
+pack(dir);

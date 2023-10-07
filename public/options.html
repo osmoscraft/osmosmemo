@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="styles.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
     <form class="js-options-form options-container">
@@ -12,13 +12,21 @@
         <span class="field__action">
           <a href="https://github.com/join?source=login" target="_blank">Join GitHub</a>
         </span>
-        <input id="username" class="js-username field__input" type="text" placeholder="Username or organization" required />
+        <input
+          id="username"
+          class="js-username field__input"
+          type="text"
+          placeholder="Username or organization"
+          required
+        />
       </div>
       <hr />
       <div class="field">
         <label for="repo" class="field__label">Repo</label>
         <span class="field__action">
-          <a href="https://github.com/login?return_to=%2Fosmoscraft%2Fosmosmemo-template%2Fgenerate" target="_blank">Create repo</a>
+          <a href="https://github.com/login?return_to=%2Fosmoscraft%2Fosmosmemo-template%2Fgenerate" target="_blank"
+            >Create repo</a
+          >
         </span>
         <input id="repo" class="js-repo field__input" type="text" required />
       </div>
@@ -28,7 +36,13 @@
         <span class="field__action">
           <a href="https://github.com/settings/tokens/new" target="_blank">Create token</a>
         </span>
-        <input id="access-token" class="js-access-token field__input" placeholder="e.g. ghp_ABCDEFGHIKLMNN1234567890abcdefhijklm" type="password" required />
+        <input
+          id="access-token"
+          class="js-access-token field__input"
+          placeholder="e.g. ghp_ABCDEFGHIKLMNN1234567890abcdefhijklm"
+          type="password"
+          required
+        />
         <div>* The <i>repo</i> scope is required.</div>
       </div>
       <hr />
@@ -52,10 +66,12 @@
         <ul class="trouble-shooting-list">
           <li>Verify the Repo exists. You should be able to open <samp>https://github.com/USERNAME/REPO</samp></li>
           <li>Make sure you have selected the <i>repo</i> scope when creating the personal access token.</li>
-          <li>Still having trouble? <a href="https://github.com/osmoscraft/osmosmemo">Find documentation on GitHub</a>.</li>
+          <li>
+            Still having trouble? <a href="https://github.com/osmoscraft/osmosmemo">Find documentation on GitHub</a>.
+          </li>
         </ul>
       </div>
     </form>
   </body>
-  <script type="module" src="options/options.js"></script>
+  <script type="module" src="options.js"></script>
 </html>

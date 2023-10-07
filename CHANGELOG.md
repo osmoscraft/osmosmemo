@@ -1,3 +1,9 @@
+# Unreleased
+
+- Removed: `fs-extra` dependency
+- Fixed: keyboard shortcut suggestion per Manifest v3 spec
+- Deps update
+
 # v3.0.1
 
 - Fixed: Capture status was stale when link input changes

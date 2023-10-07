@@ -20,9 +20,13 @@
     "96": "assets/osmosmemo-icon-96.png",
     "128": "assets/osmosmemo-icon-128.png"
   },
-  "permissions": ["activeTab", "storage", "scripting"],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
   "commands": {
-    "_execute_browser_action": {
+    "_execute_action": {
       "suggested_key": {
         "default": "Alt+Shift+D"
       },
