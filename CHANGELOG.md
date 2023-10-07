@@ -1,8 +1,8 @@
 # Unreleased
 
-- Removed: `fs-extra` dependency
 - Fixed: keyboard shortcut suggestion per Manifest v3 spec
-- Deps update
+- Chore: Dependency reduction and updates
+- Chore: Modern build scripts with Node.js 20 API
 
 # v3.0.1
 
