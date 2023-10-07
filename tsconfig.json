@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "lib": ["DOM", "DOM.Iterable", "esnext"],
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "module": "esnext",
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "WebWorker"],
+    "skipLibCheck": true,
     "strict": true,
     "noImplicitAny": false,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "verbatimModuleSyntax": true,
-    "skipDefaultLibCheck": true,
-    "declaration": true,
-    "outDir": "dist"
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.test.ts"]
+  "include": ["src"]
 }
