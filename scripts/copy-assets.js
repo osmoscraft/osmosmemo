@@ -1,6 +1,5 @@
 import assert from "assert/strict";
 import fs from "fs/promises";
-import { copyDir } from "./fs.js";
 
 assert(process.argv.includes("--src"), "Specify src dir: --src <SOURCE_DIR>");
 assert(process.argv.includes("--target"), "Specify target dir: --target <TARGET_DIR>");
@@ -15,8 +14,8 @@ const targetDir = process.argv[process.argv.indexOf("--target") + 1];
  * @param {boolean} isWatch
  */
 async function copyFilesOnChangeRecursive(srcDir, targetDir, isWatch) {
-  const { targetPaths } = await copyDir(srcDir, targetDir);
-  console.log(`[copy-assets] Copied ${targetPaths.length} files`);
+  await fs.cp(srcDir, targetDir, { recursive: true });
+  console.log(`[copy-assets] Copied assets`);
 
   if (!isWatch) return;
 
