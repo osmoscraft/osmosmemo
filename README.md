@@ -1,6 +1,6 @@
 [![image](./docs/media/osmosmemo-square-badge.svg)](#get-started)
 
-# Memo
+# osmos::memo
 
 A browser bookmark manager optimized for capture and retrieval speed.
 
