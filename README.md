@@ -1,6 +1,6 @@
 [![image](./docs/media/osmosmemo-square-badge.svg)](#get-started)
 
-# osmos::memo
+# Memo
 
 A browser bookmark manager optimized for capture and retrieval speed.
 
@@ -38,10 +38,6 @@ A browser bookmark manager optimized for capture and retrieval speed.
 - Now navigate to any page and re-open the extension. You will be able to save new content.  
   ![image](https://user-images.githubusercontent.com/1895289/115136348-10487800-9fd4-11eb-9a40-81382fe5c0fb.png)
 
-## Contributions
-
-My current focus is to bring the entire [osmos::craft](https://osmoscraft.org) project online. Until then, I have no bandwidth for new feature requests or PRs. However, issues and bug reports are always welcome. I'll keep track of issues and address them once I have more time. Thank your for being patient.
-
 ## FAQ
 
 ### How to open the extension with keyboard shortcut?
@@ -58,7 +54,7 @@ My current focus is to bring the entire [osmos::craft](https://osmoscraft.org) p
 
 ## Ecosystem
 
-Browse other projects from the [osmos::craft](https://osmoscraft.org/) ecosystem. 
+Browse other projects from the [OsmosCraft](https://osmoscraft.org/) ecosystem. 
 
 - Read the web with [Fjord](https://github.com/osmoscraft/fjord)
 - Manage bookmarks with [Memo](https://github.com/osmoscraft/osmosmemo)
