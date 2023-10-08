@@ -58,7 +58,8 @@ My current focus is to bring the entire [osmos::craft](https://osmoscraft.org) p
 
 ## Ecosystem
 
-osmos::memo is part of the [osmos::craft](https://osmoscraft.org) ecosystem. If you enjoy this tool, you might also like:
+Browse other projects from the [osmos::craft](https://osmoscraft.org/) ecosystem. 
 
-- [osmos::feed](https://github.com/osmoscraft/osmosfeed): A web-based RSS reader running entirely from your GitHub repo.
-- [osmos::note](https://github.com/osmoscraft/osmosnote): A web-based text editor for networked note-taking, self-hostable on any Git repository.
+- Read the web with [Fjord](https://github.com/osmoscraft/fjord)
+- Manage bookmarks with [Memo](https://github.com/osmoscraft/osmosmemo)
+- Take notes with [Tundra](https://github.com/osmoscraft/tundra)
