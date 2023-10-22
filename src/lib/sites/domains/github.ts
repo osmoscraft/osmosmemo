@@ -2,7 +2,9 @@ import type { SiteConfig, StringExtractor } from "../sites";
 import { defaultSiteConfig } from "./default";
 
 export const githubTitleExtractor: StringExtractor = (document) => {
-  return parseGithubRepoTitle(document.title)?.tagline;
+  const githubPathname = parseGithubPathname(document.location.pathname);
+  if (!githubPathname) return undefined;
+  return `${githubPathname.owner}/${githubPathname.repo}`;
 };
 
 export const githubSiteConfig: SiteConfig = {

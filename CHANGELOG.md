@@ -1,3 +1,7 @@
+# v3.1.1
+
+- Fixed: GitHub repo url did not extract `owner/repo` as title
+
 # v3.1.0
 
 - New: Parse repo name and tagline from GitHub repo URL
