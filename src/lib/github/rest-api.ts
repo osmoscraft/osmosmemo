@@ -42,7 +42,7 @@ async function writeContent({ accessToken, username, repo, filename, previousSha
       "Content-Type": "application/json",
     }),
     body: JSON.stringify({
-      message: "New summary added by osmos::memo",
+      message: b64EncodeUnicode(content.substring(0,20)),
       content: b64EncodeUnicode(content),
       sha: previousSha,
     }),
