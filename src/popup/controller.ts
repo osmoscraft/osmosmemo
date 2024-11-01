@@ -71,7 +71,7 @@ export class Controller {
       const { title, href, description, tags } = this.model.state;
       const newEntryString = this.view.getPreviewOutput(title, href, description, tags);
       const mergeWithExisting = mergeContent.bind(null, href!, newEntryString);
-      const message = truncateString(`${title} | ${href}`, 80);
+      const message = truncateString(title ?? description ?? href, 80);
       const updatedContent = await updateContent({ accessToken, username, repo, filename, message }, mergeWithExisting);
       this.model.update({ saveStatus: "saved", markdownString: updatedContent, isSaved: true });
     } catch {
