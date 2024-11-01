@@ -1,6 +1,7 @@
 import { getContentString, getLibraryUrl, updateContent } from "../lib/github/rest-api";
 import { getEntryPatternByHref, parseEntry } from "../lib/utils/markdown";
 import { mergeContent } from "../lib/utils/merge-content";
+import { truncateString } from "../lib/utils/string";
 import { getUniqueTagsFromMarkdownString } from "../lib/utils/tags";
 import { getUserOptions } from "../lib/utils/user-options";
 import type { CacheableModel, FullModel, Model } from "./model";
@@ -17,7 +18,7 @@ export class Controller {
       onLinkChange: (href) => {
         // when link changes, Saved status must be recalculated
         const savedModel = this.findSavedModel(href, this.model.state.markdownString) ?? undefined;
-        this.model.update({...savedModel, isSaved: !!savedModel });
+        this.model.update({ ...savedModel, isSaved: !!savedModel });
         this.model.updateAndCache({ href });
       },
       onDescriptionChange: (description) => this.model.updateAndCache({ description }),
@@ -70,7 +71,8 @@ export class Controller {
       const { title, href, description, tags } = this.model.state;
       const newEntryString = this.view.getPreviewOutput(title, href, description, tags);
       const mergeWithExisting = mergeContent.bind(null, href!, newEntryString);
-      const updatedContent = await updateContent({ accessToken, username, repo, filename }, mergeWithExisting);
+      const message = truncateString(newEntryString, 20);
+      const updatedContent = await updateContent({ accessToken, username, repo, filename, message }, mergeWithExisting);
       this.model.update({ saveStatus: "saved", markdownString: updatedContent, isSaved: true });
     } catch {
       this.model.update({ saveStatus: "error" });
