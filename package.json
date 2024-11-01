@@ -27,10 +27,10 @@
   },
   "homepage": "https://github.com/osmoscraft/osmosmemo#readme",
   "devDependencies": {
-    "@types/chrome": "^0.0.246",
-    "@types/node": "^20.8.3",
-    "concurrently": "^8.2.1",
-    "esbuild": "^0.19.4",
-    "tsx": "^3.13.0"
+    "@types/chrome": "^0.0.279",
+    "@types/node": "^22.8.6",
+    "concurrently": "^9.0.1",
+    "esbuild": "^0.24.0",
+    "tsx": "^4.19.2"
   }
 }

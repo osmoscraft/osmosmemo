@@ -12,7 +12,7 @@ export async function getContentString({ accessToken, username, repo, filename }
  * @return Updated full markdown string
  */
 export async function updateContent(
-  { accessToken, username, repo, filename },
+  { accessToken, username, repo, filename, message },
   updateFunction: (previousContent: string) => string
 ) {
   // To reduce chance of conflict, the update function runs on fresh data from API
@@ -20,7 +20,15 @@ export async function updateContent(
   const previousContent = b64DecodeUnicode(contents.content ?? "");
   const resultContent = updateFunction(previousContent);
 
-  await writeContent({ accessToken, username, repo, filename, previousSha: contents.sha, content: resultContent });
+  await writeContent({
+    accessToken,
+    username,
+    repo,
+    filename,
+    previousSha: contents.sha,
+    content: resultContent,
+    message,
+  });
 
   return resultContent;
 }
@@ -34,7 +42,7 @@ export async function getLibraryUrl({ accessToken, username, repo, filename }) {
   )}`;
 }
 
-async function writeContent({ accessToken, username, repo, filename, previousSha, content }) {
+async function writeContent({ accessToken, username, repo, filename, previousSha, content, message }) {
   return fetch(`https://api.github.com/repos/${username}/${repo}/contents/${filename}`, {
     method: "PUT",
     headers: new Headers({
@@ -42,7 +50,7 @@ async function writeContent({ accessToken, username, repo, filename, previousSha
       "Content-Type": "application/json",
     }),
     body: JSON.stringify({
-      message: b64EncodeUnicode(content.substring(0,20)),
+      message,
       content: b64EncodeUnicode(content),
       sha: previousSha,
     }),
@@ -54,7 +62,15 @@ async function getContentsOrCreateNew({ accessToken, username, repo, filename })
 
   if (response.status === 404) {
     console.log(`[rest-api] ${filename} does not exist. Create new`);
-    response = await writeContent({ accessToken, username, repo, filename, previousSha: undefined, content: "" });
+    response = await writeContent({
+      accessToken,
+      username,
+      repo,
+      filename,
+      previousSha: undefined,
+      content: "",
+      message: "initialize memo",
+    });
   }
 
   if (!response.ok) throw new Error("create-contents-failed");
