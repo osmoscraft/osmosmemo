@@ -1,3 +1,7 @@
+# v3.2.1
+
+- Fixed: Commit message can be empty
+
 # v3.2.0
 
 - Added: Generate meaningful commit message based on site content
