@@ -50,7 +50,7 @@ async function writeContent({ accessToken, username, repo, filename, previousSha
       "Content-Type": "application/json",
     }),
     body: JSON.stringify({
-      message: b64EncodeUnicode(message),
+      message,
       content: b64EncodeUnicode(content),
       sha: previousSha,
     }),
