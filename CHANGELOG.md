@@ -1,6 +1,7 @@
 # v3.2.0
 
 - Added: Generate meaningful commit message based on site content
+- Chore: Update dependencies
 
 # v3.1.1
 
